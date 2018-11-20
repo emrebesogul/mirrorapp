@@ -6,14 +6,12 @@ import Initializing from './src/Initializing';
 import Login from './src/Login';
 import Register from './src/Register';
 import Home from './src/Home';
-import Settings from './src/Settings';
 
 const AppStackNavigator = createStackNavigator({
   Initializing: Initializing,
   Login: Login,
   Register: Register,
-  Home: Home,
-  Settings: Settings
+  Home: Home
 });
 
 const App = createAppContainer(AppStackNavigator);
