@@ -45,7 +45,9 @@ export default class Register extends React.Component {
       })
       .then((response) => {
         console.log(response);
-        if(response.state === "true") {
+        console.log(response.status);
+        console.log(typeof response.status);
+        if(response.status === true) {
           console.log('user successfully registered!: ', username);
           //this.showAlert("Success!", response.message);
         } else {

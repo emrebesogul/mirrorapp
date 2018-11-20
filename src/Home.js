@@ -10,6 +10,8 @@ import {
 import { createBottomTabNavigator } from 'react-navigation';
 import Icon from 'react-native-vector-icons/Ionicons';
 
+import deviceStorage from './deviceStorage';
+
 class Home extends Component {
 
   static navigationOptions = {
@@ -18,9 +20,8 @@ class Home extends Component {
 
   logout = async () => {
     try {
-      //await AsyncStorage.removeItem("USER_KEY");
-      await AsyncStorage.setItem("USER_KEY", "empty");
       console.log('user successfully signed out!')
+      deviceStorage.saveItem("access_token", "empty");
       this.props.navigation.navigate('Login');
     } catch (err) {
       console.log('error signing out...: ', err)
@@ -48,9 +49,8 @@ class Settings extends Component {
 
   logout = async () => {
     try {
-      //await AsyncStorage.removeItem("USER_KEY");
-      await AsyncStorage.setItem("USER_KEY", "empty");
       console.log('user successfully signed out!')
+      deviceStorage.saveItem("access_token", "empty");
       this.props.navigation.navigate('Login');
     } catch (err) {
       console.log('error signing out...: ', err)

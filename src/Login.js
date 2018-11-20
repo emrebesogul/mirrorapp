@@ -8,6 +8,9 @@ import {
   AsyncStorage
 } from "react-native";
 
+import frontendConfig from './frontendConfig';
+import deviceStorage from './deviceStorage';
+
 class Login extends Component {
 
   static navigationOptions = {
@@ -23,17 +26,54 @@ class Login extends Component {
   }
 
   signIn = async () => {
-    const { username, password } = this.state
+    const { username, password } = this.state;
     try {
-      // login logic here:
-      // check credentials on server via post request
-
-      this.props.navigation.navigate('Home');
-      const user = await AsyncStorage.setItem("USER_KEY", username)
-      console.log('user successfully signed in!', username)
+      // post username and pw to backend and check input, eitherwise register new account and go back to login
+      // save access_token in AsyncStorage
+      // https://stackoverflow.com/questions/38418998/react-native-fetch-network-request-failed (in case smth is not working)
+      fetch("http://" + frontendConfig.server_address + ':' + frontendConfig.socket_server_port + "/native/signin", {
+          method: 'POST',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            "username": username,
+            "password": password
+          })
+      })
+      .then((response) => {
+        return response.json();
+      })
+      .then((response) => {
+        console.log(response);
+        if(response.status === true) {
+          console.log('user successfully logged in!: ', username);
+          deviceStorage.saveItem("access_token", response.token);
+          this.props.navigation.navigate('Home');
+          //this.showAlert("Success!", response.message);
+        } else {
+          //this.showAlert("Error!", response.message);
+        }
+      })
+      .catch(function(err) {
+        console.log(err);
+      });
     } catch (err) {
-      console.log('login error:', err)
+      console.log('error signing up: ', err);
     }
+  }
+
+  showAlert = (type, message) => {
+    Alert.alert(
+      type,
+      message,
+      [
+        {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+        {text: 'OK', onPress: () => console.log('OK Pressed')},
+      ],
+      { cancelable: false }
+    )
   }
 
   render() {
