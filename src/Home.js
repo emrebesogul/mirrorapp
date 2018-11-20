@@ -10,9 +10,45 @@ import {
 import { createBottomTabNavigator } from 'react-navigation';
 import Icon from 'react-native-vector-icons/Ionicons';
 
+import frontendConfig from './frontendConfig';
 import deviceStorage from './deviceStorage';
 
 class Home extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      currentUser: ""
+    };
+  }
+
+  async componentDidMount() {
+    try {
+      const access_token  = await AsyncStorage.getItem("access_token");
+      fetch("http://" + frontendConfig.server_address + ':' + frontendConfig.socket_server_port + "/native/getUserData", {
+          method: 'GET',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + access_token
+          },
+      })
+      .then((response) => {
+        return response.json();
+      })
+      .then((response) => {
+        console.log(response);
+        if(response.status === true) {
+          this.setState({username: response.username});
+        }
+      })
+      .catch(function(err) {
+        console.log(err);
+      });
+    } catch (err) {
+      console.log('error getting user data: ', err);
+    }
+  }
 
   static navigationOptions = {
       header: null
@@ -31,6 +67,7 @@ class Home extends Component {
   render() {
     return (
       <View style={styles.container}>
+        <Text>Welcome: {this.state.username}</Text>
         <Text>Hello from Home screen.</Text>
         <Button
           onPress={this.logout}
