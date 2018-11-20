@@ -13,9 +13,9 @@ import {
 export default class Initializing extends React.Component {
   async componentDidMount() {
     try {
-      const user = await AsyncStorage.getItem("USER_KEY");
-      console.log("Initializing: ", user);
-      if (user && user !== "empty") {
+      const access_toke  = await AsyncStorage.getItem("USER_KEY");
+      console.log("Initializing: ", access_token);
+      if (access_token && access_token !== "empty") {
         this.props.navigation.navigate('Home'); // go to main page
       } else {
         this.props.navigation.navigate('Login'); // go to auth page
@@ -29,7 +29,7 @@ export default class Initializing extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>Loading User Credentials</Text>
+        <Text style={styles.welcome}>Loading</Text>
       </View>
     )
   }

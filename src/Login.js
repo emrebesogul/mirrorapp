@@ -56,11 +56,11 @@ class Login extends Component {
           onChangeText={val => this.onChangeText('password', val)}
         />
         <Button
-          title='Sign In'
+          title='Login'
           onPress={this.signIn}
         />
         <Button
-          title='Sign Up?'
+          title='Register'
           onPress={() => this.props.navigation.navigate('Register')}
         />
       </View>

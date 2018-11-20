@@ -23,5 +23,8 @@
     "ios": {
       "supportsTablet": true
     }
-  }
+  },
+  "infoPlist": {
+    "NSAppTransportSecurity": "Allow Expo experiences to access http"
+  },
 }
