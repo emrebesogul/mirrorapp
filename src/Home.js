@@ -4,11 +4,13 @@ import {
     Text,
     StyleSheet,
     Button,
-    AsyncStorage
+    AsyncStorage,
+    Image
 } from "react-native";
 
 import { createBottomTabNavigator } from 'react-navigation';
 import Icon from 'react-native-vector-icons/Ionicons';
+import { ImagePicker } from 'expo';
 
 import frontendConfig from './frontendConfig';
 import deviceStorage from './deviceStorage';
@@ -78,7 +80,21 @@ class Home extends Component {
   }
 }
 
+//
+//
+//
+
+
 class Settings extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      photos: [],
+      avatarSource: null,
+      image: null
+    };
+  }
 
   static navigationOptions = {
       header: null
@@ -94,10 +110,51 @@ class Settings extends Component {
     }
   }
 
+  _pickImage = async () => {
+     let result = await ImagePicker.launchImageLibraryAsync({
+       allowsEditing: true,
+       aspect: [4, 3],
+     });
+
+     console.log(result);
+
+     if (!result.cancelled) {
+       this.setState({ image: result.uri });
+     }
+   };
+
+/*
+https://facebook.github.io/react-native/docs/cameraroll
+
+const file = {
+  uri,             // e.g. 'file:///path/to/file/image123.jpg'
+  name,            // e.g. 'image123.jpg',
+  type             // e.g. 'image/jpg'
+}
+
+const body = new FormData()
+body.append('file', file)
+
+fetch(url, {
+  method: 'POST',
+  body
+})
+*/
+
   render() {
+    let { image } = this.state;
+
     return (
       <View style={styles.container}>
         <Text>Hello from Settings screen.</Text>
+
+        <Button
+          title="Pick an image from camera roll"
+          onPress={this._pickImage}
+        />
+        {image &&
+          <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />}
+
         <Button
           onPress={this.logout}
           title="Sign Out"

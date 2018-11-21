@@ -21,10 +21,13 @@
       "**/*"
     ],
     "ios": {
+      "bundleIdentifier": "com.mirrorapp.mom",
       "supportsTablet": true
     }
   },
   "infoPlist": {
+    "NSPhotoLibraryUsageDescription": "Allow Expo experiences to access photo library",
+    "NSPhotoLibraryAddUsageDescription": "Allow Expo experiences on how to use the photo data",
     "NSAppTransportSecurity": "Allow Expo experiences to access http"
   },
 }
