@@ -53,7 +53,7 @@ class Login extends Component {
           this.props.navigation.navigate('Home');
           //this.showAlert("Success!", response.message);
         } else {
-          //this.showAlert("Error!", response.message);
+          this.showAlert("Error!", response.message);
         }
       })
       .catch(function(err) {
@@ -69,7 +69,6 @@ class Login extends Component {
       type,
       message,
       [
-        {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
         {text: 'OK', onPress: () => console.log('OK Pressed')},
       ],
       { cancelable: false }

@@ -49,9 +49,9 @@ export default class Register extends React.Component {
         console.log(typeof response.status);
         if(response.status === true) {
           console.log('user successfully registered!: ', username);
-          //this.showAlert("Success!", response.message);
+          this.showAlert("Success!", response.message);
         } else {
-          //this.showAlert("Error!", response.message);
+          this.showAlert("Error!", response.message);
         }
       })
       .catch(function(err) {
@@ -67,7 +67,6 @@ export default class Register extends React.Component {
       type,
       message,
       [
-        {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
         {text: 'OK', onPress: () => console.log('OK Pressed')},
       ],
       { cancelable: false }
