@@ -5,7 +5,8 @@ import {
   StyleSheet,
   TextInput,
   Button,
-  AsyncStorage
+  AsyncStorage,
+  Alert
 } from "react-native";
 
 import frontendConfig from './frontendConfig';
