@@ -15,11 +15,14 @@ export default class Initializing extends React.Component {
     try {
       const access_token  = await AsyncStorage.getItem("access_token");
       console.log("Initializing: ", access_token);
-      if (access_token && access_token !== "empty" && access_token !== null) {
+      this.props.navigation.navigate('Home'); // go to main page
+
+/*      if (access_token && access_token !== "empty" && access_token !== null) {
         this.props.navigation.navigate('Home'); // go to main page
       } else {
         this.props.navigation.navigate('Login'); // go to auth page
       }
+*/
     } catch (err) {
       console.log('error: ', err);
       this.props.navigation.navigate('Login');

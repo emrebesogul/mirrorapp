@@ -10,7 +10,7 @@ import {
 
 import { createBottomTabNavigator } from 'react-navigation';
 import Icon from 'react-native-vector-icons/Ionicons';
-import { ImagePicker } from 'expo';
+import { ImagePicker, Permissions } from 'expo';
 
 import frontendConfig from './frontendConfig';
 import deviceStorage from './deviceStorage';
@@ -110,36 +110,29 @@ class Settings extends Component {
     }
   }
 
-  _pickImage = async () => {
-     let result = await ImagePicker.launchImageLibraryAsync({
-       allowsEditing: true,
-       aspect: [4, 3],
-     });
-
-     console.log(result);
-
-     if (!result.cancelled) {
-       this.setState({ image: result.uri });
-     }
+  pickImage = async () => {
+    const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL)
+    if (status === 'granted') {
+      ImagePicker.launchImageLibraryAsync({
+        allowsEditing: true,
+        aspect: [4, 3]
+      }).then(newPostImage => {
+        if (!newPostImage.cancelled) {
+          this.setState({ image: newPostImage.uri })
+          console.log(newPostImage);
+        }
+      })
+      .catch(err => console.log(err))
+    }
    };
 
-/*
-https://facebook.github.io/react-native/docs/cameraroll
+  uploadImage = async () => {
+    const body = new FormData();
+    body.append('file', this.state.newPostImage);
 
-const file = {
-  uri,             // e.g. 'file:///path/to/file/image123.jpg'
-  name,            // e.g. 'image123.jpg',
-  type             // e.g. 'image/jpg'
-}
+    //fetch code goes here
+  }
 
-const body = new FormData()
-body.append('file', file)
-
-fetch(url, {
-  method: 'POST',
-  body
-})
-*/
 
   render() {
     let { image } = this.state;
@@ -150,10 +143,14 @@ fetch(url, {
 
         <Button
           title="Pick an image from camera roll"
-          onPress={this._pickImage}
+          onPress={this.pickImage}
         />
-        {image &&
-          <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />}
+        {image && <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />}
+
+        <Button
+          title="Upload or Update Image for Face Recognition"
+          onPress={this.uploadImage}
+        />
 
         <Button
           onPress={this.logout}
