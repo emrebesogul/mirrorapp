@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 import {
-    View,
-    Text,
-    StyleSheet,
-    Button,
-    AsyncStorage,
-    Image
+  View,
+  Text,
+  StyleSheet,
+  Button,
+  AsyncStorage,
+  Image,
+  Alert
 } from "react-native";
 
 import { createBottomTabNavigator } from 'react-navigation';
@@ -90,9 +91,8 @@ class Settings extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      photos: [],
-      avatarSource: null,
-      image: null
+      image: null,
+      type: null
     };
   }
 
@@ -119,7 +119,7 @@ class Settings extends Component {
       }).then(newPostImage => {
         if (!newPostImage.cancelled) {
           this.setState({ image: newPostImage.uri })
-          console.log(newPostImage);
+          this.setState({ type: newPostImage.type })
         }
       })
       .catch(err => console.log(err))
@@ -127,10 +127,63 @@ class Settings extends Component {
    };
 
   uploadImage = async () => {
-    const body = new FormData();
-    body.append('file', this.state.newPostImage);
 
-    //fetch code goes here
+    // check if image is updated or not... if new image -> upload, else don't burden traffic... => missing!
+
+    const data = new FormData();
+
+    data.append('file', {
+      uri: this.state.image,
+      type: this.state.type, // or photo.type
+      name: 'opencvImage'
+    });
+
+    // check if image is selected... alert if not... else upload/update user image
+    if(this.state.image !== null && this.state.type !== null) {
+      try {
+        const access_token = await AsyncStorage.getItem("access_token");
+        fetch("http://" + frontendConfig.server_address + ':' + frontendConfig.socket_server_port + "/native/uploadImage", {
+            method: 'POST',
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + access_token
+            },
+            body: data
+        })
+        .then((response) => {
+          return response.json();
+        })
+        .then((response) => {
+          // response logic
+          if(response.status === true) {
+            this.showAlert("Success!", response.message);
+            console.log('Image uploaded successfully!');
+          } else {
+            this.showAlert("Error!", response.message);
+          }
+        })
+        .catch(function(err) {
+          console.log(err);
+        });
+      } catch (err) {
+        console.log('error uploading image: ', err);
+      }
+    } else {
+      this.showAlert("Error!", "Please select an image!");
+    }
+
+  }
+
+  showAlert = (type, message) => {
+    Alert.alert(
+      type,
+      message,
+      [
+        {text: 'OK', onPress: () => console.log('OK Pressed')},
+      ],
+      { cancelable: false }
+    )
   }
 
 
