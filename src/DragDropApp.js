@@ -124,7 +124,8 @@ class DragDropTest extends React.Component {
         this.displayName = 'DragDropTest';
         this.socket = SocketIOClient('http://192.168.2.104:5000');
         this.state = {
-            all_widgets: []
+            all_widgets: [],
+            user_widgets: []
         }
     }
 
@@ -135,6 +136,12 @@ class DragDropTest extends React.Component {
                     all_widgets: res.data.all_widgets
                 })
             })
+            .catch(err => console.log(err));
+        this.getUserWidgets()
+            .then(res => this.setState({
+                user_widgets: res.data.user_widgets
+            }))
+            .catch(err => console.log(err));
     }
 
     getAllWidgets = async () => {
@@ -146,6 +153,26 @@ class DragDropTest extends React.Component {
                 'Content-Type': 'application/json',
                 'Authorization': 'Bearer ' + access_token
             }
+        });
+        const body = await response.json();
+
+        if (response.status !== 200) throw Error(body.message);
+
+        return body;
+    };
+
+    getUserWidgets = async () => {
+        const access_token = await AsyncStorage.getItem("access_token");
+        const response = await fetch('http://' + frontendConfig.server_address + ':' + frontendConfig.socket_server_port + '/native/getUserWidgets', {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + access_token
+            },
+            body: JSON.stringify({
+                "user_id": 'felix'
+            })
         });
         const body = await response.json();
 
