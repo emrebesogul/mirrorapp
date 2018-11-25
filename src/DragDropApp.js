@@ -125,30 +125,52 @@ class DragDropTest extends React.Component {
         this.socket = SocketIOClient('http://192.168.2.104:5000');
         this.state = {
             all_widgets: [],
-            user_widgets: []
+            user_widgets: [],
+            username: ''
         }
     }
 
-    componentDidMount() {
+    async componentDidMount() {
+        await this.getUserData()
+            .then(res => {
+                this.setState({
+                    username: res.username
+                })
+            })
+            .catch(err => console.log("ERROR:\n" + err));
         this.getAllWidgets()
             .then(res => {
                 this.setState({
                     all_widgets: res.data.all_widgets
                 })
             })
-            .catch(err => console.log(err));
+            .catch(err => console.log("ERROR: \n" + err));
         this.getUserWidgets()
             .then(res => {
-                console.log("Res");
-                console.log(res);
                 this.setState({
                     user_widgets: res.data
                 })
             })
             .catch(err => {
-                console.log("ERROR!!!!:\n" + err);
+                console.log("ERROR:\n" + err);
             });
     }
+
+    getUserData = async () => {
+        const access_token = await AsyncStorage.getItem("access_token");
+        const response = await fetch("http://" + frontendConfig.server_address + ':' + frontendConfig.socket_server_port + "/native/getUserData", {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + access_token
+            }
+        })
+        const body = await response.json();
+
+        if (response.status !== 200) throw Error(body.message);
+        return body;
+    };
 
     getAllWidgets = async () => {
         const access_token = await AsyncStorage.getItem("access_token");
@@ -168,9 +190,8 @@ class DragDropTest extends React.Component {
     };
 
     getUserWidgets = async () => {
-        console.log("In progress..");
         const access_token = await AsyncStorage.getItem("access_token");
-        const response = await fetch("http://" + frontendConfig.server_address + ':' + frontendConfig.socket_server_port + "/native/getUserWidgets?user_id=felix", {
+        const response = await fetch("http://" + frontendConfig.server_address + ':' + frontendConfig.socket_server_port + "/native/getUserWidgets?user_id=" + this.state.username, {
             method: 'GET',
             headers: {
                 'Accept': 'application/json',
@@ -196,7 +217,6 @@ class DragDropTest extends React.Component {
             dropZoneContents.push(<MyDropZoneContent key={widget.widget_id + widget.widget_name + index}
                                                      displayText={widget.widget_name}/>)
         })
-        console.log(this.state.user_widgets);
         let dropZones = [];
         for (let dropZoneCounter = 0; dropZoneCounter < 8; dropZoneCounter++) {
             dropZones.push(<DropZone onDrop={e => {
