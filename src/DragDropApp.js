@@ -138,10 +138,16 @@ class DragDropTest extends React.Component {
             })
             .catch(err => console.log(err));
         this.getUserWidgets()
-            .then(res => this.setState({
-                user_widgets: res.data.user_widgets
-            }))
-            .catch(err => console.log(err));
+            .then(res => {
+                console.log("Res");
+                console.log(res);
+                this.setState({
+                    user_widgets: res.data
+                })
+            })
+            .catch(err => {
+                console.log("ERROR!!!!:\n" + err);
+            });
     }
 
     getAllWidgets = async () => {
@@ -162,17 +168,15 @@ class DragDropTest extends React.Component {
     };
 
     getUserWidgets = async () => {
+        console.log("In progress..");
         const access_token = await AsyncStorage.getItem("access_token");
-        const response = await fetch('http://' + frontendConfig.server_address + ':' + frontendConfig.socket_server_port + '/native/getUserWidgets', {
+        const response = await fetch("http://" + frontendConfig.server_address + ':' + frontendConfig.socket_server_port + "/native/getUserWidgets?user_id=felix", {
             method: 'GET',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
                 'Authorization': 'Bearer ' + access_token
-            },
-            body: JSON.stringify({
-                "user_id": 'felix'
-            })
+            }
         });
         const body = await response.json();
 
@@ -183,13 +187,19 @@ class DragDropTest extends React.Component {
 
     render() {
         let draggyElements = [];
-        this.state.all_widgets.forEach(function (widget) {
-            draggyElements.push(<Draggy widget_id={widget.widget_id} widget_name={widget.widget_name}/>)
+        this.state.all_widgets.forEach(function (widget, index) {
+            draggyElements.push(<Draggy key={widget.widget_id + widget.widget_name + index} widget_id={widget.widget_id}
+                                        widget_name={widget.widget_name}/>)
         });
+        let dropZoneContents = [];
+        this.state.user_widgets.forEach(function (widget, index) {
+            dropZoneContents.push(<MyDropZoneContent key={widget.widget_id + widget.widget_name + index}
+                                                     displayText={widget.widget_name}/>)
+        })
+        console.log(this.state.user_widgets);
         let dropZones = [];
         for (let dropZoneCounter = 0; dropZoneCounter < 8; dropZoneCounter++) {
             dropZones.push(<DropZone onDrop={e => {
-                Alert.alert("Dropped it on area " + dropZoneCounter);
                 this.socket.emit('app_drop_event', {
                     previous_slot: null,
                     slot: dropZoneCounter,
@@ -197,8 +207,10 @@ class DragDropTest extends React.Component {
                     widget_name: e.widget_name,
                     remove: false
                 });
+                this.state.user_widgets[dropZoneCounter] = {widget_id: e.widget_id, widget_name: e.widget_name};
+                this.forceUpdate();
             }}>
-                <MyDropZoneContent displayText={dropZoneCounter}/>
+                {dropZoneContents[dropZoneCounter]}
             </DropZone>)
         }
 
