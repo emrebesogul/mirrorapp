@@ -12,7 +12,6 @@ import {
 import { createBottomTabNavigator } from 'react-navigation';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { ImagePicker, Permissions } from 'expo';
-
 import frontendConfig from './frontendConfig';
 import deviceStorage from './deviceStorage';
 
@@ -91,13 +90,39 @@ class Settings extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      currentUser: "",
       image: null,
-      type: null
+      type: null,
+      updatedImage: false,
     };
   }
 
-  static navigationOptions = {
-      header: null
+  async componentDidMount() {
+    try {
+      const access_token  = await AsyncStorage.getItem("access_token");
+      fetch("http://" + frontendConfig.server_address + ':' + frontendConfig.socket_server_port + "/native/getUserData", {
+          method: 'GET',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + access_token
+          },
+      })
+      .then((response) => {
+        return response.json();
+      })
+      .then((response) => {
+        console.log(response);
+        if(response.status === true) {
+          this.setState({image: response.face_image});
+        }
+      })
+      .catch(function(err) {
+        console.log(err);
+      });
+    } catch (err) {
+      console.log('error getting user data: ', err);
+    }
   }
 
   logout = async () => {
@@ -120,6 +145,9 @@ class Settings extends Component {
         if (!newPostImage.cancelled) {
           this.setState({ image: newPostImage.uri })
           this.setState({ type: newPostImage.type })
+          this.setState({ updatedImage: true })
+        } else {
+          this.setState({ updatedImage: false })
         }
       })
       .catch(err => console.log(err))
@@ -139,7 +167,7 @@ class Settings extends Component {
     });
 
     // check if image is selected... alert if not... else upload/update user image
-    if(this.state.image !== null && this.state.type !== null) {
+    if(this.state.image !== null && this.state.type !== null && this.state.updatedImage) {
       try {
         const access_token = await AsyncStorage.getItem("access_token");
         fetch("http://" + frontendConfig.server_address + ':' + frontendConfig.socket_server_port + "/native/uploadImage", {
@@ -188,7 +216,8 @@ class Settings extends Component {
 
 
   render() {
-    let { image } = this.state;
+
+    console.log(this.state.image);
 
     return (
       <View style={styles.container}>
@@ -198,7 +227,17 @@ class Settings extends Component {
           title="Pick an image from camera roll"
           onPress={this.pickImage}
         />
-        {image && <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />}
+
+        {this.state.image !== "" && this.state.updatedImage === false ?
+          <Image source={{ uri: "http://127.0.0.1:5000/public/uploads/" + this.state.image }} style={styles.stretch} />
+          :
+            <View>
+              {this.state.updatedImage === true ?
+              <Image source={{ uri: this.state.image }} style={styles.stretch} />
+              : <View><Text>No picture uploaded yet...</Text><Image source={require('../assets/user.png')} style={styles.stretch} /></View>
+              }
+            </View>
+        }
 
         <Button
           title="Upload or Update Image for Face Recognition"
@@ -252,5 +291,9 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center'
+  },
+  stretch: {
+    width: 200,
+    height: 200
   }
 });
