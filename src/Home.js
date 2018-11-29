@@ -6,7 +6,8 @@ import {
   Button,
   AsyncStorage,
   Image,
-  Alert
+  Alert,
+  TextInput
 } from "react-native";
 
 import { createBottomTabNavigator } from 'react-navigation';
@@ -254,6 +255,104 @@ class Settings extends Component {
 }
 
 
+//
+//
+//
+
+
+class Wunderlist extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      currentWunderlistSettings: [],
+      todoList: "",
+      wl_access_token: "",
+      wl_client_id: ""
+    };
+  }
+
+  async componentDidMount() {
+    try {
+      const access_token  = await AsyncStorage.getItem("access_token");
+      fetch("http://" + frontendConfig.server_address + ':' + frontendConfig.socket_server_port + "/native/getWunderlistSettings", {
+          method: 'POST',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + access_token
+          },
+      })
+      .then((response) => {
+        return response.json();
+      })
+      .then((response) => {
+        console.log(response);
+        if(response.status === true) {
+          this.setState({currentWunderlistSettings: response});
+        }
+      })
+      .catch(function(err) {
+        console.log(err);
+      });
+    } catch (err) {
+      console.log('error getting user data: ', err);
+    }
+  }
+
+  logout = async () => {
+    try {
+      console.log('user successfully signed out!')
+      deviceStorage.saveItem("access_token", "empty");
+      this.props.navigation.navigate('Login');
+    } catch (err) {
+      console.log('error signing out...: ', err)
+    }
+  }
+
+  uploadWunderlistSelection = async () => {
+    alert("Wunderlist...");
+  }
+
+  render() {
+    return (
+      <View style={styles.container}>
+        <Text>Please register at https://developer.wunderlist.com/ and insert your CLIENT ID and CLIENT SECRET in the fields below</Text>
+        <Text>Please insert your list for the Wunderlist App:</Text>
+        <TextInput
+          style={styles.wunderlist_text}
+          onChangeText={(todoList) => this.setState({todoList})}
+          value={this.state.todoList}
+        />
+
+        <Text>Please insert your Access Token for the Wunderlist App:</Text>
+        <TextInput
+          style={styles.wunderlist_text}
+          onChangeText={(wl_access_token) => this.setState({wl_access_token})}
+          value={this.state.wl_access_token}
+        />
+
+        <Text>Please insert your client ID for the Wunderlist App:</Text>
+        <TextInput
+          style={styles.wunderlist_text}
+          onChangeText={(wl_client_id) => this.setState({wl_client_id})}
+          value={this.state.wl_client_id}
+        />
+
+        <Button
+          title="Update your To Do List with the credentials and list above"
+          onPress={this.uploadWunderlistSelection}
+        />
+
+        <Button
+          onPress={this.logout}
+          title="Sign Out"
+        />
+      </View>
+    );
+  }
+}
+
 export default createBottomTabNavigator({
   Home: {
     screen: Home,
@@ -278,6 +377,18 @@ export default createBottomTabNavigator({
     header: {
       visible: false,
     },
+  },
+  Wunderlist: {
+    screen: Wunderlist,
+    navigationOptions: {
+      tabBarLabel: 'Wunderlist',
+      tabBarIcon: ({ tintColor }) => (
+        <Icon name="ios-settings" color={tintColor} size={24} />
+      )
+    },
+    header: {
+      visible: false,
+    },
   }
 }, {
     initialRouteName: 'Home',
@@ -295,5 +406,15 @@ const styles = StyleSheet.create({
   stretch: {
     width: 200,
     height: 200
+  },
+  wunderlist_text: {
+    width: 200,
+    fontSize: 18,
+    height: 45,
+    padding: 8,
+    borderRadius: 14,
+    margin: 10,
+    borderColor: 'black',
+    borderWidth: 1
   }
 });
