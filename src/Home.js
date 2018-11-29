@@ -310,8 +310,50 @@ class Wunderlist extends Component {
     }
   }
 
-  uploadWunderlistSelection = async () => {
-    alert("Wunderlist...");
+  uploadWunderlistSettings = async () => {
+    const access_token  = await AsyncStorage.getItem("access_token");
+    try {
+      fetch("http://" + frontendConfig.server_address + ':' + frontendConfig.socket_server_port + "/native/uploadWunderlistSettings", {
+          method: 'POST',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + access_token
+          },
+          body: JSON.stringify({
+            "todoList": this.state.todoList,
+            "wl_access_token": this.state.wl_access_token,
+            "wl_client_id": this.state.wl_client_id
+          })
+      })
+      .then((response) => {
+        return response.json();
+      })
+      .then((response) => {
+        console.log(response);
+        if(response.status === true) {
+          this.showAlert("Success!", response.message);
+        } else {
+          this.showAlert("Error!", response.message);
+        }
+      })
+      .catch(function(err) {
+        console.log(err);
+      });
+    } catch (err) {
+      console.log('error signing up: ', err);
+    }
+  }
+
+  showAlert = (type, message) => {
+    Alert.alert(
+      type,
+      message,
+      [
+        {text: 'OK', onPress: () => console.log('OK Pressed')},
+      ],
+      { cancelable: false }
+    )
   }
 
   render() {
@@ -325,14 +367,14 @@ class Wunderlist extends Component {
           value={this.state.todoList}
         />
 
-        <Text>Please insert your Access Token for the Wunderlist App:</Text>
+        <Text>Please insert your CLIENT SECRET for the Wunderlist App:</Text>
         <TextInput
           style={styles.wunderlist_text}
           onChangeText={(wl_access_token) => this.setState({wl_access_token})}
           value={this.state.wl_access_token}
         />
 
-        <Text>Please insert your client ID for the Wunderlist App:</Text>
+        <Text>Please insert your CLIENT ID for the Wunderlist App:</Text>
         <TextInput
           style={styles.wunderlist_text}
           onChangeText={(wl_client_id) => this.setState({wl_client_id})}
@@ -341,7 +383,7 @@ class Wunderlist extends Component {
 
         <Button
           title="Update your To Do List with the credentials and list above"
-          onPress={this.uploadWunderlistSelection}
+          onPress={this.uploadWunderlistSettings}
         />
 
         <Button
