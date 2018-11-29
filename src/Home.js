@@ -289,7 +289,10 @@ class Wunderlist extends Component {
       .then((response) => {
         console.log(response);
         if(response.status === true) {
-          this.setState({currentWunderlistSettings: response});
+          this.setState({currentWunderlistSettings: response.settings});
+          this.setState({todoList: response.settings.todo_list});
+          this.setState({wl_access_token: response.settings.client_secret});
+          this.setState({wl_client_id: response.settings.client_id});
         }
       })
       .catch(function(err) {
