@@ -122,7 +122,7 @@ class DragDropTest extends React.Component {
     constructor(props) {
         super(props);
         this.displayName = 'DragDropTest';
-        this.socket = SocketIOClient('http://192.168.2.104:5000');
+        this.socket = SocketIOClient('http://' + frontendConfig.server_address + ':' + frontendConfig.socket_server_port);
         this.state = {
             all_widgets: [],
             user_widgets: [],
