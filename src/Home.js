@@ -370,7 +370,7 @@ class Wunderlist extends Component {
           value={this.state.todoList}
         />
 
-        <Text>Please insert your CLIENT SECRET for the Wunderlist App:</Text>
+        <Text>Please insert your ACCESS TOKEN for the Wunderlist App:</Text>
         <TextInput
           style={styles.wunderlist_text}
           onChangeText={(wl_access_token) => this.setState({wl_access_token})}
