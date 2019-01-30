@@ -362,7 +362,7 @@ class Wunderlist extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text>Please register at https://developer.wunderlist.com/ and insert your CLIENT ID and CLIENT SECRET in the fields below</Text>
+        <Text>Please register at https://developer.wunderlist.com/ and insert your CLIENT ID and ACCESS TOKEN in the fields below</Text>
         <Text>Please insert your list for the Wunderlist App:</Text>
         <TextInput
           style={styles.wunderlist_text}
