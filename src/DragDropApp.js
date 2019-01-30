@@ -208,14 +208,21 @@ class DragDropTest extends React.Component {
 
     render() {
         let draggyElements = [];
+        console.log(this.state.all_widgets);
+        console.log(this.state.user_widgets);
         this.state.all_widgets.forEach(function (widget, index) {
             draggyElements.push(<Draggy key={widget.widget_id + widget.widget_name + index} widget_id={widget.widget_id}
                                         widget_name={widget.widget_name}/>)
         });
         let dropZoneContents = [];
         this.state.user_widgets.forEach(function (widget, index) {
-            dropZoneContents.push(<MyDropZoneContent key={widget.widget_id + widget.widget_name + index}
-                                                     displayText={widget.widget_name}/>)
+            if (widget) {
+                dropZoneContents.push(<MyDropZoneContent key={widget.widget_id + widget.widget_name + index}
+                                                         displayText={widget.widget_name}/>)
+            } else {
+                dropZoneContents.push(<MyDropZoneContent key={index}
+                                                         displayText={"Empty"}/>)
+            }
         })
         let dropZones = [];
         for (let dropZoneCounter = 0; dropZoneCounter < 8; dropZoneCounter++) {
