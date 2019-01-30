@@ -23,11 +23,6 @@ class MyDropZoneContent extends React.Component {
     constructor(props) {
         super(props);
         this.displayText = props.displayText;
-        this.state = {
-            user_widget: true,
-            slot: props.slot,
-            draggable: props.draggable
-        }
     }
 
     componentWillReceiveProps({dragOver}) {
@@ -35,30 +30,17 @@ class MyDropZoneContent extends React.Component {
     }
 
     render() {
-        return (this.state.draggable) ?
-            <Draggable data={{user_widget: this.state.user_widget, slot: this.state.slot}}>
-                <View style={{
-                    width: this.props.dragOver ? 110 : 100,
-                    height: this.props.dragOver ? 110 : 100,
-                    backgroundColor: '#ddd',
-                    alignItems: 'center',
-                    justifyContent: 'center'
-                }}>
-                    <View>
-                        <Text>{this.displayText}</Text>
-                    </View>
-                </View>
-            </Draggable> : <View style={{
-                width: this.props.dragOver ? 110 : 100,
-                height: this.props.dragOver ? 110 : 100,
-                backgroundColor: '#ddd',
-                alignItems: 'center',
-                justifyContent: 'center'
-            }}>
-                <View>
-                    <Text>{this.displayText}</Text>
-                </View>
+        return <View style={{
+            width: this.props.dragOver ? 110 : 100,
+            height: this.props.dragOver ? 110 : 100,
+            backgroundColor: '#ddd',
+            alignItems: 'center',
+            justifyContent: 'center'
+        }}>
+            <View>
+                <Text>{this.displayText}</Text>
             </View>
+        </View>
     }
 }
 
@@ -122,8 +104,7 @@ class Draggy extends React.Component {
         super(props);
         this.state = {
             widget_id: props.widget_id,
-            widget_name: props.widget_name,
-            user_widget: false
+            widget_name: props.widget_name
         }
     }
 
@@ -233,30 +214,21 @@ class DragDropTest extends React.Component {
         });
         let dropZoneContents = [];
         this.state.user_widgets.forEach(function (widget, index) {
-            if (widget) {
-                dropZoneContents.push(<MyDropZoneContent
-                    key={widget.widget_id + widget.widget_name + index}
-                    displayText={widget.widget_name} slot={widget.slot} draggable={true}/>)
-            } else {
-                dropZoneContents.push(<MyDropZoneContent
-                    key={'empty' + index}
-                    displayText={'Empty Slot'} slot={null} draggable={false}/>)
-            }
+            dropZoneContents.push(<MyDropZoneContent key={widget.widget_id + widget.widget_name + index}
+                                                     displayText={widget.widget_name}/>)
         })
         let dropZones = [];
         for (let dropZoneCounter = 0; dropZoneCounter < 8; dropZoneCounter++) {
             dropZones.push(<DropZone onDrop={e => {
-                if (e.user_widget === false) {
-                    this.socket.emit('app_drop_event', {
-                        previous_slot: null,
-                        slot: dropZoneCounter,
-                        widget_id: e.widget_id,
-                        widget_name: e.widget_name,
-                        remove: false
-                    });
-                    this.state.user_widgets[dropZoneCounter] = {widget_id: e.widget_id, widget_name: e.widget_name};
-                    this.forceUpdate();
-                }
+                this.socket.emit('app_drop_event', {
+                    previous_slot: null,
+                    slot: dropZoneCounter,
+                    widget_id: e.widget_id,
+                    widget_name: e.widget_name,
+                    remove: false
+                });
+                this.state.user_widgets[dropZoneCounter] = {widget_id: e.widget_id, widget_name: e.widget_name};
+                this.forceUpdate();
             }}>
                 {dropZoneContents[dropZoneCounter]}
             </DropZone>)
@@ -274,21 +246,6 @@ class DragDropTest extends React.Component {
                 {dropZones[5]}
                 {dropZones[6]}
                 {dropZones[7]}
-            </View>
-            <View style={{justifyContent: 'center', alignItems: 'flex-end', flexDirection: 'row'}}>
-                <DropZone style={{position: 'absolute', top: 0, left: 0, right: 0, height: 100}}
-                          onDrop={async (e) => {
-                              if (e.user_widget === true) {
-                                  const access_token = await AsyncStorage.getItem("access_token");
-                                  this.socket.emit('app_delete_event', {
-                                      slot: e.slot,
-                                      remove: true,
-                                      token: access_token
-                                  });
-                              }
-                          }}>
-                    <Text>DELETE ME </Text>
-                </DropZone>
             </View>
             <ScrollView horizontal={true}>
                 <View style={{justifyContent: 'center', alignItems: 'flex-end', flexDirection: 'row'}}>
