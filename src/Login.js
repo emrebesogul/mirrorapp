@@ -47,7 +47,6 @@ class Login extends Component {
         return response.json();
       })
       .then((response) => {
-        console.log(response);
         if(response.status === true) {
           console.log('user successfully logged in!: ', username);
           deviceStorage.saveItem("access_token", response.token);
