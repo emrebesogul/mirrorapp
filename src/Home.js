@@ -349,7 +349,7 @@ class Wunderlist extends Component {
         } catch (err) {
             console.log('error signing up: ', err);
         }
-    }
+    
   }
 
   showAlert = (type, message) => {
