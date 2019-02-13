@@ -16,6 +16,7 @@ import {ImagePicker, Permissions} from 'expo';
 import frontendConfig from './frontendConfig';
 import deviceStorage from './deviceStorage';
 import DragDropApp from './DragDropApp';
+import styles from './styles';
 
 class Home extends Component {
 
@@ -349,57 +350,58 @@ class Wunderlist extends Component {
         } catch (err) {
             console.log('error signing up: ', err);
         }
-    
-  }
 
-  showAlert = (type, message) => {
-    Alert.alert(
-      type,
-      message,
-      [
-        {text: 'OK', onPress: () => console.log('OK Pressed')},
-      ],
-      { cancelable: false }
-    )
-  }
+    }
 
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text>Please register at https://developer.wunderlist.com/ and insert your CLIENT ID and ACCESS TOKEN in the fields below</Text>
-        <Text>Please insert your list for the Wunderlist App:</Text>
-        <TextInput
-          style={styles.wunderlist_text}
-          onChangeText={(todoList) => this.setState({todoList})}
-          value={this.state.todoList}
-        />
+    showAlert = (type, message) => {
+        Alert.alert(
+            type,
+            message,
+            [
+                {text: 'OK', onPress: () => console.log('OK Pressed')},
+            ],
+            {cancelable: false}
+        )
+    }
 
-        <Text>Please insert your ACCESS TOKEN for the Wunderlist App:</Text>
-        <TextInput
-          style={styles.wunderlist_text}
-          onChangeText={(wl_access_token) => this.setState({wl_access_token})}
-          value={this.state.wl_access_token}
-        />
+    render() {
+        return (
+            <View style={styles.container}>
+                <Text>Please register at https://developer.wunderlist.com/ and insert your CLIENT ID and ACCESS TOKEN in
+                    the fields below</Text>
+                <Text>Please insert your list for the Wunderlist App:</Text>
+                <TextInput
+                    style={styles.wunderlist_text}
+                    onChangeText={(todoList) => this.setState({todoList})}
+                    value={this.state.todoList}
+                />
 
-        <Text>Please insert your CLIENT ID for the Wunderlist App:</Text>
-        <TextInput
-          style={styles.wunderlist_text}
-          onChangeText={(wl_client_id) => this.setState({wl_client_id})}
-          value={this.state.wl_client_id}
-        />
+                <Text>Please insert your ACCESS TOKEN for the Wunderlist App:</Text>
+                <TextInput
+                    style={styles.wunderlist_text}
+                    onChangeText={(wl_access_token) => this.setState({wl_access_token})}
+                    value={this.state.wl_access_token}
+                />
 
-        <Button
-          title="Update your To Do List with the credentials and list above"
-          onPress={this.uploadWunderlistSettings}
-        />
+                <Text>Please insert your CLIENT ID for the Wunderlist App:</Text>
+                <TextInput
+                    style={styles.wunderlist_text}
+                    onChangeText={(wl_client_id) => this.setState({wl_client_id})}
+                    value={this.state.wl_client_id}
+                />
 
-        <Button
-          onPress={this.logout}
-          title="Sign Out"
-        />
-      </View>
-    );
-  }
+                <Button
+                    title="Update your To Do List with the credentials and list above"
+                    onPress={this.uploadWunderlistSettings}
+                />
+
+                <Button
+                    onPress={this.logout}
+                    title="Sign Out"
+                />
+            </View>
+        );
+    }
 }
 
 export default createBottomTabNavigator({
@@ -452,25 +454,3 @@ export default createBottomTabNavigator({
     activeTintColor: 'white',
     shifting: true
 })
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center'
-    },
-    stretch: {
-        width: 200,
-        height: 200
-    },
-    wunderlist_text: {
-        width: 200,
-        fontSize: 18,
-        height: 45,
-        padding: 8,
-        borderRadius: 14,
-        margin: 10,
-        borderColor: 'black',
-        borderWidth: 1
-    }
-});
