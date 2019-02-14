@@ -9,9 +9,11 @@ import {
     Alert
 } from "react-native";
 
-import frontendConfig from './frontendConfig';
 import deviceStorage from './deviceStorage';
 import styles from './styles';
+import {signIn} from "../api/post";
+import responseMessages from '../responseMessages'
+import {showAlert} from "../utils";
 
 class Login extends Component {
 
@@ -20,60 +22,24 @@ class Login extends Component {
     }
 
     state = {
-        username: '', password: ''
+        username: '',
+        password: ''
     }
 
     onChangeText = (key, value) => {
         this.setState({[key]: value})
     }
 
-    signIn = async () => {
+    processSignIn = async () => {
         const {username, password} = this.state;
-        try {
-            // post username and pw to backend and check input, eitherwise register new account and go back to login
-            // save access_token in AsyncStorage
-            // https://stackoverflow.com/questions/38418998/react-native-fetch-network-request-failed (in case smth is not working)
-            fetch("http://" + frontendConfig.server_address + ':' + frontendConfig.socket_server_port + "/native/signin", {
-                method: 'POST',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    "username": username,
-                    "password": password
-                })
-            })
-                .then((response) => {
-                    return response.json();
-                })
-                .then((response) => {
-                    if (response.status === true) {
-                        console.log('user successfully logged in!: ', username);
-                        deviceStorage.saveItem("access_token", response.token);
-                        this.props.navigation.navigate('Home');
-                        //this.showAlert("Success!", response.message);
-                    } else {
-                        this.showAlert("Error!", response.message);
-                    }
-                })
-                .catch(function (err) {
-                    console.log(err);
-                });
-        } catch (err) {
-            console.log('error signing up: ', err);
+        let response = await signIn(username, password);
+        console.log(response);
+        if (response.status === true) {
+            deviceStorage.saveItem("access_token", response.token);
+            this.props.navigation.navigate('Home');
+        } else {
+            showAlert("error", responseMessages.LOGIN_ERROR);
         }
-    }
-
-    showAlert = (type, message) => {
-        Alert.alert(
-            type,
-            message,
-            [
-                {text: 'OK', onPress: () => console.log('OK Pressed')},
-            ],
-            {cancelable: false}
-        )
     }
 
     render() {
@@ -97,7 +63,7 @@ class Login extends Component {
                 />
                 <Button
                     title='Login'
-                    onPress={this.signIn}
+                    onPress={this.processSignIn}
                 />
                 <Button
                     title='Register'

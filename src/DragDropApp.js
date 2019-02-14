@@ -6,7 +6,7 @@ import {
 } from 'react-native';
 
 import SocketIOClient from 'socket.io-client';
-import frontendConfig from './frontendConfig';
+import config from '../config';
 
 import DragContainer from '../lib/DragContainer';
 import Draggable from '../lib/Draggable';
@@ -15,11 +15,12 @@ import DropZone from '../lib/DropZone';
 import DropZoneContent from '../lib/DropZoneContent';
 
 import styles from './styles';
+import {getAllWidgets, getUserData, getUserWidgets} from "../api/get";
 
 export default class DragDropApp extends Component {
     constructor(props) {
         super(props);
-        this.socket = SocketIOClient('http://' + frontendConfig.server_address + ':' + frontendConfig.socket_server_port);
+        this.socket = SocketIOClient('http://' + config.SERVER_ADDRESS + ':' + config.SOCKET_SERVER_PORT);
         this.state = {
             all_widgets: [],
             user_widgets: [],
@@ -30,82 +31,21 @@ export default class DragDropApp extends Component {
     }
 
     async componentDidMount() {
-        await this.getUserData()
-            .then(res => {
-                this.setState({
-                    username: res.username
-                })
-            })
-            .catch(err => console.log("ERROR:\n" + err));
-        await this.getAllWidgets()
-            .then(res => {
-                this.setState({
-                    all_widgets: res.data.all_widgets
-                })
-            })
-            .catch(err => console.log("ERROR: \n" + err));
-        await this.getUserWidgets()
-            .then(res => {
-                this.setState({
-                    user_widgets: res.data
-                })
-            })
-            .catch(err => {
-                console.log("ERROR:\n" + err);
-            });
+        let response = await getUserData();
+        if (response.status === true) this.setState({
+            username: response.username
+        });
+        response = await getAllWidgets();
+        if (response.status === true) this.setState({
+            all_widgets: response.data.all_widgets
+        });
+        response = await getUserWidgets(this.state.username);
+        if (response.status === true) this.setState({
+            user_widgets: response.data
+        });
         this.renderAllWidgets();
         this.renderUserWidgets();
     }
-
-    getUserData = async () => {
-        const access_token = await AsyncStorage.getItem("access_token");
-        const response = await fetch("http://" + frontendConfig.server_address + ':' + frontendConfig.socket_server_port + "/native/getUserData", {
-            method: 'GET',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + access_token
-            }
-        })
-        const body = await response.json();
-
-        if (response.status !== 200) throw Error(body.message);
-        return body;
-    };
-
-    getAllWidgets = async () => {
-        const access_token = await AsyncStorage.getItem("access_token");
-        const response = await fetch('http://' + frontendConfig.server_address + ':' + frontendConfig.socket_server_port + '/native/getAllWidgets', {
-            method: 'GET',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + access_token
-            }
-        });
-        const body = await response.json();
-
-        if (response.status !== 200) throw Error(body.message);
-
-        return body;
-    };
-
-    getUserWidgets = async () => {
-        const access_token = await AsyncStorage.getItem("access_token");
-        const response = await fetch("http://" + frontendConfig.server_address + ':' + frontendConfig.socket_server_port + "/native/getUserWidgets?user_id=" + this.state.username, {
-            method: 'GET',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + access_token
-            }
-        });
-        const body = await response.json();
-
-        if (response.status !== 200) throw Error(body.message);
-
-        return body;
-    };
 
     renderAllWidgets() {
         let draggableWidgets = [];

@@ -45,16 +45,6 @@ export default StyleSheet.create({
         width: 200,
         height: 200
     },
-    wunderlist_text: {
-        width: 200,
-        fontSize: 18,
-        height: 45,
-        padding: 8,
-        borderRadius: 14,
-        margin: 10,
-        borderColor: 'black',
-        borderWidth: 1
-    },
     input: {
         width: 350,
         height: 55,

@@ -1,0 +1,12 @@
+{
+  "FETCH_ERROR": "Something went wrong while executing fetch",
+  "FETCH_SUCCESS": "fetch successfully executed",
+  "REGISTER_SUCCESS": "User successfully registered! You can now sign in with your credentials",
+  "REGISTER_ERROR": "An error occured trying to register your user! Please try again",
+  "LOGIN_SUCCESS": "User successfully logged in!",
+  "LOGIN_ERROR": "Username or password wrong. Please try again.",
+  "WUNDERLIST_UPLOAD_SUCCESS": "Wunderlist settings were successfully uploaded",
+  "WUNDERLIST_UPLOAD_ERROR": "An error occured trying to upload wunderlist settings",
+  "IMAGE_UPLOAD_SUCCESS": "User image successfully uploaded",
+  "IMAGE_UPLOAD_ERROR": "An error occured trying to upload user image"
+}
