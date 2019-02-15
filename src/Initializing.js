@@ -4,9 +4,7 @@
 import React from 'react'
 import {
     View,
-    Text,
-    StyleSheet,
-    AsyncStorage
+    Text
 } from 'react-native';
 
 import deviceStorage from './deviceStorage';
