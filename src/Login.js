@@ -1,12 +1,8 @@
 import React, {Component} from "react";
 import {
     View,
-    Text,
-    StyleSheet,
     TextInput,
-    Button,
-    AsyncStorage,
-    Alert
+    Button
 } from "react-native";
 
 import deviceStorage from './deviceStorage';
@@ -33,7 +29,6 @@ class Login extends Component {
     processSignIn = async () => {
         const {username, password} = this.state;
         let response = await signIn(username, password);
-        console.log(response);
         if (response.status === true) {
             deviceStorage.saveItem("access_token", response.token);
             this.props.navigation.navigate('Home');

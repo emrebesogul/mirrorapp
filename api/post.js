@@ -1,6 +1,5 @@
 import config from "../config";
 import responseMessages from '../responseMessages';
-import deviceStorage from "../src/deviceStorage";
 import {AsyncStorage} from "react-native";
 
 
