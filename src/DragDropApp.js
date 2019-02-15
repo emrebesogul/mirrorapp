@@ -1,12 +1,10 @@
 import React, {Component} from 'react';
 import {
     View,
-    ScrollView,
-    AsyncStorage
+    ScrollView
 } from 'react-native';
 
-import SocketIOClient from 'socket.io-client';
-import config from '../config';
+import {socket} from "./frontendConfig";
 
 import DragContainer from '../lib/DragContainer';
 import Draggable from '../lib/Draggable';
@@ -20,7 +18,6 @@ import {getAllWidgets, getUserData, getUserWidgets} from "../api/get";
 export default class DragDropApp extends Component {
     constructor(props) {
         super(props);
-        this.socket = SocketIOClient('http://' + config.SERVER_ADDRESS + ':' + config.SOCKET_SERVER_PORT);
         this.state = {
             all_widgets: [],
             user_widgets: [],
@@ -89,7 +86,7 @@ export default class DragDropApp extends Component {
             dropWidgets.push(<DropZone
                 key={index}
                 onDrop={e => {
-                    app.socket.emit('app_drop_event', {
+                    socket.emit('app_drop_event', {
                         previous_slot: null,
                         slot: index,
                         widget_id: e.widget_id,
