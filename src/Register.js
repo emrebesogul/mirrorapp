@@ -9,14 +9,11 @@ import {
 
 import styles from './styles';
 import responseMessages from "../responseMessages";
-import {signUp} from '../api/post';
+import {signIn, signUp} from '../api/post';
 import {showAlert} from "../utils";
+import deviceStorage from "./deviceStorage";
 
 export default class Register extends React.Component {
-
-    static navigationOptions = {
-        header: null
-    }
 
     state = {
         username: '', password: ''
@@ -31,7 +28,18 @@ export default class Register extends React.Component {
         let response = await signUp(username, password);
         if (response.status === true) {
             showAlert("success", responseMessages.REGISTER_SUCCESS);
+            await this.processSignIn(username, password);
         } else showAlert("error", responseMessages.REGISTER_ERROR);
+    }
+
+    processSignIn = async (username, password) => {
+        let response = await signIn(username, password);
+        if (response.status === true) {
+            deviceStorage.saveItem("access_token", response.token);
+            this.props.navigation.navigate('Home');
+        } else {
+            showAlert("error", responseMessages.LOGIN_ERROR);
+        }
     }
 
     render() {
@@ -59,12 +67,6 @@ export default class Register extends React.Component {
                     title='Sign Up here!'
                     onPress={this.processSignUp}
                 />
-
-                <Button
-                    title='Back to Login'
-                    onPress={() => this.props.navigation.navigate('Login')}
-                />
-
             </View>
 
         )
