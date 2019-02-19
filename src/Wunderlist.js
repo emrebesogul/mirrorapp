@@ -6,6 +6,7 @@ import {getWunderlistSettings} from "../api/get";
 import {uploadWunderlistSettings} from "../api/post";
 import {showAlert} from "../utils";
 import responseMessages from '../responseMessages';
+import {socket} from './frontendConfig';
 
 export default class Wunderlist extends Component {
 
@@ -40,6 +41,11 @@ export default class Wunderlist extends Component {
         let response = await uploadWunderlistSettings(this.state.todoList, this.state.wl_access_token, this.state.wl_client_id);
         if (response.status === true) {
             showAlert("Success!", responseMessages.WUNDERLIST_UPLOAD_SUCCESS);
+            // Send socket update to web ui
+            socket.emit('update_to_do_list', {
+                message: "update your web ui...!"
+            });
+
         } else {
             showAlert("Error!", responseMessages.WUNDERLIST_UPLOAD_ERROR);
         }
