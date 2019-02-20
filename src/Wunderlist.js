@@ -42,7 +42,7 @@ export default class Wunderlist extends Component {
         if (response.status === true) {
             showAlert("Success!", responseMessages.WUNDERLIST_UPLOAD_SUCCESS);
             // Send socket update to web ui
-            socket.emit('update_to_do_list', {
+            socket.emit('send_wunderlist_settings', {
                 message: "update your web ui...!"
             });
 

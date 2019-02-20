@@ -38,11 +38,9 @@ export default class Weather extends Component {
         if (response.status === true) {
             showAlert("Success!", responseMessages.WEATHER_UPLOAD_SUCCESS);
             // Send socket update to web ui
-            /*
-            socket.emit('update_weather_widget', {
+            socket.emit('send_weather_forecast', {
                 message: "update your web ui...!"
             });
-            */
 
         } else {
             showAlert("Error!", responseMessages.WUNDERLIST_UPLOAD_ERROR);
