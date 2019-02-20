@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import {Button, Text, TextInput, View} from "react-native";
 import deviceStorage from "./deviceStorage";
 import styles from "./styles";
+import {getWeatherSettings} from "../api/get";
+import {uploadWeatherSettings} from "../api/post";
 import {showAlert} from "../utils";
 import responseMessages from '../responseMessages';
 import {socket} from './frontendConfig';
@@ -16,17 +18,14 @@ export default class Weather extends Component {
     }
 
     async componentDidMount() {
-    /*
-    let response = await getWunderlistSettings();
+    let response = await getWeatherSettings();
+    console.log(response);
+    console.log(response.settings);
         if (response.status === true && response.settings) {
             this.setState({
-                currentWunderlistSettings: response.settings,
-                todoList: response.settings.todo_list,
-                wl_access_token: response.settings.client_secret,
-                wl_client_id: response.settings.client_id
+                currentCity: response.settings.city
             });
         }
-    */
     }
 
     logout = async () => {
@@ -35,19 +34,19 @@ export default class Weather extends Component {
     }
 
     processUploadWeatherSettings = async () => {
-        /*
-        let response = await uploadWunderlistSettings(this.state.todoList, this.state.wl_access_token, this.state.wl_client_id);
+        let response = await uploadWeatherSettings(this.state.currentCity);
         if (response.status === true) {
-            showAlert("Success!", responseMessages.WUNDERLIST_UPLOAD_SUCCESS);
+            showAlert("Success!", responseMessages.WEATHER_UPLOAD_SUCCESS);
             // Send socket update to web ui
-            socket.emit('update_to_do_list', {
+            /*
+            socket.emit('update_weather_widget', {
                 message: "update your web ui...!"
             });
+            */
 
         } else {
             showAlert("Error!", responseMessages.WUNDERLIST_UPLOAD_ERROR);
         }
-        */
     }
 
     render() {

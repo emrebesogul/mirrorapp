@@ -105,3 +105,28 @@ export const getUserWidgets = async (username) => {
         };
     }
 }
+
+export const getWeatherSettings = async () => {
+    try {
+        const access_token = await AsyncStorage.getItem("access_token");
+        let response = await fetch("http://" + config.SERVER_ADDRESS + ':' + config.SOCKET_SERVER_PORT + "/native/getWeatherSettings", {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + access_token
+            },
+        });
+        return {
+            status: JSON.parse(response._bodyText).status,
+            message: responseMessages.FETCH_SUCCESS + ", " + JSON.parse(response._bodyText).message,
+            settings: JSON.parse(response._bodyText).settings
+        };
+    } catch (err) {
+        return {
+            status: false,
+            message: responseMessages.FETCH_ERROR,
+            error: err
+        };
+    }
+}
