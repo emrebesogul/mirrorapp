@@ -141,3 +141,30 @@ export const uploadImage = async (data) => {
         };
     }
 }
+
+export const uploadWeatherSettings = async (city) => {
+    try {
+        const access_token = await AsyncStorage.getItem("access_token");
+        let response = await fetch("http://" + config.SERVER_ADDRESS + ':' + config.SOCKET_SERVER_PORT + "/native/uploadWeatherSettings", {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + access_token
+            },
+            body: JSON.stringify({
+                "city": city
+            })
+        });
+        return {
+            status: JSON.parse(response._bodyText).status,
+            message: responseMessages.FETCH_SUCCESS + ", " + JSON.parse(response._bodyText).message
+        };
+    } catch (err) {
+        return {
+            status: false,
+            message: responseMessages.FETCH_ERROR,
+            error: err
+        };
+    }
+}

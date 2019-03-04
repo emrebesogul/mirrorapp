@@ -8,5 +8,7 @@
   "WUNDERLIST_UPLOAD_SUCCESS": "Wunderlist settings were successfully uploaded",
   "WUNDERLIST_UPLOAD_ERROR": "An error occured trying to upload wunderlist settings",
   "IMAGE_UPLOAD_SUCCESS": "User image successfully uploaded",
-  "IMAGE_UPLOAD_ERROR": "An error occured trying to upload user image"
+  "IMAGE_UPLOAD_ERROR": "An error occured trying to upload user image",
+  "WEATHER_UPLOAD_SUCCESS": "Weather settings were successfully uploaded",
+  "WEATHER_UPLOAD_ERROR": "An error occured trying to upload Weather settings"
 }

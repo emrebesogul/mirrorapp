@@ -16,6 +16,7 @@ import {getUserData} from "../api/get";
 import Wunderlist from './Wunderlist';
 import Settings from './Settings';
 import DragDropApp from './DragDropApp';
+import Weather from './Weather';
 
 class Home extends Component {
 
@@ -79,6 +80,18 @@ export default createBottomTabNavigator({
         screen: Wunderlist,
         navigationOptions: {
             tabBarLabel: 'Wunderlist',
+            tabBarIcon: ({tintColor}) => (
+                <Icon name="ios-settings" color={tintColor} size={24}/>
+            )
+        },
+        header: {
+            visible: false,
+        },
+    },
+    Weather: {
+        screen: Weather,
+        navigationOptions: {
+            tabBarLabel: 'Weather',
             tabBarIcon: ({tintColor}) => (
                 <Icon name="ios-settings" color={tintColor} size={24}/>
             )
