@@ -24,6 +24,7 @@ export const signUp = async (username, password) => {
             response: JSON.parse(response._bodyText)
         };
     } catch (err) {
+        console.log(err);
         return {
             status: false,
             message: responseMessages.FETCH_ERROR,

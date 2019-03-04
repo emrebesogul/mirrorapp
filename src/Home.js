@@ -36,20 +36,11 @@ class Home extends Component {
         }
     }
 
-    logout = async () => {
-        deviceStorage.saveItem("access_token", "");
-        this.props.navigation.navigate('Login');
-    }
-
     render() {
         return (
             <View style={styles.container}>
                 <Text>Welcome: {this.state.username}</Text>
                 <Text>Hello from Home screen.</Text>
-                <Button
-                    onPress={this.logout}
-                    title="Sign Out"
-                />
             </View>
         );
     }

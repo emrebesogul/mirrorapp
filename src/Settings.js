@@ -33,7 +33,7 @@ export default class Settings extends Component {
 
     logout = async () => {
         deviceStorage.saveItem("access_token", "empty");
-        this.props.navigation.navigate('Login');
+        this.props.navigation.navigate('QRScanner');
     }
 
     pickImage = async () => {
@@ -82,7 +82,6 @@ export default class Settings extends Component {
 
 
     render() {
-
         return (
             <View style={styles.container}>
                 <Text>Hello from Settings screen.</Text>
@@ -110,10 +109,6 @@ export default class Settings extends Component {
                     onPress={this.processUploadImage}
                 />
 
-                <Button
-                    onPress={this.logout}
-                    title="Sign Out"
-                />
             </View>
         );
     }

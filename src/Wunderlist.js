@@ -32,11 +32,6 @@ export default class Wunderlist extends Component {
         }
     }
 
-    logout = async () => {
-        deviceStorage.saveItem("access_token", "");
-        this.props.navigation.navigate('Login');
-    }
-
     processUploadWunderlistSettings = async () => {
         let response = await uploadWunderlistSettings(this.state.todoList, this.state.wl_access_token, this.state.wl_client_id);
         if (response.status === true) {
@@ -80,11 +75,6 @@ export default class Wunderlist extends Component {
                 <Button
                     title="Update your To Do List with the credentials and list above"
                     onPress={this.processUploadWunderlistSettings}
-                />
-
-                <Button
-                    onPress={this.logout}
-                    title="Sign Out"
                 />
             </View>
         );
