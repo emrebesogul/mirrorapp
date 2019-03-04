@@ -1,4 +1,3 @@
-import config from "../config";
 import responseMessages from '../responseMessages';
 import {AsyncStorage} from "react-native";
 
@@ -7,7 +6,8 @@ export const signUp = async (username, password) => {
     try {
         // post username and pw to backend and check input, eitherwise register new account and go back to login
         // save access_token in AsyncStorage
-        let response = await fetch("http://" + config.SERVER_ADDRESS + ':' + config.SOCKET_SERVER_PORT + "/native/signup", {
+        let server_address = await AsyncStorage.getItem("server_address");
+        let response = await fetch(server_address + "/native/signup", {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -37,7 +37,8 @@ export const signIn = async (username, password) => {
     try {
         // post username and pw to backend and check input, eitherwise register new account and go back to login
         // save access_token in AsyncStorage
-        let response = await fetch("http://" + config.SERVER_ADDRESS + ':' + config.SOCKET_SERVER_PORT + "/native/signin", {
+        let server_address = await AsyncStorage.getItem("server_address");
+        let response = await fetch(server_address + "/native/signin", {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -65,7 +66,8 @@ export const signIn = async (username, password) => {
 export const authorizeToken = async () => {
     try {
         const access_token = await AsyncStorage.getItem("access_token");
-        let response = await fetch("http://" + config.SERVER_ADDRESS + ':' + config.SOCKET_SERVER_PORT + "/native/authizeToken", {
+        let server_address = await AsyncStorage.getItem("server_address");
+        let response = await fetch(server_address + "/native/authizeToken", {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -91,7 +93,8 @@ export const authorizeToken = async () => {
 export const uploadWunderlistSettings = async (todoList, wl_access_token, wl_client_id) => {
     try {
         const access_token = await AsyncStorage.getItem("access_token");
-        let response = await fetch("http://" + config.SERVER_ADDRESS + ':' + config.SOCKET_SERVER_PORT + "/native/uploadWunderlistSettings", {
+        let server_address = await AsyncStorage.getItem("server_address");
+        let response = await fetch(server_address + "/native/uploadWunderlistSettings", {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -120,7 +123,8 @@ export const uploadWunderlistSettings = async (todoList, wl_access_token, wl_cli
 export const uploadImage = async (data) => {
     try {
         const access_token = await AsyncStorage.getItem("access_token");
-        let response = await fetch("http://" + config.SERVER_ADDRESS + ':' + config.SOCKET_SERVER_PORT + "/native/uploadImage", {
+        let server_address = await AsyncStorage.getItem("server_address");
+        let response = await fetch(server_address + "/native/uploadImage", {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -145,7 +149,8 @@ export const uploadImage = async (data) => {
 export const uploadWeatherSettings = async (city) => {
     try {
         const access_token = await AsyncStorage.getItem("access_token");
-        let response = await fetch("http://" + config.SERVER_ADDRESS + ':' + config.SOCKET_SERVER_PORT + "/native/uploadWeatherSettings", {
+        let server_address = await AsyncStorage.getItem("server_address");
+        let response = await fetch(server_address + "/native/uploadWeatherSettings", {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',

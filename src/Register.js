@@ -15,8 +15,12 @@ import deviceStorage from "./deviceStorage";
 
 export default class Register extends React.Component {
 
-    state = {
-        username: '', password: ''
+    constructor(props) {
+        super(props);
+        this.state = {
+            username: '',
+            password: ''
+        }
     }
 
     onChangeText = (key, val) => {
@@ -67,6 +71,10 @@ export default class Register extends React.Component {
                     title='Sign Up here!'
                     onPress={this.processSignUp}
                 />
+
+                <Button title={'Already have an account? Log in!'} onPress={() => {
+                    this.props.navigation.navigate('Login')
+                }}/>
             </View>
 
         )

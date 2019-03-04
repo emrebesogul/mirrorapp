@@ -7,15 +7,14 @@ import {
 } from 'react-native';
 
 import deviceStorage from './deviceStorage';
-import styles from './styles';
 
 export default class InitializingQR extends React.Component {
     async componentDidMount() {
-        const ip_address = await deviceStorage.getItem("ip_address");
-        if (ip_address) {
+        let server_address = await deviceStorage.getItem("server_address");
+        if (server_address) {
             this.props.navigation.navigate('Initializing'); // go to Initializing page to check if webtoken is present
         } else {
-            this.props.navigation.navigate('FakePage'); // go to QR-Code scanning page
+            this.props.navigation.navigate('QRScanner'); // go to QR-Code scanning page
         }
     }
 

@@ -13,13 +13,16 @@ import {showAlert} from "../utils";
 
 class Login extends Component {
 
-    static navigationOptions = {
-        header: null
+    constructor(props) {
+        super(props);
+        this.state = {
+            username: '',
+            password: ''
+        }
     }
 
-    state = {
-        username: '',
-        password: ''
+    static navigationOptions = {
+        header: null
     }
 
     onChangeText = (key, value) => {
