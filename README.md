@@ -14,7 +14,6 @@ Clone this package and run this:
 1. cd mirrorapp
 2. npm install
 3. expo start
-* This will run the app
 ```
 
 ## Contributors
