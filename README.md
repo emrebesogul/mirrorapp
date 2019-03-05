@@ -1,5 +1,4 @@
 # mirrorapp
-Smart Mirror Configuration App with React Native
 
 ## What does this Repository contain?
 This repository holds code for the Smart Mirror Configuration with React Native.
