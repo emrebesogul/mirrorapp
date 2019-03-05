@@ -55,5 +55,8 @@ export default StyleSheet.create({
         borderRadius: 14,
         fontSize: 18,
         fontWeight: '500',
+    },
+    qrCodeText: {
+        color: 'white'
     }
 });

@@ -1,4 +1,7 @@
 import SocketIOClient from "socket.io-client";
-import config from "../config";
+import {AsyncStorage} from "react-native";
 
-export const socket = SocketIOClient('http://' + config.SERVER_ADDRESS + ':' + config.SOCKET_SERVER_PORT);
+export const socket = async () => {
+    let server_address = await AsyncStorage.getItem("server_address");
+    SocketIOClient(server_address);
+}

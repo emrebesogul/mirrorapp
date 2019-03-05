@@ -1,11 +1,11 @@
 import {AsyncStorage} from "react-native";
-import config from "../config";
 import responseMessages from "../responseMessages";
 
 export const getUserData = async () => {
     try {
         const access_token = await AsyncStorage.getItem("access_token");
-        let response = await fetch("http://" + config.SERVER_ADDRESS + ':' + config.SOCKET_SERVER_PORT + "/native/getUserData", {
+        let server_address = await AsyncStorage.getItem("server_address");
+        let response = await fetch(server_address + "/native/getUserData", {
             method: 'GET',
             headers: {
                 'Accept': 'application/json',
@@ -31,7 +31,8 @@ export const getUserData = async () => {
 export const getWunderlistSettings = async () => {
     try {
         const access_token = await AsyncStorage.getItem("access_token");
-        let response = await fetch("http://" + config.SERVER_ADDRESS + ':' + config.SOCKET_SERVER_PORT + "/native/getWunderlistSettings", {
+        let server_address = await AsyncStorage.getItem("server_address");
+        let response = await fetch(server_address + "/native/getWunderlistSettings", {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -56,7 +57,8 @@ export const getWunderlistSettings = async () => {
 export const getAllWidgets = async () => {
     try {
         const access_token = await AsyncStorage.getItem("access_token");
-        let response = await fetch("http://" + config.SERVER_ADDRESS + ':' + config.SOCKET_SERVER_PORT + "/native/getAllWidgets", {
+        let server_address = await AsyncStorage.getItem("server_address");
+        let response = await fetch(server_address + "/native/getAllWidgets", {
             method: 'GET',
             headers: {
                 'Accept': 'application/json',
@@ -84,7 +86,8 @@ export const getAllWidgets = async () => {
 export const getUserWidgets = async (username) => {
     try {
         const access_token = await AsyncStorage.getItem("access_token");
-        let response = await fetch("http://" + config.SERVER_ADDRESS + ':' + config.SOCKET_SERVER_PORT + "/native/getUserWidgets?user_id=" + username, {
+        let server_address = await AsyncStorage.getItem("server_address");
+        let response = await fetch(server_address + "/native/getUserWidgets?user_id=" + username, {
             method: 'GET',
             headers: {
                 'Accept': 'application/json',
@@ -109,7 +112,8 @@ export const getUserWidgets = async (username) => {
 export const getWeatherSettings = async () => {
     try {
         const access_token = await AsyncStorage.getItem("access_token");
-        let response = await fetch("http://" + config.SERVER_ADDRESS + ':' + config.SOCKET_SERVER_PORT + "/native/getWeatherSettings", {
+        let server_address = await AsyncStorage.getItem("server_address");
+        let response = await fetch(server_address + "/native/getWeatherSettings", {
             method: 'GET',
             headers: {
                 'Accept': 'application/json',

@@ -18,7 +18,7 @@ export default class Initializing extends React.Component {
             this.props.navigation.navigate('Home'); // go to main page
         } else {
             deviceStorage.saveItem("access_token", ""); // set back saved token because could not been authorized
-            this.props.navigation.navigate('QRScanner'); // go to auth page
+            this.props.navigation.navigate('Login'); // go to auth page
         }
     }
 

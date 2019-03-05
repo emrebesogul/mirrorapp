@@ -6,6 +6,8 @@ import {
     StyleSheet
 } from 'react-native';
 import {BarCodeScanner, Permissions} from 'expo';
+import styles from './styles';
+import deviceStorage from "./deviceStorage";
 
 export default class App extends Component {
     state = {
@@ -25,6 +27,7 @@ export default class App extends Component {
 
     _handleBarCodeRead = result => {
         if (this.isURL(result.data)) {
+            deviceStorage.saveItem("server_address", result.data);
             this.props.navigation.navigate('Register');
         }
     };
@@ -41,7 +44,12 @@ export default class App extends Component {
 
     render() {
         return (
-            <View style={styles.container}>
+            <View style={[styles.container, {'alignItems': 'center'}]}>
+
+                <View>
+                    <Text style={styles.qrCodeText}>Hello and welcome to MirrorApp. Scan the QR Code on your Smart
+                        Mirror to get started.</Text>
+                </View>
 
                 {this.state.hasCameraPermission === null
                     ? <Text>Please allow camera usage to connect to your mirror</Text>
@@ -60,12 +68,3 @@ export default class App extends Component {
         );
     }
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: '#000',
-    }
-});

@@ -9,7 +9,7 @@ import DragDropApp from "./src/DragDropApp";
 import Settings from "./src/Settings";
 import Wunderlist from "./src/Wunderlist";
 import QRScanner from "./src/QRScanner";
-import FakePage from "./src/FakePage";
+import Login from "./src/Login";
 
 const AppStackNavigator = createStackNavigator({
     InitializingQR: InitializingQR,
@@ -20,7 +20,7 @@ const AppStackNavigator = createStackNavigator({
     Settings: Settings,
     Wunderlist: Wunderlist,
     QRScanner: QRScanner,
-    FakePage: FakePage
+    Login: Login
 });
 
 const App = createAppContainer(AppStackNavigator);
