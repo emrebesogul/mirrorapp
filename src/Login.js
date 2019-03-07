@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import {
     View,
     TextInput,
+    Text,
     Button
 } from "react-native";
 
@@ -21,10 +22,6 @@ class Login extends Component {
         }
     }
 
-    static navigationOptions = {
-        header: null
-    }
-
     onChangeText = (key, value) => {
         this.setState({[key]: value})
     }
@@ -42,7 +39,8 @@ class Login extends Component {
 
     render() {
         return (
-            <View style={styles.container}>
+            <View style={styles.lrScreen}>
+                <Text style={styles.lrtext}>Login Screen</Text>
                 <TextInput
                     style={styles.input}
                     placeholder='Username'
@@ -59,14 +57,8 @@ class Login extends Component {
                     placeholderTextColor='white'
                     onChangeText={val => this.onChangeText('password', val)}
                 />
-                <Button
-                    title='Login'
-                    onPress={this.processSignIn}
-                />
-                <Button
-                    title='Register'
-                    onPress={() => this.props.navigation.navigate('Register')}
-                />
+                <Button title="Login with here!" onPress={this.processSignIn} />
+                <Button title="Not registered yet? Register here!" onPress={() => this.props.navigation.navigate('Register')} />
             </View>
         );
     }

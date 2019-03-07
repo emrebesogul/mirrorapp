@@ -1,16 +1,19 @@
 import React from 'react'
 import {AsyncStorage} from "react-native";
+import styles from './styles';
+import deviceStorage from './deviceStorage';
 
 import {
     View,
     Text
 } from 'react-native';
 
-import deviceStorage from './deviceStorage';
-
 export default class InitializingQR extends React.Component {
+
     async componentDidMount() {
         let server_address = await deviceStorage.getItem("server_address");
+        await deviceStorage.saveItem("server_address", "http://localhost:5000");    // just for debugging
+
         if (server_address) {
             this.props.navigation.navigate('Initializing'); // go to Initializing page to check if webtoken is present
         } else {
@@ -20,8 +23,8 @@ export default class InitializingQR extends React.Component {
 
     render() {
         return (
-            <View>
-                <Text>Loading IP Address</Text>
+            <View style={styles.initializing}>
+                <Text style={styles.initializingText}>Loading IP Address of Smart Mirror...</Text>
             </View>
         )
     }

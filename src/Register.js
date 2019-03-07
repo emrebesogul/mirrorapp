@@ -1,10 +1,10 @@
 import React from 'react';
 import {
     View,
-    Button,
     TextInput,
-    StyleSheet,
-    Alert
+    Alert,
+    Text,
+    Button
 } from 'react-native';
 
 import styles from './styles';
@@ -48,8 +48,8 @@ export default class Register extends React.Component {
 
     render() {
         return (
-
-            <View style={styles.container}>
+            <View style={styles.lrScreen}>
+                <Text style={styles.lrtext}>Register Screen</Text>
                 <TextInput
                     style={styles.input}
                     placeholder='Username'
@@ -57,7 +57,6 @@ export default class Register extends React.Component {
                     placeholderTextColor='white'
                     onChangeText={val => this.onChangeText('username', val)}
                 />
-
                 <TextInput
                     style={styles.input}
                     placeholder='Password'
@@ -66,15 +65,8 @@ export default class Register extends React.Component {
                     placeholderTextColor='white'
                     onChangeText={val => this.onChangeText('password', val)}
                 />
-
-                <Button
-                    title='Sign Up here!'
-                    onPress={this.processSignUp}
-                />
-
-                <Button title={'Already have an account? Log in!'} onPress={() => {
-                    this.props.navigation.navigate('Login')
-                }}/>
+                <Button title="Register here!" onPress={this.processSignUp} />
+                <Button title="Already have an account? Log in!" onPress={() => {this.props.navigation.navigate('Login')}} />
             </View>
 
         )
