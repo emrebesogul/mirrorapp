@@ -6,13 +6,24 @@ import {
     Text,
 } from 'react-native';
 
-export default class NewHome extends React.Component {
+import {createDrawerNavigator, createAppContainer} from 'react-navigation';
+import HomeScreen from './HomeScreen';
+import SettingsScreen from './SettingsScreen';
+import Wunderlist from './Wunderlist';
+
+class NewHome extends React.Component {
 
     render() {
         return (
-            <View style={styles.initializing}>
-                <Text style={styles.initializingText}>New Home Screen with Swiper on the left</Text>
-            </View>
+            <NewHomeNavigator />
         )
     }
 }
+
+const NewHomeNavigator = createDrawerNavigator({
+    Home: {screen: HomeScreen},
+    Settings: {screen: SettingsScreen},
+    Wunderlist: {screen: Wunderlist}
+})
+
+export default createAppContainer(NewHomeNavigator);
