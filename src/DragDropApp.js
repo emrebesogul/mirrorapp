@@ -15,7 +15,17 @@ import DropZoneContent from '../lib/DropZoneContent';
 import styles from './styles';
 import {getAllWidgets, getUserData, getUserWidgets} from "../api/get";
 
+import { Container, Header, Body, Left, Right, Title, Content } from 'native-base';
+import MenuButton from './components/MenuButton';
+
 export default class DragDropApp extends Component {
+
+    static navigationOptions = {
+        drawerLabel: 'Home',
+        headerMode: 'none',
+        header: null
+    };
+
     constructor(props) {
         super(props);
         this.state = {
@@ -106,15 +116,31 @@ export default class DragDropApp extends Component {
     }
 
     render() {
-        return <DragContainer style={styles.container}>
-            <View style={styles.row}>
-                {this.state.dropWidgets}
-            </View>
-            <ScrollView horizontal={true}>
-                <View style={{justifyContent: 'center', alignItems: 'flex-end', flexDirection: 'row'}}>
-                    {this.state.draggableWidgets}
-                </View>
-            </ScrollView>
-        </DragContainer>
-    }
+        return (
+            <Container>
+                <Header>
+                    <Left>
+                        <MenuButton navigation={this.props.navigation} />
+                    </Left>
+                    <Body>
+                        <Title>Home</Title>
+                    </Body>
+                    <Right />
+                </Header>
+
+                <Content>
+                    <DragContainer>
+                        <View style={styles.row}>
+                            {this.state.dropWidgets}
+                        </View>
+                        <ScrollView horizontal={true}>
+                            <View style={{justifyContent: 'center', alignItems: 'flex-end', flexDirection: 'row'}}>
+                                {this.state.draggableWidgets}
+                            </View>
+                        </ScrollView>
+                    </DragContainer>
+                </Content>
+
+            </Container>
+    )}
 }

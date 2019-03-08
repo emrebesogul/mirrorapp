@@ -12,6 +12,12 @@ import { Container, Header, Body, Left, Right, Title, Content } from 'native-bas
 
 export default class Weather extends Component {
 
+    static navigationOptions = {
+        drawerLabel: 'Weather',
+        headerMode: 'none',
+        header: null
+    };
+
     constructor(props) {
         super(props);
         this.state = {
@@ -28,11 +34,6 @@ export default class Weather extends Component {
                 currentCity: response.settings.city
             });
         }
-    }
-
-    logout = async () => {
-        deviceStorage.saveItem("access_token", "");
-        this.props.navigation.navigate('Login');
     }
 
     processUploadWeatherSettings = async () => {
@@ -57,7 +58,7 @@ export default class Weather extends Component {
                         <MenuButton navigation={this.props.navigation} />
                     </Left>
                     <Body>
-                        <Title>Weather Screen</Title>
+                        <Title>Weather</Title>
                     </Body>
                     <Right />
                 </Header>
@@ -69,14 +70,7 @@ export default class Weather extends Component {
                         onChangeText={(currentCity) => this.setState({currentCity})}
                         value={this.state.currentCity}
                     />
-                    <Button
-                        title="Update your Weather information for the city above"
-                        onPress={this.processUploadWeatherSettings}
-                    />
-                    <Button
-                        onPress={this.logout}
-                        title="Sign Out"
-                    />
+                    <Button title="Update your Weather information for the city above" onPress={this.processUploadWeatherSettings} />
                 </Content>
             </Container>
         );

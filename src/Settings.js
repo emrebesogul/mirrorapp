@@ -1,30 +1,21 @@
 import React, {Component} from 'react';
 import {Button, Image, Text, View} from "react-native";
 import styles from "./styles";
-import {getUserData} from "../api/get";
 import MenuButton from './components/MenuButton';
 import { Container, Header, Body, Left, Right, Title, Content } from 'native-base';
+import deviceStorage from "./deviceStorage";
 
 export default class Settings extends Component {
 
     static navigationOptions = {
-      drawerLabel: 'Settings',
+        drawerLabel: 'Settings',
+        headerMode: 'none',
+        header: null
     };
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            currentUser: "",
-        };
-    }
-
-    async componentDidMount() {
-        let response = await getUserData();
-        if (response.status === true) {
-            this.setState({
-                currentUser: response.username
-            });
-        }
+    logout = async () => {
+        deviceStorage.saveItem("access_token", "");
+        this.props.navigation.navigate('Login');
     }
 
     render() {
@@ -41,10 +32,10 @@ export default class Settings extends Component {
                 </Header>
 
                 <Content>
-                    <Text>Hello {this.state.currentUser} from Settings screen.</Text>
+                    <Text>Hello from Settings screen.</Text>
                     <Button title="User Profile Settings" onPress={() => {}} />
                     <Button title="Set Face ID" onPress={() => {}} />
-                    <Button title="Log me Out!" onPress={() => {}} />
+                    <Button title="Sign me Out!" onPress={this.logout} />
                 </Content>
 
             </Container>

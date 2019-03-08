@@ -1,39 +1,27 @@
 import React from 'react'
-import styles from './styles';
 
 import {
     View,
-    Text,
+    StyleSheet
 } from 'react-native';
 
-import {Platform, Dimensions} from 'react-native';
-import {createDrawerNavigator, createAppContainer} from 'react-navigation';
-import Settings from './Settings';
-import Wunderlist from './Wunderlist';
-import DragDropApp from './DragDropApp';
-import Weather from './Weather';
 
-const WIDTH = Dimensions.get('window').width;
+import DrawerNavigator from './navigation/DrawerNavigator'
 
-const DrawerConfig = {
-    drawerWidth: WIDTH*0.5,
-
-}
-
-class NewHome extends React.Component {
+export default class NewHome extends React.Component {
 
     render() {
         return (
-            <NewHomeNavigator />
+            <View style={styles.container}>
+                <DrawerNavigator />
+            </View>
         )
     }
 }
 
-const NewHomeNavigator = createDrawerNavigator({
-    DragDropApp: {screen: DragDropApp, navigationOptions: {drawerLabel: () => null}},
-    Settings: {screen: Settings},
-    Wunderlist: {screen: Wunderlist},
-    Weather: {screen: Weather}
-}, DrawerConfig)
-
-export default createAppContainer(NewHomeNavigator);
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+  },
+});
