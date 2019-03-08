@@ -7,6 +7,8 @@ import {uploadWunderlistSettings} from "../api/post";
 import {showAlert} from "../utils";
 import responseMessages from '../responseMessages';
 import {socket} from './frontendConfig';
+import MenuButton from './components/MenuButton';
+import { Container, Header, Body, Left, Right, Title, Content } from 'native-base';
 
 export default class Wunderlist extends Component {
 
@@ -48,35 +50,48 @@ export default class Wunderlist extends Component {
 
     render() {
         return (
-            <View style={styles.container}>
-                <Text>Please register at https://developer.wunderlist.com/ and insert your CLIENT ID and ACCESS TOKEN in
-                    the fields below</Text>
-                <Text>Please insert your list for the Wunderlist App:</Text>
-                <TextInput
-                    style={styles.input}
-                    onChangeText={(todoList) => this.setState({todoList})}
-                    value={this.state.todoList}
-                />
+            <Container>
+                <Header>
+                    <Left>
+                        <MenuButton navigation={this.props.navigation} />
+                    </Left>
+                    <Body>
+                        <Title>To Do List</Title>
+                    </Body>
+                    <Right />
+                </Header>
 
-                <Text>Please insert your ACCESS TOKEN for the Wunderlist App:</Text>
-                <TextInput
-                    style={styles.input}
-                    onChangeText={(wl_access_token) => this.setState({wl_access_token})}
-                    value={this.state.wl_access_token}
-                />
+                <Content>
+                    <Text>Please register at https://developer.wunderlist.com/ and insert your CLIENT ID and ACCESS TOKEN in
+                        the fields below</Text>
+                    <Text>Please insert your list for the Wunderlist App:</Text>
+                    <TextInput
+                        style={styles.input}
+                        onChangeText={(todoList) => this.setState({todoList})}
+                        value={this.state.todoList}
+                    />
 
-                <Text>Please insert your CLIENT ID for the Wunderlist App:</Text>
-                <TextInput
-                    style={styles.input}
-                    onChangeText={(wl_client_id) => this.setState({wl_client_id})}
-                    value={this.state.wl_client_id}
-                />
+                    <Text>Please insert your ACCESS TOKEN for the Wunderlist App:</Text>
+                    <TextInput
+                        style={styles.input}
+                        onChangeText={(wl_access_token) => this.setState({wl_access_token})}
+                        value={this.state.wl_access_token}
+                    />
 
-                <Button
-                    title="Update your To Do List with the credentials and list above"
-                    onPress={this.processUploadWunderlistSettings}
-                />
-            </View>
+                    <Text>Please insert your CLIENT ID for the Wunderlist App:</Text>
+                    <TextInput
+                        style={styles.input}
+                        onChangeText={(wl_client_id) => this.setState({wl_client_id})}
+                        value={this.state.wl_client_id}
+                    />
+
+                    <Button
+                        title="Update your To Do List with the credentials and list above"
+                        onPress={this.processUploadWunderlistSettings}
+                    />
+                </Content>
+            </Container>
+
         );
     }
 }

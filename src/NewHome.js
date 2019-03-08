@@ -8,7 +8,6 @@ import {
 
 import {Platform, Dimensions} from 'react-native';
 import {createDrawerNavigator, createAppContainer} from 'react-navigation';
-import HomeScreen from './HomeScreen';
 import Settings from './Settings';
 import Wunderlist from './Wunderlist';
 import DragDropApp from './DragDropApp';

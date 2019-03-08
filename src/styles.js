@@ -78,8 +78,6 @@ export default StyleSheet.create({
         bottom: 50
     },
     menuIcon: {
-        zIndex: 9,
-        position: 'absolute',
-        left: 20
+
     }
 });

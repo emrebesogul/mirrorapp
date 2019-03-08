@@ -11,7 +11,6 @@ import Wunderlist from "./src/Wunderlist";
 import QRScanner from "./src/QRScanner";
 import Login from "./src/Login";
 import NewHome from "./src/NewHome";
-import HomeScreen from './src/HomeScreen';
 
 const AppStackNavigator = createStackNavigator({
     InitializingQR: {screen: InitializingQR, navigationOptions: {headerLeft: null}},
@@ -23,8 +22,7 @@ const AppStackNavigator = createStackNavigator({
     Wunderlist: {screen: Wunderlist, navigationOptions: {headerLeft: null}},
     QRScanner: {screen: QRScanner, navigationOptions: {headerLeft: null}},
     Login: {screen: Login, navigationOptions: {headerLeft: null}},
-    NewHome: {screen: NewHome, navigationOptions: {headerLeft: null}},
-    HomeScreen: {screen: HomeScreen, navigationOptions: {headerLeft: null}}
+    NewHome: {screen: NewHome, navigationOptions: {headerLeft: null}}
 });
 
 const App = createAppContainer(AppStackNavigator);

@@ -7,6 +7,8 @@ import {uploadWeatherSettings} from "../api/post";
 import {showAlert} from "../utils";
 import responseMessages from '../responseMessages';
 import {socket} from './frontendConfig';
+import MenuButton from './components/MenuButton';
+import { Container, Header, Body, Left, Right, Title, Content } from 'native-base';
 
 export default class Weather extends Component {
 
@@ -49,24 +51,34 @@ export default class Weather extends Component {
 
     render() {
         return (
-            <View style={styles.container}>
-                <Text>Please insert your city for the Weather widget:</Text>
-                <TextInput
-                    style={styles.input}
-                    onChangeText={(currentCity) => this.setState({currentCity})}
-                    value={this.state.currentCity}
-                />
+            <Container>
+                <Header>
+                    <Left>
+                        <MenuButton navigation={this.props.navigation} />
+                    </Left>
+                    <Body>
+                        <Title>Weather Screen</Title>
+                    </Body>
+                    <Right />
+                </Header>
 
-                <Button
-                    title="Update your Weather information for the city above"
-                    onPress={this.processUploadWeatherSettings}
-                />
-
-                <Button
-                    onPress={this.logout}
-                    title="Sign Out"
-                />
-            </View>
+                <Content>
+                    <Text>Please insert your city for the Weather widget:</Text>
+                    <TextInput
+                        style={styles.input}
+                        onChangeText={(currentCity) => this.setState({currentCity})}
+                        value={this.state.currentCity}
+                    />
+                    <Button
+                        title="Update your Weather information for the city above"
+                        onPress={this.processUploadWeatherSettings}
+                    />
+                    <Button
+                        onPress={this.logout}
+                        title="Sign Out"
+                    />
+                </Content>
+            </Container>
         );
     }
 }
