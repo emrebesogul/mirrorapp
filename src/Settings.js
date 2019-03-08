@@ -6,13 +6,14 @@ import {getUserData} from "../api/get";
 
 export default class Settings extends Component {
 
+    static navigationOptions = {
+      drawerLabel: 'Settings',
+    };
+
     constructor(props) {
         super(props);
         this.state = {
             currentUser: "",
-            image: null,
-            type: null,
-            updatedImage: false,
         };
     }
 
@@ -20,16 +21,18 @@ export default class Settings extends Component {
         let response = await getUserData();
         if (response.status === true) {
             this.setState({
-                image: response.face_image
+                currentUser: response.username
             });
         }
     }
 
-
     render() {
         return (
             <View style={styles.container}>
-                <Text>Hello from Settings screen.</Text>
+                <Text>Hello {this.state.currentUser} from Settings screen.</Text>
+                <Button title="User Profile Settings" onPress={() => {}} />
+                <Button title="Set Face ID" onPress={() => {}} />
+                <Button title="Log me Out!" onPress={() => {}} />
             </View>
         );
     }

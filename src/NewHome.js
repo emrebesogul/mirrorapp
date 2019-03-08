@@ -6,10 +6,20 @@ import {
     Text,
 } from 'react-native';
 
+import {Platform, Dimensions} from 'react-native';
 import {createDrawerNavigator, createAppContainer} from 'react-navigation';
 import HomeScreen from './HomeScreen';
-import SettingsScreen from './SettingsScreen';
+import Settings from './Settings';
 import Wunderlist from './Wunderlist';
+import DragDropApp from './DragDropApp';
+import Weather from './Weather';
+
+const WIDTH = Dimensions.get('window').width;
+
+const DrawerConfig = {
+    drawerWidth: WIDTH*0.5,
+
+}
 
 class NewHome extends React.Component {
 
@@ -21,9 +31,10 @@ class NewHome extends React.Component {
 }
 
 const NewHomeNavigator = createDrawerNavigator({
-    Home: {screen: HomeScreen},
-    Settings: {screen: SettingsScreen},
-    Wunderlist: {screen: Wunderlist}
-})
+    DragDropApp: {screen: DragDropApp, navigationOptions: {drawerLabel: () => null}},
+    Settings: {screen: Settings},
+    Wunderlist: {screen: Wunderlist},
+    Weather: {screen: Weather}
+}, DrawerConfig)
 
 export default createAppContainer(NewHomeNavigator);

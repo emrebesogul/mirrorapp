@@ -77,4 +77,9 @@ export default StyleSheet.create({
         fontSize: 28,
         bottom: 50
     },
+    menuIcon: {
+        zIndex: 9,
+        position: 'absolute',
+        left: 20
+    }
 });
