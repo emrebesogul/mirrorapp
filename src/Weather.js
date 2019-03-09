@@ -59,7 +59,7 @@ export default class Weather extends Component {
                     <Form>
                         <Item stackedLabel>
                             <Label>Please insert your city for the Weather widget:</Label>
-                            <Input placeholder="Berlin" autoCapitalize="none" autoCorrect={false} onChangeText={(currentCity) => this.setState({currentCity})} />
+                            <Input value={this.state.currentCity} autoCapitalize="none" autoCorrect={false} onChangeText={(currentCity) => this.setState({currentCity})} />
                         </Item>
                     </Form>
                     <Button title="Update your Weather information for the city above" onPress={this.processUploadWeatherSettings} />

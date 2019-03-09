@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Button, Image, Text, View} from "react-native";
+import {Button} from "react-native";
 import MenuButton from './components/MenuButton';
 import { Container, Header, Body, Left, Right, Title, Content, Form, Input, Item, Label, Spinner } from 'native-base';
 import deviceStorage from "./deviceStorage";
@@ -9,9 +9,13 @@ export default class Settings extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            newPassword: '',
+            newPassword: "",
             takingPictures: false
         }
+    }
+
+    onChangeText = (key, value) => {
+        this.setState({[key]: value})
     }
 
     logout = async () => {
@@ -35,7 +39,7 @@ export default class Settings extends Component {
                     <Form>
                         <Item stackedLabel>
                             <Label>New Password</Label>
-                            <Input placeholder="New Password" autoCapitalize="none" autoCorrect={false} onChangeText={val => this.onChangeText('newPassword', val)} />
+                            <Input placeholder="New Password" autoCapitalize="none" autoCorrect={false} secureTextEntry onChangeText={val => this.onChangeText('newPassword', val)} />
                         </Item>
                         <Button title="Update Password" onPress={() => {}} />
                     </Form>
