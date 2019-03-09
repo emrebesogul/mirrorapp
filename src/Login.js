@@ -5,6 +5,7 @@ import {
     Text,
     Button
 } from "react-native";
+import { Container, Header, Body, Left, Right, Title, Content, Form, Item, Input, Label, Icon } from 'native-base';
 
 import deviceStorage from './deviceStorage';
 import styles from './styles';
@@ -39,27 +40,31 @@ class Login extends Component {
 
     render() {
         return (
-            <View style={styles.lrScreen}>
-                <Text style={styles.lrtext}>Login Screen</Text>
-                <TextInput
-                    style={styles.input}
-                    placeholder='Username'
-                    autoCapitalize="none"
-                    autoCorrect={false}
-                    placeholderTextColor='white'
-                    onChangeText={val => this.onChangeText('username', val)}
-                />
-                <TextInput
-                    style={styles.input}
-                    placeholder='Password'
-                    autoCapitalize="none"
-                    secureTextEntry={true}
-                    placeholderTextColor='white'
-                    onChangeText={val => this.onChangeText('password', val)}
-                />
-                <Button title="Login with here!" onPress={this.processSignIn} />
-                <Button title="Not registered yet? Register here!" onPress={() => this.props.navigation.navigate('Register')} />
-            </View>
+            <Container>
+                <Header>
+                    <Left />
+                    <Body>
+                        <Title>Login</Title>
+                    </Body>
+                    <Right />
+                </Header>
+                <Content>
+                    <Form>
+                        <Item stackedLabel>
+                            <Label>Username</Label>
+                            <Icon active type="FontAwesome" name='user' />
+                            <Input placeholder="Username" autoCapitalize="none" autoCorrect={false} onChangeText={val => this.onChangeText('username', val)} />
+                        </Item>
+                        <Item stackedLabel>
+                            <Label>Password</Label>
+                            <Icon active type="MaterialCommunityIcons" name='onepassword' />
+                            <Input placeholder="Password" autoCapitalize="none" autoCorrect={false} secureTextEntry onChangeText={val => this.onChangeText('password', val)} />
+                        </Item>
+                        <Button title="Login here!" onPress={this.processSignIn} />
+                        <Button title="Not registered yet? Register here!" onPress={() => this.props.navigation.navigate('Register')} />
+                    </Form>
+                </Content>
+            </Container>
         );
     }
 }

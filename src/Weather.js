@@ -8,7 +8,7 @@ import {showAlert} from "../utils";
 import responseMessages from '../responseMessages';
 import {socket} from './frontendConfig';
 import MenuButton from './components/MenuButton';
-import { Container, Header, Body, Left, Right, Title, Content } from 'native-base';
+import { Container, Header, Body, Left, Right, Title, Content, Form, Input, Item, Label, Spinner } from 'native-base';
 
 export default class Weather extends Component {
 
@@ -62,14 +62,13 @@ export default class Weather extends Component {
                     </Body>
                     <Right />
                 </Header>
-
                 <Content>
-                    <Text>Please insert your city for the Weather widget:</Text>
-                    <TextInput
-                        style={styles.input}
-                        onChangeText={(currentCity) => this.setState({currentCity})}
-                        value={this.state.currentCity}
-                    />
+                    <Form>
+                        <Item stackedLabel>
+                            <Label>Please insert your city for the Weather widget:</Label>
+                            <Input placeholder="Berlin" autoCapitalize="none" autoCorrect={false} onChangeText={(currentCity) => this.setState({currentCity})} />
+                        </Item>
+                    </Form>
                     <Button title="Update your Weather information for the city above" onPress={this.processUploadWeatherSettings} />
                 </Content>
             </Container>

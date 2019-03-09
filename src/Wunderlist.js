@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Button, Text, TextInput, View} from "react-native";
+import {Button, TextInput, View} from "react-native";
 import deviceStorage from "./deviceStorage";
 import styles from "./styles";
 import {getWunderlistSettings} from "../api/get";
@@ -8,7 +8,7 @@ import {showAlert} from "../utils";
 import responseMessages from '../responseMessages';
 import {socket} from './frontendConfig';
 import MenuButton from './components/MenuButton';
-import { Container, Header, Body, Left, Right, Title, Content } from 'native-base';
+import { Container, Header, Body, Left, Right, Title, Content, Form, Input, Item, Label, Card, CardItem, Text} from 'native-base';
 
 export default class Wunderlist extends Component {
 
@@ -66,38 +66,34 @@ export default class Wunderlist extends Component {
                     </Body>
                     <Right />
                 </Header>
-
                 <Content>
-                    <Text>Please register at https://developer.wunderlist.com/ and insert your CLIENT ID and ACCESS TOKEN in
-                        the fields below</Text>
-                    <Text>Please insert your list for the Wunderlist App:</Text>
-                    <TextInput
-                        style={styles.input}
-                        onChangeText={(todoList) => this.setState({todoList})}
-                        value={this.state.todoList}
-                    />
-
-                    <Text>Please insert your ACCESS TOKEN for the Wunderlist App:</Text>
-                    <TextInput
-                        style={styles.input}
-                        onChangeText={(wl_access_token) => this.setState({wl_access_token})}
-                        value={this.state.wl_access_token}
-                    />
-
-                    <Text>Please insert your CLIENT ID for the Wunderlist App:</Text>
-                    <TextInput
-                        style={styles.input}
-                        onChangeText={(wl_client_id) => this.setState({wl_client_id})}
-                        value={this.state.wl_client_id}
-                    />
-
-                    <Button
-                        title="Update your To Do List with the credentials and list above"
-                        onPress={this.processUploadWunderlistSettings}
-                    />
+                    <Card>
+                        <CardItem header>
+                          <Text>Wunderlist Instruction</Text>
+                        </CardItem>
+                      <CardItem>
+                        <Body>
+                          <Text>Please register with your Google Account at https://developer.wunderlist.com/ and insert your CLIENT ID and ACCESS TOKEN in the fields below</Text>
+                        </Body>
+                      </CardItem>
+                    </Card>
+                    <Form>
+                        <Item stackedLabel>
+                            <Label>List from the Wunderlist App</Label>
+                            <Input value={this.state.todoList} autoCapitalize="none" autoCorrect={false} onChangeText={(todoList) => this.setState({todoList})} />
+                        </Item>
+                        <Item stackedLabel>
+                            <Label>ACCESS TOKEN</Label>
+                            <Input value={this.state.wl_access_token} autoCapitalize="none" autoCorrect={false} onChangeText={(wl_access_token) => this.setState({wl_access_token})} />
+                        </Item>
+                        <Item stackedLabel>
+                            <Label>CLIENT ID</Label>
+                            <Input value={this.state.wl_client_id} autoCapitalize="none" autoCorrect={false} onChangeText={(wl_client_id) => this.setState({wl_client_id})} />
+                        </Item>
+                    </Form>
+                    <Button title="Setup To Do Widget" onPress={this.processUploadWunderlistSettings} />
                 </Content>
             </Container>
-
         );
     }
 }

@@ -55,6 +55,9 @@ export default class MenuDrawer extends React.Component {
 						{this.navLink('Weather', 'Weather')}
 					</View>
 				</ScrollView>
+				<View style={styles.footer}>
+					<Text style={styles.description}>Smart Mirror App</Text>
+				</View>
 			</View>
 		)
 	}
@@ -70,24 +73,13 @@ const styles = StyleSheet.create({
 	},
 	name: {
 		fontSize: 20,
-		paddingBottom: 5,
-		color: 'white',
-		textAlign: 'left',
-	},
-	imgView: {
-		flex: 1,
-		paddingLeft: 20,
-		paddingRight: 20,
-	},
-	img: {
-		height: 70,
-		width: 70,
-		borderRadius: 50,
+		color: 'black',
+		textAlign: 'center',
 	},
 	topLinks:{
 		alignItems: 'center',
-		height: 80,
-		backgroundColor: 'black',
+		height: 60,
+		backgroundColor: 'lightgray',
 		flexDirection: 'column',
 		justifyContent: 'center',
 	},
@@ -107,21 +99,14 @@ const styles = StyleSheet.create({
 	},
 	footer: {
 		height: 50,
-		flexDirection: 'row',
 		alignItems: 'center',
 		backgroundColor: 'white',
 		borderTopWidth: 1,
 		borderTopColor: 'lightgray'
 	},
-	version: {
-		flex: 1,
-		textAlign: 'right',
-		marginRight: 20,
-		color: 'gray'
-	},
 	description: {
 		flex: 1,
-		marginLeft: 20,
+		paddingTop: 10,
 		fontSize: 16,
 	}
 })

@@ -1,4 +1,5 @@
 import React from 'react'
+import styles from './styles';
 
 import {
     View,
@@ -18,10 +19,3 @@ export default class NewHome extends React.Component {
         )
     }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-  },
-});
