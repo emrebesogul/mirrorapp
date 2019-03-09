@@ -5,7 +5,7 @@ export default StyleSheet.create({
         flex: 1,
         backgroundColor: 'white',
         ...Platform.select({
-            ios: {paddingTop: 20},
+            ios: {top: 0},
             android: {paddingTop: StatusBar.currentHeight}
         })
     },

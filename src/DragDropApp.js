@@ -112,7 +112,7 @@ export default class DragDropApp extends Component {
     render() {
         return (
             <Container>
-                <Header>
+                <Header transparent>
                     <Left>
                         <MenuButton navigation={this.props.navigation} />
                     </Left>
@@ -123,7 +123,7 @@ export default class DragDropApp extends Component {
                 </Header>
 
                 <Content>
-                    <DragContainer>
+                    <DragContainer style={styles.container}>
                         <View style={styles.row}>
                             {this.state.dropWidgets}
                         </View>
@@ -134,7 +134,6 @@ export default class DragDropApp extends Component {
                         </ScrollView>
                     </DragContainer>
                 </Content>
-
             </Container>
     )}
 }

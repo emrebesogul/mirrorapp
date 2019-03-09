@@ -50,7 +50,7 @@ export default class Wunderlist extends Component {
     render() {
         return (
             <Container>
-                <Header>
+                <Header transparent>
                     <Left>
                         <MenuButton navigation={this.props.navigation} />
                     </Left>

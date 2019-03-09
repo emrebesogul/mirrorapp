@@ -34,7 +34,7 @@ const DrawerNavigator =  createDrawerNavigator(
 			visible: false,
 		},
 		navigationOptions: {
-			headerMode: 'float'
+			headerMode: null
 		}
     }
 );

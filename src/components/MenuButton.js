@@ -1,5 +1,4 @@
 import React from 'react'
-import styles from '../styles';
 import { Ionicons } from '@expo/vector-icons';
 
 import {
