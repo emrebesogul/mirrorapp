@@ -27,7 +27,16 @@ const DrawerNavigator =  createDrawerNavigator(
 		Weather: {screen: Weather},
 		Login: {screen: Login}
 	},
-	DrawerConfig
+	DrawerConfig,
+	{
+		initialRouteName: 'DragDropApp',
+		header: {
+			visible: false,
+		},
+		navigationOptions: {
+			headerMode: 'float'
+		}
+    }
 );
 
 export default createAppContainer(DrawerNavigator);

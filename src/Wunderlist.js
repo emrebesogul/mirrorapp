@@ -11,12 +11,6 @@ import { Container, Header, Body, Left, Right, Title, Content, Form, Input, Item
 
 export default class Wunderlist extends Component {
 
-    static navigationOptions = {
-        drawerLabel: 'To Do List',
-        headerMode: 'none',
-        header: null
-    };
-
     constructor(props) {
         super(props);
         this.state = {

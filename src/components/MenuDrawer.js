@@ -10,9 +10,6 @@ import {
 	TouchableOpacity,
 } from 'react-native';
 
-const WIDTH = Dimensions.get('window').width
-const HEIGHT = Dimensions.get('window').height
-
 import {getUserData} from "../../api/get";
 
 export default class MenuDrawer extends React.Component {
