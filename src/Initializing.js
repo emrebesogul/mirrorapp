@@ -20,7 +20,7 @@ export default class Initializing extends React.Component {
 
         let response = await authorizeToken();
         if (response.authorized === true) {
-            this.props.navigation.navigate('NewHome'); // go to main page
+            this.props.navigation.navigate('Home'); // go to main page
         } else {
             deviceStorage.saveItem("access_token", ""); // set back saved token because could not been authorized
             this.props.navigation.navigate('Login'); // go to auth page

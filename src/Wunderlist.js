@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {Button, TextInput, View} from "react-native";
 import deviceStorage from "./deviceStorage";
-import styles from "./styles";
 import {getWunderlistSettings} from "../api/get";
 import {uploadWunderlistSettings} from "../api/post";
 import {showAlert} from "../utils";

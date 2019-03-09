@@ -8,7 +8,6 @@ import {
 import { Container, Header, Body, Left, Right, Title, Content, Form, Item, Input, Label, Icon } from 'native-base';
 
 import deviceStorage from './deviceStorage';
-import styles from './styles';
 import {signIn} from "../api/post";
 import responseMessages from '../responseMessages'
 import {showAlert} from "../utils";

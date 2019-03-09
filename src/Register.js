@@ -8,7 +8,6 @@ import {
 } from 'react-native';
 import { Container, Header, Body, Left, Right, Title, Content, Form, Item, Input, Label, Icon } from 'native-base';
 
-import styles from './styles';
 import responseMessages from "../responseMessages";
 import {signIn, signUp} from '../api/post';
 import {showAlert} from "../utils";

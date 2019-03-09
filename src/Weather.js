@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {Button, Text, TextInput, View} from "react-native";
 import deviceStorage from "./deviceStorage";
-import styles from "./styles";
 import {getWeatherSettings} from "../api/get";
 import {uploadWeatherSettings} from "../api/post";
 import {showAlert} from "../utils";

@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import {Button, Image, Text, View} from "react-native";
-import styles from "./styles";
 import MenuButton from './components/MenuButton';
 import { Container, Header, Body, Left, Right, Title, Content, Form, Input, Item, Label, Spinner } from 'native-base';
 import deviceStorage from "./deviceStorage";
