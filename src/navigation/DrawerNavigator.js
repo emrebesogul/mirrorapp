@@ -6,6 +6,7 @@ import Settings from '../Settings';
 import Wunderlist from '../Wunderlist';
 import DragDropApp from '../DragDropApp';
 import Weather from '../Weather';
+import Login from '../Login';
 
 import MenuDrawer from '../components/MenuDrawer';
 
@@ -23,7 +24,8 @@ const DrawerNavigator =  createDrawerNavigator(
 		DragDropApp: {screen: DragDropApp},
 	    Settings: {screen: Settings},
 	    Wunderlist: {screen: Wunderlist},
-	    Weather: {screen: Weather}
+		Weather: {screen: Weather},
+		Login: {screen: Login}
 	},
 	DrawerConfig
 );
