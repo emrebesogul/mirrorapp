@@ -7,7 +7,6 @@ import Register from './src/Register';
 import Home from './src/Home';
 import QRScanner from "./src/QRScanner";
 import Login from "./src/Login";
-import CreateFaceId from "./src/CreateFaceId";
 
 const AppStackNavigator = createStackNavigator({
     InitializingQR: {screen: InitializingQR, navigationOptions: {headerLeft: null}},
@@ -15,8 +14,7 @@ const AppStackNavigator = createStackNavigator({
     Register: {screen: Register, navigationOptions: {headerLeft: null}},
     Home: {screen: Home, navigationOptions: {headerLeft: null}},
     QRScanner: {screen: QRScanner, navigationOptions: {headerLeft: null}},
-    Login: {screen: Login, navigationOptions: {headerLeft: null}},
-    CreateFaceId: {screen: CreateFaceId, navigationOptions: {headerLeft: null}}
+    Login: {screen: Login, navigationOptions: {headerLeft: null}}
 });
 
 const App = createAppContainer(AppStackNavigator);
