@@ -31,7 +31,7 @@ class Home extends Component {
         let response = await getUserData();
         if (response.status === true) {
             this.setState({
-                username: response.username
+                username: response.user_data.username
             });
         }
     }

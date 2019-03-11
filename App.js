@@ -10,6 +10,7 @@ import Settings from "./src/Settings";
 import Wunderlist from "./src/Wunderlist";
 import QRScanner from "./src/QRScanner";
 import Login from "./src/Login";
+import CreateFaceId from "./src/CreateFaceId";
 
 const AppStackNavigator = createStackNavigator({
     InitializingQR: InitializingQR,
@@ -20,7 +21,8 @@ const AppStackNavigator = createStackNavigator({
     Settings: Settings,
     Wunderlist: Wunderlist,
     QRScanner: QRScanner,
-    Login: Login
+    Login: Login,
+    CreateFaceId: CreateFaceId
 });
 
 const App = createAppContainer(AppStackNavigator);
