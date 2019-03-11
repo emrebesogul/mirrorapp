@@ -53,7 +53,7 @@ export default class Settings extends Component {
                         </Item>
                         <Button title="Update Password" onPress={() => {}} />
                     </Form>
-                    {this.state.takingPictures ? <View><Spinner color='blue' /><Button title="Creating Face ID..." onPress={() => {}} /></View> : <Button title="Create new Face ID" onPress={() => nPress={this.handleCreateFaceId.bind(this)} />}
+                    {this.state.takingPictures ? <View><Spinner color='blue' /><Button title="Creating Face ID..." onPress={() => {}} /></View> : <Button title="Create new Face ID" onPress={() => this.handleCreateFaceId.bind(this)} />}
                     <Button title="Sign me Out!" onPress={this.logout} />
                 </Content>
             </Container>
