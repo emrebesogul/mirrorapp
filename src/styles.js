@@ -3,9 +3,9 @@ import {Platform, StyleSheet, StatusBar} from 'react-native';
 export default StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: 'black',
+        backgroundColor: 'white',
         ...Platform.select({
-            ios: {paddingTop: 20},
+            ios: {top: 0},
             android: {paddingTop: StatusBar.currentHeight}
         })
     },
@@ -48,7 +48,7 @@ export default StyleSheet.create({
     input: {
         width: 350,
         height: 55,
-        backgroundColor: '#42A5F5',
+        backgroundColor: 'black',
         margin: 10,
         padding: 8,
         color: 'white',
@@ -58,5 +58,26 @@ export default StyleSheet.create({
     },
     qrCodeText: {
         color: 'white'
+    },
+    initializing: {
+        fontSize: 28,
+        paddingTop: 200,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    initializingText: {
+        fontSize: 18,
+    },
+    lrScreen: {
+        paddingTop: 50,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    lrtext: {
+        fontSize: 28,
+        bottom: 50
+    },
+    menuIcon: {
+
     }
 });
