@@ -31,6 +31,7 @@ class Login extends Component {
         let response = await signIn(username, password);
         if (response.status === true) {
             deviceStorage.saveItem("access_token", response.token);
+            console.log(response.token);
             this.props.navigation.navigate('Home');
         } else {
             showAlert("error", responseMessages.LOGIN_ERROR);

@@ -4,7 +4,6 @@ import {
     ScrollView
 } from 'react-native';
 
-import {socket} from "./frontendConfig";
 
 import DragContainer from '../lib/DragContainer';
 import Draggable from '../lib/Draggable';
@@ -13,7 +12,8 @@ import DropZone from '../lib/DropZone';
 import DropZoneContent from '../lib/DropZoneContent';
 
 import styles from './styles';
-import {getAllWidgets, getUserData, getUserWidgets} from "../api/get";
+import {getWidgets, getUserData} from "../api/get";
+import {updateUserWidgets} from "../api/post";
 
 import { Container, Header, Body, Left, Right, Title, Content } from 'native-base';
 import MenuButton from './components/MenuButton';
@@ -23,89 +23,53 @@ export default class DragDropApp extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            all_widgets: [],
-            user_widgets: [],
-            username: '',
-            draggableWidgets: [],
-            dropWidgets: []
+            allWidgets: [],
+            userWidgets: [],
+            user_id: null
         }
     }
 
     async componentDidMount() {
-        let response = await getUserData();
-        if (response.status === true) this.setState({
-            username: response.username
-        });
-        response = await getAllWidgets();
-        if (response.status === true) this.setState({
-            all_widgets: response.data.all_widgets
-        });
-        response = await getUserWidgets(this.state.username);
-        if (response.status === true) this.setState({
-            user_widgets: response.data
-        });
-        this.renderAllWidgets();
         this.renderUserWidgets();
+        this.renderAllWidgets();
     }
 
-    renderAllWidgets() {
-        let draggableWidgets = [];
-        this.state.all_widgets.forEach(function (widget, index) {
-            draggableWidgets.push(<Draggable
-                key={widget.widget_id + widget.widget_name + index}
-                data={{widget_id: widget.widget_id, widget_name: widget.widget_name}}
+    async renderAllWidgets() {
+        let response = await getWidgets();
+        let handleAllWidgets = [];
+        response.forEach(function (widget) {
+            handleAllWidgets.push(<Draggable
+                key={widget.name}
+                data={{widgetName: widget.name}}
                 style={styles.box}>
-                <DraggableContent widget_name={widget.widget_name}/>
+                <DraggableContent widgetName={widget.name}/>
             </Draggable>)
         });
         this.setState({
-            draggableWidgets: draggableWidgets
-        })
-    }
-
-    replaceUserWidget(slot, widget_id, widget_name) {
-        let user_widgets = this.state.user_widgets;
-        user_widgets[slot] = {
-            widget_id: widget_id,
-            widget_name: widget_name
-        };
-        this.setState({
-            user_widgets: user_widgets
+            allWidgets: handleAllWidgets
         });
-        this.renderUserWidgets();
     }
-
-    renderUserWidgets() {
-        let dropWidgets = [];
+    async renderUserWidgets() {
+        let response = await getUserData();
+        let handleUserWidgets = [];
         let app = this;
-        this.state.user_widgets.forEach(function (widget, index) {
+        response.user_data.widgets.forEach(function (widget, index) {
             let dropZoneContent;
-            if (widget) {
-                dropZoneContent = <DropZoneContent key={widget.widget_id + widget.widget_name + index}
-                                                   displayText={widget.widget_name}/>;
-            } else {
-                dropZoneContent = <DropZoneContent key={index}
-                                                   displayText={"Empty"}/>;
-            }
-            dropWidgets.push(<DropZone
-                key={index}
-                onDrop={e => {
-                    socket.emit('app_drop_event', {
-                        previous_slot: null,
-                        slot: index,
-                        widget_id: e.widget_id,
-                        widget_name: e.widget_name,
-                        remove: false
-                    });
-                    app.replaceUserWidget(index, e.widget_id, e.widget_name);
+            dropZoneContent = <DropZoneContent key={widget ? widget.name + index : index}
+                                               displayText={widget ? widget.name : "Empty"}/>;
+            handleUserWidgets.push(<DropZone
+                key={widget ? widget.name + index : index}
+                onDrop={async (e) => {
+                    await updateUserWidgets(e.widgetName, null, index);
+                    app.renderUserWidgets();
                 }}
                 style={styles.box}
             >
                 {dropZoneContent}
             </DropZone>)
-        });
+        })
         this.setState({
-            dropWidgets: dropWidgets
+            userWidgets: handleUserWidgets
         });
     }
 
@@ -125,11 +89,11 @@ export default class DragDropApp extends Component {
                 <Content>
                     <DragContainer style={styles.container}>
                         <View style={styles.row}>
-                            {this.state.dropWidgets}
+                            {this.state.userWidgets}
                         </View>
                         <ScrollView horizontal={true}>
                             <View style={{justifyContent: 'center', alignItems: 'flex-end', flexDirection: 'row'}}>
-                                {this.state.draggableWidgets}
+                                {this.state.allWidgets}
                             </View>
                         </ScrollView>
                     </DragContainer>

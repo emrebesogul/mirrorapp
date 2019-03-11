@@ -30,6 +30,7 @@ export default class Register extends React.Component {
     processSignUp = async () => {
         const {username, password} = this.state;
         let response = await signUp(username, password);
+        console.log(response);
         if (response.status === true) {
             showAlert("success", responseMessages.REGISTER_SUCCESS);
             await this.processSignIn(username, password);

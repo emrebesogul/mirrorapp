@@ -120,18 +120,20 @@ export const uploadWunderlistSettings = async (todoList, wl_access_token, wl_cli
     }
 }
 
-export const uploadImage = async (data) => {
+export const uploadWeatherSettings = async (city) => {
     try {
         const access_token = await AsyncStorage.getItem("access_token");
         let server_address = await AsyncStorage.getItem("server_address");
-        let response = await fetch(server_address + "/native/uploadImage", {
+        let response = await fetch(server_address + "/native/uploadWeatherSettings", {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
                 'Authorization': 'Bearer ' + access_token
             },
-            body: data
+            body: JSON.stringify({
+                "city": city
+            })
         });
         return {
             status: JSON.parse(response._bodyText).status,
@@ -146,11 +148,11 @@ export const uploadImage = async (data) => {
     }
 }
 
-export const uploadWeatherSettings = async (city) => {
+export const updateUserWidgets = async (widget_name, previous_slot, slot) => {
     try {
         const access_token = await AsyncStorage.getItem("access_token");
         let server_address = await AsyncStorage.getItem("server_address");
-        let response = await fetch(server_address + "/native/uploadWeatherSettings", {
+        let response = await fetch(server_address + "/native/updateUserWidgets", {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -158,7 +160,9 @@ export const uploadWeatherSettings = async (city) => {
                 'Authorization': 'Bearer ' + access_token
             },
             body: JSON.stringify({
-                "city": city
+                "widget_name": widget_name,
+                "previous_slot": previous_slot,
+                "slot": slot
             })
         });
         return {
