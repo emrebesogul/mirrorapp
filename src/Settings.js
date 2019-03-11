@@ -3,6 +3,7 @@ import {Button} from "react-native";
 import MenuButton from './components/MenuButton';
 import { Container, Header, Body, Left, Right, Title, Content, Form, Input, Item, Label, Spinner } from 'native-base';
 import deviceStorage from "./deviceStorage";
+import {socket} from './frontendConfig';
 
 export default class Settings extends Component {
 
@@ -16,6 +17,15 @@ export default class Settings extends Component {
 
     onChangeText = (key, value) => {
         this.setState({[key]: value})
+    }
+
+    async handleCreateFaceId() {
+        const access_token = await AsyncStorage.getItem("access_token");
+        console.log(access_token)
+        console.log("On create face id")
+        socket.emit("app_trigger_face_id", {
+            token: access_token
+        });
     }
 
     logout = async () => {
@@ -43,7 +53,7 @@ export default class Settings extends Component {
                         </Item>
                         <Button title="Update Password" onPress={() => {}} />
                     </Form>
-                    {this.state.takingPictures ? <View><Spinner color='blue' /><Button title="Setting Face ID" onPress={() => {}} /></View> : <Button title="Set Face ID" onPress={() => {}} />}
+                    {this.state.takingPictures ? <View><Spinner color='blue' /><Button title="Creating Face ID..." onPress={() => {}} /></View> : <Button title="Create new Face ID" onPress={() => nPress={this.handleCreateFaceId.bind(this)} />}
                     <Button title="Sign me Out!" onPress={this.logout} />
                 </Content>
             </Container>

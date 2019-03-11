@@ -25,7 +25,7 @@ export default class MenuDrawer extends React.Component {
         let response = await getUserData();
         if (response.status === true) {
             this.setState({
-                currentUser: response.username
+                currentUser: response.user_data.username
             });
         }
     }
