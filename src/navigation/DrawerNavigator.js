@@ -19,7 +19,7 @@ const DrawerConfig = {
 	}
 }
 
-const DrawerNavigator =  createDrawerNavigator(
+const DrawerNavigator = createDrawerNavigator(
 	{
 		DragDropApp: {screen: DragDropApp},
 	    Settings: {screen: Settings},
@@ -29,13 +29,7 @@ const DrawerNavigator =  createDrawerNavigator(
 	},
 	DrawerConfig,
 	{
-		initialRouteName: 'DragDropApp',
-		header: {
-			visible: false,
-		},
-		navigationOptions: {
-			headerMode: null
-		}
+		initialRouteName: 'DragDropApp'
     }
 );
 

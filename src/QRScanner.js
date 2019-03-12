@@ -10,6 +10,11 @@ import styles from './styles';
 import deviceStorage from "./deviceStorage";
 
 export default class App extends Component {
+
+    static navigationOptions = {
+        header: null
+    }
+
     state = {
         hasCameraPermission: null
     };
