@@ -14,6 +14,7 @@ import {getUserData} from "../../api/get";
 
 export default class MenuDrawer extends React.Component {
 
+
 	constructor(props) {
         super(props);
         this.state = {
@@ -30,14 +31,6 @@ export default class MenuDrawer extends React.Component {
         }
     }
 
-	navLink(nav, text) {
-		return(
-			<TouchableOpacity style={{height: 50}} onPress={() => this.props.navigation.navigate(nav)}>
-				<Text style={styles.link}>{text}</Text>
-			</TouchableOpacity>
-		)
-	}
-
 	render() {
 		return(
 			<View style={styles.container}>
@@ -46,10 +39,18 @@ export default class MenuDrawer extends React.Component {
 						<Text style={styles.name}>{this.state.currentUser}</Text>
 					</View>
 					<View style={styles.bottomLinks}>
-						{this.navLink('DragDropApp', 'Home')}
-						{this.navLink('Settings', 'Settings')}
-						{this.navLink('Wunderlist', 'To Do List')}
-						{this.navLink('Weather', 'Weather')}
+						<TouchableOpacity style={{height: 50}} onPress={() => this.props.navigation.navigate('DragDropApp')}>
+							<Text style={styles.link}>Home</Text>
+						</TouchableOpacity>
+						<TouchableOpacity style={{height: 50}} onPress={() => this.props.navigation.navigate('Settings')}>
+							<Text style={styles.link}>Settings</Text>
+						</TouchableOpacity>
+						<TouchableOpacity style={{height: 50}} onPress={() => this.props.navigation.navigate('Wunderlist')}>
+							<Text style={styles.link}>Wunderlist</Text>
+						</TouchableOpacity>
+						<TouchableOpacity style={{height: 50}} onPress={() => this.props.navigation.navigate('Weather')}>
+							<Text style={styles.link}>Weather</Text>
+						</TouchableOpacity>
 					</View>
 				</ScrollView>
 				<View style={styles.footer}>
@@ -67,6 +68,7 @@ const styles = StyleSheet.create({
 	},
 	scroller: {
 		flex: 1,
+		paddingTop: 50
 	},
 	name: {
 		fontSize: 20,

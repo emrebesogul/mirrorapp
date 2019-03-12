@@ -13,13 +13,13 @@ import MenuDrawer from '../components/MenuDrawer';
 const WIDTH = Dimensions.get('window').width;
 
 const DrawerConfig = {
-	drawerWidth: WIDTH*0.5,
+	drawerWidth: WIDTH*0.63,
 	contentComponent: ({ navigation }) => {
 		return(<MenuDrawer navigation={navigation} />)
 	}
 }
 
-const DrawerNavigator =  createDrawerNavigator(
+const DrawerNavigator = createDrawerNavigator(
 	{
 		DragDropApp: {screen: DragDropApp},
 	    Settings: {screen: Settings},
@@ -29,13 +29,7 @@ const DrawerNavigator =  createDrawerNavigator(
 	},
 	DrawerConfig,
 	{
-		initialRouteName: 'DragDropApp',
-		header: {
-			visible: false,
-		},
-		navigationOptions: {
-			headerMode: null
-		}
+		initialRouteName: 'DragDropApp'
     }
 );
 

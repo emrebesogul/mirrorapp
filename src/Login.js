@@ -1,11 +1,8 @@
 import React, {Component} from "react";
 import {
-    View,
-    TextInput,
-    Text,
     Button
 } from "react-native";
-import { Container, Header, Body, Left, Right, Title, Content, Form, Item, Input, Label, Icon } from 'native-base';
+import { Container, Header, Body, Left, Right, Title, Content, Form, Item, Input, Label, Icon, Text } from 'native-base';
 
 import deviceStorage from './deviceStorage';
 import {signIn} from "../api/post";
@@ -13,6 +10,10 @@ import responseMessages from '../responseMessages'
 import {showAlert} from "../utils";
 
 class Login extends Component {
+
+    static navigationOptions = {
+        header: null
+    }
 
     constructor(props) {
         super(props);

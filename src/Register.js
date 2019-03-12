@@ -1,12 +1,8 @@
 import React from 'react';
 import {
-    View,
-    TextInput,
-    Alert,
-    Text,
     Button
 } from 'react-native';
-import { Container, Header, Body, Left, Right, Title, Content, Form, Item, Input, Label, Icon } from 'native-base';
+import { Container, Header, Body, Left, Right, Title, Content, Form, Item, Input, Label, Icon, Text } from 'native-base';
 
 import responseMessages from "../responseMessages";
 import {signIn, signUp} from '../api/post';
@@ -14,6 +10,10 @@ import {showAlert} from "../utils";
 import deviceStorage from "./deviceStorage";
 
 export default class Register extends React.Component {
+
+    static navigationOptions = {
+        header: null
+    }
 
     constructor(props) {
         super(props);
