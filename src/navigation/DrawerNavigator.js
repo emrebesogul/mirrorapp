@@ -13,7 +13,7 @@ import MenuDrawer from '../components/MenuDrawer';
 const WIDTH = Dimensions.get('window').width;
 
 const DrawerConfig = {
-	drawerWidth: WIDTH*0.5,
+	drawerWidth: WIDTH*0.63,
 	contentComponent: ({ navigation }) => {
 		return(<MenuDrawer navigation={navigation} />)
 	}

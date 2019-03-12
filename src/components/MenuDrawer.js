@@ -14,9 +14,6 @@ import {getUserData} from "../../api/get";
 
 export default class MenuDrawer extends React.Component {
 
-	static navigationOptions = {
-        header: null
-    }
 
 	constructor(props) {
         super(props);
@@ -71,6 +68,7 @@ const styles = StyleSheet.create({
 	},
 	scroller: {
 		flex: 1,
+		paddingTop: 50
 	},
 	name: {
 		fontSize: 20,
