@@ -2,7 +2,8 @@ import React, {Component} from "react";
 import {
     View,
     TextInput,
-    Button
+    Button,
+    Text
 } from "react-native";
 
 import styles from './styles';
@@ -44,30 +45,36 @@ class Login extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <TextInput
-                    style={styles.input}
-                    placeholder='Username'
-                    autoCapitalize="none"
-                    autoCorrect={false}
-                    placeholderTextColor='white'
-                    onChangeText={val => this.onChangeText('username', val)}
-                />
-                <TextInput
-                    style={styles.input}
-                    placeholder='Password'
-                    autoCapitalize="none"
-                    secureTextEntry={true}
-                    placeholderTextColor='white'
-                    onChangeText={val => this.onChangeText('password', val)}
-                />
-                <Button
-                    title='Login here!'
-                    onPress={this.processSignIn}
-                />
-                <Button
-                    title='Not registered yet? Register here!'
-                    onPress={() => this.props.navigation.navigate('Register')}
-                />
+                <View style={styles.headerBar}>
+                    <Text style={styles.headerTitle}>Login</Text>
+                </View>
+
+                <View style={styles.content}>
+                    <TextInput
+                        style={styles.input}
+                        placeholder='Username'
+                        autoCapitalize="none"
+                        autoCorrect={false}
+                        placeholderTextColor='white'
+                        onChangeText={val => this.onChangeText('username', val)}
+                    />
+                    <TextInput
+                        style={styles.input}
+                        placeholder='Password'
+                        autoCapitalize="none"
+                        secureTextEntry={true}
+                        placeholderTextColor='white'
+                        onChangeText={val => this.onChangeText('password', val)}
+                    />
+                    <Button
+                        title='Login here!'
+                        onPress={this.processSignIn}
+                    />
+                    <Button
+                        title='Not registered yet? Register here!'
+                        onPress={() => this.props.navigation.navigate('Register')}
+                    />
+                </View>
             </View>
         );
     }
