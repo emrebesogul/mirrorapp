@@ -52,13 +52,25 @@ export default class Weather extends Component {
         return (
             <View style={styles.container}>
 
-                <MenuButton navigation={this.props.navigation} />
+                <View style={styles.headerBar}>
+                    <MenuButton navigation={this.props.navigation} />
+                    <Text style={styles.headerTitle}>Weather</Text>
+                    <Text style={styles.toolbarButton}></Text>
+                </View>
 
-                <Text>Please insert your city for the Weather widget:</Text>
-                <TextInput value={this.state.currentCity} autoCapitalize="none" autoCorrect={false} onChangeText={(currentCity) => this.setState({currentCity})} />
+                <View style={styles.content}>
+                    <Text style={styles.contentText}>Please insert your city for the Weather widget:</Text>
+                    <TextInput
+                        style={styles.input}
+                        value={this.state.currentCity}
+                        autoCapitalize="none"
+                        autoCorrect={false}
+                        placeholderTextColor='white'
+                        onChangeText={(currentCity) => this.setState({currentCity})}
+                    />
 
-                <Button title="Update your Weather information for the city above" onPress={this.processUploadWeatherSettings} />
-
+                    <Button title="Update your Weather information for the city above" onPress={this.processUploadWeatherSettings} />
+                </View>
             </View>
         );
     }
