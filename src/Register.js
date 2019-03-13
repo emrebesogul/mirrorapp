@@ -1,9 +1,12 @@
 import React from 'react';
 import {
-    Button
+    View,
+    Button,
+    TextInput,
+    Alert
 } from 'react-native';
-import { Container, Header, Body, Left, Right, Title, Content, Form, Item, Input, Label, Icon, Text } from 'native-base';
 
+import styles from './styles';
 import responseMessages from "../responseMessages";
 import {signIn, signUp} from '../api/post';
 import {showAlert} from "../utils";
@@ -49,31 +52,33 @@ export default class Register extends React.Component {
 
     render() {
         return (
-            <Container>
-                <Header>
-                    <Left />
-                    <Body>
-                        <Title>Register</Title>
-                    </Body>
-                    <Right />
-                </Header>
-                <Content>
-                    <Form>
-                        <Item stackedLabel>
-                            <Label>Username</Label>
-                            <Icon active type="FontAwesome" name='user' />
-                            <Input placeholder="Username" autoCapitalize="none" autoCorrect={false} onChangeText={val => this.onChangeText('username', val)} />
-                        </Item>
-                        <Item stackedLabel>
-                            <Label>Password</Label>
-                            <Icon active type="MaterialCommunityIcons" name='onepassword' />
-                            <Input placeholder="Password" autoCapitalize="none" autoCorrect={false} secureTextEntry onChangeText={val => this.onChangeText('password', val)} />
-                        </Item>
-                        <Button title="Register here!" onPress={this.processSignUp} />
-                        <Button title="Already have an account? Log in!" onPress={() => {this.props.navigation.navigate('Login')}} />
-                    </Form>
-                </Content>
-            </Container>
+            <View style={styles.container}>
+                <TextInput
+                    style={styles.input}
+                    placeholder='Username'
+                    autoCapitalize="none"
+                    placeholderTextColor='white'
+                    onChangeText={val => this.onChangeText('username', val)}
+                />
+
+                <TextInput
+                    style={styles.input}
+                    placeholder='Password'
+                    secureTextEntry={true}
+                    autoCapitalize="none"
+                    placeholderTextColor='white'
+                    onChangeText={val => this.onChangeText('password', val)}
+                />
+
+                <Button
+                    title='Register here!'
+                    onPress={this.processSignUp}
+                />
+
+                <Button title={'Already have an account? Log in!'} onPress={() => {
+                    this.props.navigation.navigate('Login')
+                }}/>
+            </View>
         )
     }
 }

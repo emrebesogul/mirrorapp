@@ -4,10 +4,7 @@ export default StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: 'white',
-        ...Platform.select({
-            ios: {top: 0},
-            android: {paddingTop: StatusBar.currentHeight}
-        })
+        top: 25
     },
     ballContainer: {
         height: 200

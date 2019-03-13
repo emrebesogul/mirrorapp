@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import {Button, Text, TextInput, View} from "react-native";
+
+import styles from "./styles";
 import deviceStorage from "./deviceStorage";
 import {getWeatherSettings} from "../api/get";
 import {uploadWeatherSettings} from "../api/post";
@@ -7,7 +9,6 @@ import {showAlert} from "../utils";
 import responseMessages from '../responseMessages';
 import {socket} from './frontendConfig';
 import MenuButton from './components/MenuButton';
-import { Container, Header, Body, Left, Right, Title, Content, Form, Input, Item, Label, Spinner } from 'native-base';
 
 export default class Weather extends Component {
 
@@ -49,26 +50,16 @@ export default class Weather extends Component {
 
     render() {
         return (
-            <Container>
-                <Header transparent>
-                    <Left>
-                        <MenuButton navigation={this.props.navigation} />
-                    </Left>
-                    <Body>
-                        <Title>Weather</Title>
-                    </Body>
-                    <Right />
-                </Header>
-                <Content>
-                    <Form>
-                        <Item stackedLabel>
-                            <Label>Please insert your city for the Weather widget:</Label>
-                            <Input value={this.state.currentCity} autoCapitalize="none" autoCorrect={false} onChangeText={(currentCity) => this.setState({currentCity})} />
-                        </Item>
-                    </Form>
-                    <Button title="Update your Weather information for the city above" onPress={this.processUploadWeatherSettings} />
-                </Content>
-            </Container>
+            <View style={styles.container}>
+
+                <MenuButton navigation={this.props.navigation} />
+
+                <Text>Please insert your city for the Weather widget:</Text>
+                <TextInput value={this.state.currentCity} autoCapitalize="none" autoCorrect={false} onChangeText={(currentCity) => this.setState({currentCity})} />
+
+                <Button title="Update your Weather information for the city above" onPress={this.processUploadWeatherSettings} />
+
+            </View>
         );
     }
 }

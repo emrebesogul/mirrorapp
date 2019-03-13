@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
-import {Button} from "react-native";
+import {Button, View, Text} from "react-native";
 import MenuButton from './components/MenuButton';
-import { Container, Header, Body, Left, Right, Title, Content, Form, Input, Item, Label, Spinner } from 'native-base';
+import styles from "./styles";
 import deviceStorage from "./deviceStorage";
 import {socket} from './frontendConfig';
 import {AsyncStorage} from 'react-native';
@@ -40,28 +40,15 @@ export default class Settings extends Component {
 
     render() {
         return (
-            <Container>
-                <Header transparent>
-                    <Left>
-                        <MenuButton navigation={this.props.navigation} />
-                    </Left>
-                    <Body>
-                        <Title>Settings</Title>
-                    </Body>
-                    <Right />
-                </Header>
-                <Content>
-                    <Form>
-                        <Item stackedLabel>
-                            <Label>New Password</Label>
-                            <Input placeholder="New Password" autoCapitalize="none" autoCorrect={false} secureTextEntry onChangeText={val => this.onChangeText('newPassword', val)} />
-                        </Item>
-                        <Button title="Update Password" onPress={() => {}} />
-                    </Form>
-                    {this.state.takingPictures ? <View><Spinner color='blue' /><Button title="Creating Face ID..." onPress={() => {}} /></View> : <Button title="Create new Face ID" onPress={this.handleCreateFaceId.bind(this)} />}
-                    <Button title="Sign me Out!" onPress={this.logout} />
-                </Content>
-            </Container>
+            <View style={styles.container}>
+
+                <MenuButton navigation={this.props.navigation} />
+
+                {this.state.takingPictures ? <View><Button title="Creating Face ID..." onPress={() => {}} /></View> : <Button title="Create new Face ID" onPress={this.handleCreateFaceId.bind(this)} />}
+
+                <Button title="Sign me Out!" onPress={this.logout} />
+
+            </View>
         );
     }
 }

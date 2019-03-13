@@ -15,7 +15,6 @@ import styles from './styles';
 import {getWidgets, getUserData} from "../api/get";
 import {updateUserWidgets} from "../api/post";
 
-import { Container, Header, Body, Left, Right, Title, Content } from 'native-base';
 import MenuButton from './components/MenuButton';
 
 export default class DragDropApp extends Component {
@@ -79,29 +78,18 @@ export default class DragDropApp extends Component {
 
     render() {
         return (
-            <Container>
-                <Header transparent>
-                    <Left>
-                        <MenuButton navigation={this.props.navigation} />
-                    </Left>
-                    <Body>
-                        <Title>Home</Title>
-                    </Body>
-                    <Right />
-                </Header>
+            <DragContainer style={styles.container}>
 
-                <Content>
-                    <DragContainer style={styles.container}>
-                        <View style={styles.row}>
-                            {this.state.userWidgets}
-                        </View>
-                        <ScrollView horizontal={true}>
-                            <View style={{justifyContent: 'center', alignItems: 'flex-end', flexDirection: 'row'}}>
-                                {this.state.allWidgets}
-                            </View>
-                        </ScrollView>
-                    </DragContainer>
-                </Content>
-            </Container>
+                <MenuButton navigation={this.props.navigation} />
+
+                <View style={styles.row}>
+                    {this.state.userWidgets}
+                </View>
+                <ScrollView horizontal={true}>
+                    <View style={{justifyContent: 'center', alignItems: 'flex-end', flexDirection: 'row'}}>
+                        {this.state.allWidgets}
+                    </View>
+                </ScrollView>
+            </DragContainer>
     )}
 }
