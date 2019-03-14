@@ -32,7 +32,6 @@ export default class App extends Component {
 
     _handleBarCodeRead = result => {
         if (this.isURL(result.data)) {
-            console.log(result.data)
             deviceStorage.saveItem("server_address", result.data);
             this.props.navigation.navigate('Register');
         }

@@ -26,8 +26,6 @@ export default class Settings extends Component {
 
     async handleCreateFaceId() {
         const access_token = await AsyncStorage.getItem("access_token");
-        console.log(access_token)
-        console.log("On create face id")
         socket.emit("app_trigger_face_id", {
             token: access_token
         });
