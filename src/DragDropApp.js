@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
 import {
     View,
-    ScrollView,
     AsyncStorage
+    Text,
+    ScrollView
 } from 'react-native';
 
 import DragContainer from '../lib/DragContainer';
@@ -88,16 +89,22 @@ export default class DragDropApp extends Component {
         return (
             <DragContainer style={styles.container}>
 
-                <MenuButton navigation={this.props.navigation}/>
-
-                <View style={styles.row}>
-                    {this.state.userWidgets}
+                <View style={styles.headerBar}>
+                    <MenuButton navigation={this.props.navigation} />
+                    <Text style={styles.headerTitle}>Home</Text>
+                    <Text style={styles.toolbarButton}></Text>
                 </View>
-                <ScrollView horizontal={true}>
-                    <View style={{justifyContent: 'center', alignItems: 'flex-end', flexDirection: 'row'}}>
-                        {this.state.allWidgets}
+
+                <View style={styles.content}>
+                    <View style={styles.row}>
+                        {this.state.userWidgets}
                     </View>
-                </ScrollView>
+                    <ScrollView horizontal={true}>
+                        <View style={{justifyContent: 'center', alignItems: 'flex-end', flexDirection: 'row'}}>
+                            {this.state.allWidgets}
+                        </View>
+                    </ScrollView>
+                </View>
             </DragContainer>
         )
     }

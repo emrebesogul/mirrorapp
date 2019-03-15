@@ -1,10 +1,11 @@
-import {Platform, StyleSheet, StatusBar} from 'react-native';
+import {Platform, StyleSheet, StatusBar, Dimensions} from 'react-native';
+
+const WIDTH = Dimensions.get('window').width;
 
 export default StyleSheet.create({
     container: {
-        flex: 1,
         backgroundColor: 'white',
-        top: 25
+        marginTop: 40
     },
     ballContainer: {
         height: 200
@@ -74,7 +75,35 @@ export default StyleSheet.create({
         fontSize: 28,
         bottom: 50
     },
-    menuIcon: {
-
+    toolbarButton:{
+        width: 50,            //Step 2
+        color:'#fff',
+        textAlign:'center'
+    },
+    headerBar: {
+        height: 60,
+        alignItems: 'center',
+        flexDirection: 'row'
+    },
+    headerButton:{
+        color:'#fff',
+        textAlign:'center'
+    },
+    headerTitle: {
+        fontSize: 28,
+        color: 'black',
+        textAlign:'center',
+        fontWeight:'bold',
+        flex: 1,
+        justifyContent: 'center'
+    },
+    contentText: {
+        fontSize: 16,
+        color: 'black',
+        textAlign:'center',
+        justifyContent: 'center'
+    },
+    content: {
+        marginTop: 40
     }
 });

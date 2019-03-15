@@ -3,7 +3,8 @@ import {
     View,
     Button,
     TextInput,
-    Alert
+    Alert,
+    Text
 } from 'react-native';
 
 import styles from './styles';
@@ -52,31 +53,37 @@ export default class Register extends React.Component {
     render() {
         return (
             <View style={styles.container}>
-                <TextInput
-                    style={styles.input}
-                    placeholder='Username'
-                    autoCapitalize="none"
-                    placeholderTextColor='white'
-                    onChangeText={val => this.onChangeText('username', val)}
-                />
+                <View style={styles.headerBar}>
+                    <Text style={styles.headerTitle}>Register</Text>
+                </View>
 
-                <TextInput
-                    style={styles.input}
-                    placeholder='Password'
-                    secureTextEntry={true}
-                    autoCapitalize="none"
-                    placeholderTextColor='white'
-                    onChangeText={val => this.onChangeText('password', val)}
-                />
+                <View style={styles.content}>
+                    <TextInput
+                        style={styles.input}
+                        placeholder='Username'
+                        autoCapitalize="none"
+                        placeholderTextColor='white'
+                        onChangeText={val => this.onChangeText('username', val)}
+                    />
 
-                <Button
-                    title='Register here!'
-                    onPress={this.processSignUp}
-                />
+                    <TextInput
+                        style={styles.input}
+                        placeholder='Password'
+                        secureTextEntry={true}
+                        autoCapitalize="none"
+                        placeholderTextColor='white'
+                        onChangeText={val => this.onChangeText('password', val)}
+                    />
 
-                <Button title={'Already have an account? Log in!'} onPress={() => {
-                    this.props.navigation.navigate('Login')
-                }}/>
+                    <Button
+                        title='Register here!'
+                        onPress={this.processSignUp}
+                    />
+
+                    <Button title={'Already have an account? Log in!'}
+                        onPress={() => {this.props.navigation.navigate('Login')}}
+                    />
+                </View>
             </View>
         )
     }

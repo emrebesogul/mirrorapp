@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Button, View, Text} from "react-native";
+import {Button, View, Text, TextInput} from "react-native";
 import MenuButton from './components/MenuButton';
 import styles from "./styles";
 import deviceStorage from "./deviceStorage";
@@ -40,12 +40,27 @@ export default class Settings extends Component {
         return (
             <View style={styles.container}>
 
-                <MenuButton navigation={this.props.navigation} />
+                <View style={styles.headerBar}>
+                    <MenuButton navigation={this.props.navigation} />
+                    <Text style={styles.headerTitle}>Settings</Text>
+                    <Text style={styles.toolbarButton}></Text>
+                </View>
 
-                {this.state.takingPictures ? <View><Button title="Creating Face ID..." onPress={() => {}} /></View> : <Button title="Create new Face ID" onPress={this.handleCreateFaceId.bind(this)} />}
+                <View style={styles.content}>
+                    <TextInput
+                        style={styles.input}
+                        placeholder='New Password'
+                        autoCapitalize="none"
+                        secureTextEntry={true}
+                        placeholderTextColor='white'
+                        onChangeText={val => this.onChangeText('newPassword', val)}
+                    />
+                    <Button title="Update Password!" onPress={() => {}} />
 
-                <Button title="Sign me Out!" onPress={this.logout} />
+                    {this.state.takingPictures ? <View><Button title="Creating Face ID..." onPress={() => {}} /></View> : <Button title="Create new Face ID" onPress={this.handleCreateFaceId.bind(this)} />}
 
+                    <Button title="Sign me Out!" onPress={this.logout} />
+                </View>
             </View>
         );
     }
