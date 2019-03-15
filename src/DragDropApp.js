@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
 import {
     View,
+    AsyncStorage
     Text,
     ScrollView
 } from 'react-native';
-
 
 import DragContainer from '../lib/DragContainer';
 import Draggable from '../lib/Draggable';
@@ -14,7 +14,8 @@ import DropZoneContent from '../lib/DropZoneContent';
 
 import styles from './styles';
 import {getWidgets, getUserData} from "../api/get";
-import {updateUserWidgets} from "../api/post";
+
+import {socket} from './frontendConfig';
 
 import MenuButton from './components/MenuButton';
 
@@ -53,6 +54,7 @@ export default class DragDropApp extends Component {
             allWidgets: handleAllWidgets
         });
     }
+
     async renderUserWidgets() {
         let response = await getUserData();
         let handleUserWidgets = [];
@@ -64,7 +66,13 @@ export default class DragDropApp extends Component {
             handleUserWidgets.push(<DropZone
                 key={widget ? widget.name + index : index}
                 onDrop={async (e) => {
-                    await updateUserWidgets(e.widgetName, null, index);
+                    let access_token = await AsyncStorage.getItem('access_token');
+                    socket.emit('app_update_widgets', {
+                        token: access_token,
+                        widget_name: e.widgetName,
+                        previous_slot: null,
+                        slot: index
+                    });
                     app.renderUserWidgets();
                 }}
                 style={styles.box}
@@ -98,5 +106,6 @@ export default class DragDropApp extends Component {
                     </ScrollView>
                 </View>
             </DragContainer>
-    )}
+        )
+    }
 }

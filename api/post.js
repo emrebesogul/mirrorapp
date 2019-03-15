@@ -24,7 +24,6 @@ export const signUp = async (username, password) => {
             response: JSON.parse(response._bodyText)
         };
     } catch (err) {
-        console.log(err);
         return {
             status: false,
             message: responseMessages.FETCH_ERROR,
@@ -133,36 +132,6 @@ export const uploadWeatherSettings = async (city) => {
             },
             body: JSON.stringify({
                 "city": city
-            })
-        });
-        return {
-            status: JSON.parse(response._bodyText).status,
-            message: responseMessages.FETCH_SUCCESS + ", " + JSON.parse(response._bodyText).message
-        };
-    } catch (err) {
-        return {
-            status: false,
-            message: responseMessages.FETCH_ERROR,
-            error: err
-        };
-    }
-}
-
-export const updateUserWidgets = async (widget_name, previous_slot, slot) => {
-    try {
-        const access_token = await AsyncStorage.getItem("access_token");
-        let server_address = await AsyncStorage.getItem("server_address");
-        let response = await fetch(server_address + "/native/updateUserWidgets", {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + access_token
-            },
-            body: JSON.stringify({
-                "widget_name": widget_name,
-                "previous_slot": previous_slot,
-                "slot": slot
             })
         });
         return {

@@ -6,4 +6,4 @@ export const initializeSocket = async () => {
     this.socket =  SocketIOClient(server_address);
 }
 
-export const socket = SocketIOClient("http://192.168.178.20:5000");
+export const socket = SocketIOClient("http://192.168.2.104:5000");
