@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {
     View,
-    AsyncStorage
+    AsyncStorage,
     Text,
     ScrollView
 } from 'react-native';
