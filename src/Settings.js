@@ -5,6 +5,7 @@ import styles from "./styles";
 import deviceStorage from "./deviceStorage";
 import {socket} from './frontendConfig';
 import {AsyncStorage} from 'react-native';
+import {showAlert} from "../utils";
 
 export default class Settings extends Component {
 
@@ -31,9 +32,15 @@ export default class Settings extends Component {
         });
     }
 
+    mirrorUnpair = async () => {
+        AsyncStorage.removeItem("server_address");
+        showAlert("Mirror unpaired!", "Restart the App now...");
+
+    }
+
     logout = async () => {
         deviceStorage.saveItem("access_token", "");
-        this.props.navigation.navigate("Login");
+        showAlert("Logged out!", "Restart the App now...");
     }
 
     render() {
@@ -59,6 +66,7 @@ export default class Settings extends Component {
 
                     {this.state.takingPictures ? <View><Button title="Creating Face ID..." onPress={() => {}} /></View> : <Button title="Create new Face ID" onPress={this.handleCreateFaceId.bind(this)} />}
 
+                    <Button title="Unpair this mirror!" onPress={this.mirrorUnpair} />
                     <Button title="Sign me Out!" onPress={this.logout} />
                 </View>
             </View>
