@@ -3,7 +3,7 @@ import {Button, View, Text, TextInput} from "react-native";
 import MenuButton from './components/MenuButton';
 import styles from "./styles";
 import deviceStorage from "./deviceStorage";
-import {socket} from './frontendConfig';
+import {sendSocketMessage} from './socketConnection';
 import {AsyncStorage} from 'react-native';
 
 export default class Settings extends Component {
@@ -26,7 +26,7 @@ export default class Settings extends Component {
 
     async handleCreateFaceId() {
         const access_token = await AsyncStorage.getItem("access_token");
-        socket.emit("app_trigger_face_id", {
+        await sendSocketMessage("app_trigger_face_id", {
             token: access_token
         });
     }

@@ -7,7 +7,7 @@ import {getWeatherSettings} from "../api/get";
 import {uploadWeatherSettings} from "../api/post";
 import {showAlert} from "../utils";
 import responseMessages from '../responseMessages';
-import {socket} from './frontendConfig';
+import {sendSocketMessage} from './socketConnection';
 import MenuButton from './components/MenuButton';
 
 export default class Weather extends Component {
@@ -39,7 +39,7 @@ export default class Weather extends Component {
         if (response.status === true) {
             showAlert("Success!", responseMessages.WEATHER_UPLOAD_SUCCESS);
             // Send socket update to web ui
-            socket.emit('send_weather_forecast', {
+            await sendSocketMessage('send_weather_forecast', {
                 message: "update your web ui...!"
             });
 

@@ -8,6 +8,7 @@ import {
 import {BarCodeScanner, Permissions} from 'expo';
 import styles from './styles';
 import deviceStorage from "./deviceStorage";
+import {connectSocket} from './socketConnection';
 
 export default class App extends Component {
 
@@ -33,6 +34,7 @@ export default class App extends Component {
     _handleBarCodeRead = result => {
         if (this.isURL(result.data)) {
             deviceStorage.saveItem("server_address", result.data);
+            connectSocket();
             this.props.navigation.navigate('Register');
         }
     };

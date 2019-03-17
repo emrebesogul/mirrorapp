@@ -15,7 +15,7 @@ import DropZoneContent from '../lib/DropZoneContent';
 import styles from './styles';
 import {getWidgets, getUserData} from "../api/get";
 
-import {socket} from './frontendConfig';
+import {sendSocketMessage} from './socketConnection';
 
 import MenuButton from './components/MenuButton';
 
@@ -67,13 +67,16 @@ export default class DragDropApp extends Component {
                 key={widget ? widget.name + index : index}
                 onDrop={async (e) => {
                     let access_token = await AsyncStorage.getItem('access_token');
-                    socket.emit('app_update_widgets', {
+                    await sendSocketMessage('app_update_widgets', {
                         token: access_token,
                         widget_name: e.widgetName,
                         previous_slot: null,
                         slot: index
+                    }, function (response) {
+                        if (response.status) {
+                            app.renderUserWidgets();
+                        }
                     });
-                    app.renderUserWidgets();
                 }}
                 style={styles.box}
             >
@@ -90,7 +93,7 @@ export default class DragDropApp extends Component {
             <DragContainer style={styles.container}>
 
                 <View style={styles.headerBar}>
-                    <MenuButton navigation={this.props.navigation} />
+                    <MenuButton navigation={this.props.navigation}/>
                     <Text style={styles.headerTitle}>Home</Text>
                     <Text style={styles.toolbarButton}></Text>
                 </View>
