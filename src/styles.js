@@ -4,37 +4,33 @@ const WIDTH = Dimensions.get('window').width;
 
 export default StyleSheet.create({
     container: {
-        backgroundColor: 'white',
+        backgroundColor: 'black',
         marginTop: 40
-    },
-    ballContainer: {
-        height: 200
-    },
-    row: {
-        flexDirection: "row",
-        flexWrap: 'wrap',
-        alignItems: 'center',
     },
     boxText: {
         textAlign: "center",
         color: "white",
-        fontWeight: "bold",
+        fontWeight: "bold"
     },
     box: {
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: 'black',
-        borderWidth: 2,
-        borderColor: 'white',
-        margin: 5
+        margin: 2,
+        flex: 1
     },
     draggableContent: {
-        height: 80,
-        width: 80,
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderWidth: 2,
+        borderColor: 'white',
+        width: '100%',
+        height: '100%'
     },
-    dropZoneContent: {
-        width: 80,
-        height: 80
+    draggableContentDragging: {
+        justifyContent: 'center',
+        alignItems: 'center'
     },
     welcome: {
         fontSize: 28
@@ -104,6 +100,28 @@ export default StyleSheet.create({
         justifyContent: 'center'
     },
     content: {
-        marginTop: 40
+        marginTop: 40,
+        flex: 1
+    },
+    dragDropContainer: {
+        flex: 1,
+        flexDirection: "column",
+        flexWrap: 'wrap',
+        alignItems: 'center'
+    },
+    dragDropMidContainer: {
+        flex: 2
+    },
+    row: {
+        flex: 1,
+        flexDirection: 'row',
+    },
+    widgetScrollView: {
+        flex: 1
+    },
+    deleteZone: {
+        flex: 1,
+        backgroundColor: 'red'
     }
+
 });
