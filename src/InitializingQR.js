@@ -1,5 +1,4 @@
 import React from 'react'
-import {AsyncStorage} from "react-native";
 import styles from './styles';
 import deviceStorage from './deviceStorage';
 
