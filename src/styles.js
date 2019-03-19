@@ -100,6 +100,9 @@ export default StyleSheet.create({
         justifyContent: 'center'
     },
     content: {
+        marginTop: 40
+    },
+    dragDropContent: {
         marginTop: 40,
         flex: 1
     },

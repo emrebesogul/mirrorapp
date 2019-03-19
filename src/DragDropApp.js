@@ -98,7 +98,7 @@ export default class DragDropApp extends Component {
                     <Text style={styles.toolbarButton}></Text>
                 </View>
 
-                <View style={styles.content}>
+                <View style={styles.dragDropContent}>
                     <View style={styles.dragDropContainer}>
                         <View style={styles.row}>
                             {this.state.userWidgets.slice(0, 4)}
