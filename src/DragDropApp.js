@@ -29,8 +29,7 @@ export default class DragDropApp extends Component {
         super(props);
         this.state = {
             allWidgets: [],
-            userWidgets: [],
-            user_id: null
+            userWidgets: []
         }
     }
 
