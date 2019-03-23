@@ -3,7 +3,7 @@ import {Button, View, Text, TextInput} from "react-native";
 import MenuButton from './components/MenuButton';
 import styles from "./styles";
 import deviceStorage from "./deviceStorage";
-import {sendSocketMessage} from './socketConnection';
+import {sendSocketMessage, handleSocketMessage} from './socketConnection';
 import {AsyncStorage} from 'react-native';
 
 export default class Settings extends Component {
@@ -16,7 +16,8 @@ export default class Settings extends Component {
         super(props);
         this.state = {
             newPassword: "",
-            takingPictures: false
+            displayMessage: false,
+            message: ""
         }
     }
 
@@ -28,6 +29,13 @@ export default class Settings extends Component {
         const access_token = await AsyncStorage.getItem("access_token");
         await sendSocketMessage("app_trigger_face_id", {
             token: access_token
+        });
+        let app = this;
+        await handleSocketMessage('wait_trigger_face_id', function (data) {
+            app.setState({
+                message: data.message,
+                displayMessage: data.displayMessage
+            })
         });
     }
 
@@ -41,7 +49,7 @@ export default class Settings extends Component {
             <View style={styles.container}>
 
                 <View style={styles.headerBar}>
-                    <MenuButton navigation={this.props.navigation} />
+                    <MenuButton navigation={this.props.navigation}/>
                     <Text style={styles.headerTitle}>Settings</Text>
                     <Text style={styles.toolbarButton}></Text>
                 </View>
@@ -55,11 +63,17 @@ export default class Settings extends Component {
                         placeholderTextColor='white'
                         onChangeText={val => this.onChangeText('newPassword', val)}
                     />
-                    <Button title="Update Password!" onPress={() => {}} />
+                    <Button title="Update Password!" onPress={() => {
+                    }}/>
 
-                    {this.state.takingPictures ? <View><Button title="Creating Face ID..." onPress={() => {}} /></View> : <Button title="Create new Face ID" onPress={this.handleCreateFaceId.bind(this)} />}
+                    {this.state.displayMessage ?
+                        <View><Button title={this.state.message} disabled={true} onPress={(e) => {
+                            console.log("Triggering face id")
+                        }
+                        }/></View> :
+                        <Button title="Create new Face ID" onPress={this.handleCreateFaceId.bind(this)}/>}
 
-                    <Button title="Sign me Out!" onPress={this.logout} />
+                    <Button title="Sign me Out!" onPress={this.logout}/>
                 </View>
             </View>
         );
