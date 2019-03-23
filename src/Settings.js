@@ -67,7 +67,10 @@ export default class Settings extends Component {
                     }}/>
 
                     {this.state.displayMessage ?
-                        <View><Text style={{color: 'white'}}>{this.state.message}</Text></View> :
+                        <View><Button title={this.state.message} disabled={true} onPress={(e) => {
+                            console.log("Triggering face id")
+                        }
+                        }/></View> :
                         <Button title="Create new Face ID" onPress={this.handleCreateFaceId.bind(this)}/>}
 
                     <Button title="Sign me Out!" onPress={this.logout}/>
