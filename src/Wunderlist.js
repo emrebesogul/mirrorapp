@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Button, TextInput, View, Text} from "react-native";
+import {Button, TextInput, View, Text, AsyncStorage} from "react-native";
 
 import styles from "./styles";
 import deviceStorage from "./deviceStorage";
@@ -43,8 +43,9 @@ export default class Wunderlist extends Component {
         if (response.status === true) {
             showAlert("Success!", responseMessages.WUNDERLIST_UPLOAD_SUCCESS);
             // Send socket update to web ui
+            let token = await AsyncStorage.getItem("access_token");
             await sendSocketMessage('send_wunderlist_settings', {
-                message: "update your web ui...!"
+                token: token
             });
 
         } else {

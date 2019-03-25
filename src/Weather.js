@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Button, Text, TextInput, View} from "react-native";
+import {Button, Text, TextInput, View, AsyncStorage} from "react-native";
 
 import styles from "./styles";
 import deviceStorage from "./deviceStorage";
@@ -39,8 +39,9 @@ export default class Weather extends Component {
         if (response.status === true) {
             showAlert("Success!", responseMessages.WEATHER_UPLOAD_SUCCESS);
             // Send socket update to web ui
+            let token = await AsyncStorage.getItem("access_token");
             await sendSocketMessage('send_weather_forecast', {
-                message: "update your web ui...!"
+                token: token
             });
 
         } else {
