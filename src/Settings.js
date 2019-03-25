@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Button, View, Text, TextInput} from "react-native";
+import {Button, View, Text, TextInput, NativeModules} from "react-native";
 import MenuButton from './components/MenuButton';
 import styles from "./styles";
 import deviceStorage from "./deviceStorage";
@@ -32,15 +32,18 @@ export default class Settings extends Component {
         });
     }
 
+    updatePassword = async () => {
+        showAlert("Feature not implemented...");
+    }
+
     mirrorUnpair = async () => {
         AsyncStorage.removeItem("server_address");
-        showAlert("Mirror unpaired!", "Restart the App now...");
-
+        NativeModules.DevSettings.reload();
     }
 
     logout = async () => {
         deviceStorage.saveItem("access_token", "");
-        showAlert("Logged out!", "Restart the App now...");
+        NativeModules.DevSettings.reload();
     }
 
     render() {
@@ -62,7 +65,7 @@ export default class Settings extends Component {
                         placeholderTextColor='white'
                         onChangeText={val => this.onChangeText('newPassword', val)}
                     />
-                    <Button title="Update Password!" onPress={() => {}} />
+                    <Button title="Update Password!" onPress={this.updatePassword} />
 
                     {this.state.takingPictures ? <View><Button title="Creating Face ID..." onPress={() => {}} /></View> : <Button title="Create new Face ID" onPress={this.handleCreateFaceId.bind(this)} />}
 
