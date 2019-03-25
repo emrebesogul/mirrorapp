@@ -119,7 +119,7 @@ export const uploadWunderlistSettings = async (todoList, wl_access_token, wl_cli
     }
 }
 
-export const uploadWeatherSettings = async (city) => {
+export const uploadWeatherSettings = async (city, weatherkey) => {
     try {
         const access_token = await AsyncStorage.getItem("access_token");
         let server_address = await AsyncStorage.getItem("server_address");
@@ -131,7 +131,8 @@ export const uploadWeatherSettings = async (city) => {
                 'Authorization': 'Bearer ' + access_token
             },
             body: JSON.stringify({
-                "city": city
+                "city": city,
+                "weatherkey": weatherkey
             })
         });
         return {

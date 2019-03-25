@@ -19,23 +19,25 @@ export default class Weather extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            currentCity: ""
+            currentCity: "",
+            weatherkey: ""
         };
     }
 
     async componentDidMount() {
     let response = await getWeatherSettings();
-    console.log(response);
-    console.log(response.settings);
-        if (response.status === true && response.settings) {
-            this.setState({
-                currentCity: response.settings.city
-            });
-        }
+    if (response.status === true && response.settings) {
+        this.setState({
+            currentCity: response.settings.city
+        });
+        this.setState({
+            weatherkey: response.settings.weatherkey
+        });
+    }
     }
 
     processUploadWeatherSettings = async () => {
-        let response = await uploadWeatherSettings(this.state.currentCity);
+        let response = await uploadWeatherSettings(this.state.currentCity, this.state.weatherkey);
         if (response.status === true) {
             showAlert("Success!", responseMessages.WEATHER_UPLOAD_SUCCESS);
             // Send socket update to web ui
@@ -67,6 +69,16 @@ export default class Weather extends Component {
                         autoCorrect={false}
                         placeholderTextColor='white'
                         onChangeText={(currentCity) => this.setState({currentCity})}
+                    />
+
+                    <Text style={styles.contentText}>Please insert your weather key:</Text>
+                    <TextInput
+                        style={styles.input}
+                        value={this.state.weatherkey}
+                        autoCapitalize="none"
+                        autoCorrect={false}
+                        placeholderTextColor='white'
+                        onChangeText={(weatherkey) => this.setState({weatherkey})}
                     />
 
                     <Button title="Update your Weather information for the city above" onPress={this.processUploadWeatherSettings} />
