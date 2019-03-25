@@ -3,7 +3,7 @@ import {Button, View, Text, TextInput, NativeModules} from "react-native";
 import MenuButton from './components/MenuButton';
 import styles from "./styles";
 import deviceStorage from "./deviceStorage";
-import {socket} from './frontendConfig';
+import {sendSocketMessage, handleSocketMessage} from './socketConnection';
 import {AsyncStorage} from 'react-native';
 import {showAlert} from "../utils";
 
@@ -17,7 +17,8 @@ export default class Settings extends Component {
         super(props);
         this.state = {
             newPassword: "",
-            takingPictures: false
+            displayMessage: false,
+            message: ""
         }
     }
 
@@ -27,8 +28,15 @@ export default class Settings extends Component {
 
     async handleCreateFaceId() {
         const access_token = await AsyncStorage.getItem("access_token");
-        socket.emit("app_trigger_face_id", {
+        await sendSocketMessage("app_trigger_face_id", {
             token: access_token
+        });
+        let app = this;
+        await handleSocketMessage('wait_trigger_face_id', function (data) {
+            app.setState({
+                message: data.message,
+                displayMessage: data.displayMessage
+            })
         });
     }
 
@@ -51,7 +59,7 @@ export default class Settings extends Component {
             <View style={styles.container}>
 
                 <View style={styles.headerBar}>
-                    <MenuButton navigation={this.props.navigation} />
+                    <MenuButton navigation={this.props.navigation}/>
                     <Text style={styles.headerTitle}>Settings</Text>
                     <Text style={styles.toolbarButton}></Text>
                 </View>
@@ -67,7 +75,12 @@ export default class Settings extends Component {
                     />
                     <Button title="Update Password!" onPress={this.updatePassword} />
 
-                    {this.state.takingPictures ? <View><Button title="Creating Face ID..." onPress={() => {}} /></View> : <Button title="Create new Face ID" onPress={this.handleCreateFaceId.bind(this)} />}
+                    {this.state.displayMessage ?
+                        <View><Button title={this.state.message} disabled={true} onPress={(e) => {
+                            console.log("Triggering face id")
+                        }
+                        }/></View> :
+                        <Button title="Create new Face ID" onPress={this.handleCreateFaceId.bind(this)}/>}
 
                     <Button title="Unpair this mirror!" onPress={this.mirrorUnpair} />
                     <Button title="Sign me Out!" onPress={this.logout} />
