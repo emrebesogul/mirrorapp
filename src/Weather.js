@@ -82,7 +82,7 @@ export default class Weather extends Component {
                         onChangeText={(weatherkey) => this.setState({weatherkey})}
                     />
 
-                    <Button title="Update your Weather information for the city above" onPress={this.processUploadWeatherSettings} />
+                    <Button title="Update your Weather information for the city above" color="#C0C0C0" onPress={this.processUploadWeatherSettings} />
                 </View>
             </View>
         );

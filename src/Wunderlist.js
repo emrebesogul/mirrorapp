@@ -79,7 +79,7 @@ export default class Wunderlist extends Component {
                     <TextInput style={styles.input} value={this.state.wl_client_id} autoCapitalize="none"
                                autoCorrect={false} onChangeText={(wl_client_id) => this.setState({wl_client_id})}/>
 
-                    <Button title="Setup To Do Widget" onPress={this.processUploadWunderlistSettings}/>
+                    <Button title="Setup To Do Widget" color="#C0C0C0" onPress={this.processUploadWunderlistSettings}/>
                 </View>
             </View>
 

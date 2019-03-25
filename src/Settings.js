@@ -73,17 +73,17 @@ export default class Settings extends Component {
                         placeholderTextColor='white'
                         onChangeText={val => this.onChangeText('newPassword', val)}
                     />
-                    <Button title="Update Password!" onPress={this.updatePassword} />
+                    <Button title="Update Password!" color="#C0C0C0" onPress={this.updatePassword} />
 
                     {this.state.displayMessage ?
-                        <View><Button title={this.state.message} disabled={true} onPress={(e) => {
+                        <View><Button title={this.state.message} color="#C0C0C0" disabled={true} onPress={(e) => {
                             console.log("Triggering face id")
                         }
                         }/></View> :
-                        <Button title="Create new Face ID" onPress={this.handleCreateFaceId.bind(this)}/>}
+                        <Button title="Create new Face ID" color="#C0C0C0" onPress={this.handleCreateFaceId.bind(this)}/>}
 
-                    <Button title="Unpair this mirror!" onPress={this.mirrorUnpair} />
-                    <Button title="Sign me Out!" onPress={this.logout} />
+                    <Button title="Unpair this mirror!" color="#C0C0C0" onPress={this.mirrorUnpair} />
+                    <Button title="Sign me Out!" color="#C0C0C0" onPress={this.logout} />
                 </View>
             </View>
         );

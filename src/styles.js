@@ -49,6 +49,8 @@ export default StyleSheet.create({
         borderRadius: 14,
         fontSize: 18,
         fontWeight: '500',
+        borderColor: 'white',
+        borderWidth: 1
     },
     qrCodeText: {
         color: 'white'
@@ -91,16 +93,19 @@ export default StyleSheet.create({
         textAlign:'center',
         fontWeight:'bold',
         flex: 1,
-        justifyContent: 'center'
+        justifyContent: 'center',
+        color: 'white'
     },
     contentText: {
         fontSize: 16,
         color: 'black',
         textAlign:'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        color: 'white'
     },
     content: {
-        marginTop: 40
+        marginTop: 40,
+        color: 'white'
     },
     dragDropContent: {
         marginTop: 40,
@@ -125,6 +130,8 @@ export default StyleSheet.create({
     deleteZone: {
         flex: 1,
         backgroundColor: 'red'
+    },
+    buttonStyle: {
+        color: 'white'
     }
-
 });
