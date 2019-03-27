@@ -11,6 +11,7 @@ import Register from '../Register';
 import InitializingQR from '../InitializingQR';
 
 import MenuDrawer from '../components/MenuDrawer';
+import NewsFeedSettings from "../settings/NewsFeedSettings";
 
 const WIDTH = Dimensions.get('window').width;
 
@@ -29,7 +30,8 @@ const DrawerNavigator = createDrawerNavigator(
 		Weather: {screen: Weather},
 		InitializingQR: {screen: InitializingQR},
 		Login: {screen: Login},
-		Register: {screen: Register}
+		Register: {screen: Register},
+		NewsFeedSettings: {screen: NewsFeedSettings}
 	},
 	DrawerConfig,
 	{
