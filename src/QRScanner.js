@@ -9,6 +9,7 @@ import {BarCodeScanner, Permissions} from 'expo';
 import styles from './styles';
 import deviceStorage from "./deviceStorage";
 import {connectSocket} from './socketConnection';
+import {isURL} from "../utils";
 
 export default class App extends Component {
 
@@ -32,22 +33,12 @@ export default class App extends Component {
     };
 
     _handleBarCodeRead = result => {
-        if (this.isURL(result.data)) {
+        if (isURL(result.data)) {
             deviceStorage.saveItem("server_address", result.data);
             connectSocket();
             this.props.navigation.navigate('Register');
         }
     };
-
-    isURL(str) {
-        var pattern = new RegExp('^(https?:\\/\\/)?' + // protocol
-            '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.?)+[a-z]{2,}|' + // domain name
-            '((\\d{1,3}\\.){3}\\d{1,3}))' + // OR ip (v4) address
-            '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*' + // port and path
-            '(\\?[;&a-z\\d%_.~+=-]*)?' + // query string
-            '(\\#[-a-z\\d_]*)?$', 'i'); // fragment locator
-        return pattern.test(str);
-    }
 
     render() {
         return (
