@@ -45,6 +45,7 @@ export default class Settings extends Component {
     }
 
     mirrorUnpair = async () => {
+        deviceStorage.saveItem("access_token", "");
         AsyncStorage.removeItem("server_address");
         NativeModules.DevSettings.reload();
     }
