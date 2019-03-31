@@ -45,14 +45,17 @@ export default class MenuDrawer extends React.Component {
 						<TouchableOpacity style={{height: 50}} onPress={() => this.props.navigation.navigate('Settings')}>
 							<Text style={styles.link}>Settings</Text>
 						</TouchableOpacity>
-						<TouchableOpacity style={{height: 50}} onPress={() => this.props.navigation.navigate('Wunderlist')}>
-							<Text style={styles.link}>Wunderlist</Text>
+						<TouchableOpacity style={{height: 50}} onPress={() => this.props.navigation.navigate('Calender')}>
+							<Text style={styles.link}>Calender</Text>
+						</TouchableOpacity>
+						<TouchableOpacity style={{height: 50}} onPress={() => this.props.navigation.navigate('NewsFeedSettings')}>
+							<Text style={styles.link}>News Feed</Text>
 						</TouchableOpacity>
 						<TouchableOpacity style={{height: 50}} onPress={() => this.props.navigation.navigate('Weather')}>
 							<Text style={styles.link}>Weather</Text>
 						</TouchableOpacity>
-						<TouchableOpacity style={{height: 50}} onPress={() => this.props.navigation.navigate('NewsFeedSettings')}>
-							<Text style={styles.link}>NewsFeed</Text>
+						<TouchableOpacity style={{height: 50}} onPress={() => this.props.navigation.navigate('Wunderlist')}>
+							<Text style={styles.link}>Wunderlist</Text>
 						</TouchableOpacity>
 					</View>
 				</ScrollView>
