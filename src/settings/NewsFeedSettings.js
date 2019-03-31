@@ -3,8 +3,14 @@ import {Text, View, TouchableOpacity, Alert, TextInput, ScrollView, AsyncStorage
 import {isURL} from "../../utils";
 import {getUserData} from "../../api/get";
 import {sendSocketMessage} from "../socketConnection";
+import styles from "../styles";
+import MenuButton from '../components/MenuButton';
 
 export default class NewsFeedSettings extends Component {
+
+    static navigationOptions = {
+        header: null
+    }
 
     constructor(props) {
         super(props);
@@ -91,40 +97,53 @@ export default class NewsFeedSettings extends Component {
 
     render() {
         return (
-            <View>
-                <TextInput
-                    style={{height: 40, borderColor: 'gray', borderWidth: 1, marginTop: 40}}
-                    onSubmitEditing={this.addItem.bind((this))}
-                    placeholder={this.state.text}
-                    autoFocus={true}
-                    clearTextOnFocus={true}
-                    onChangeText={inputUrl => this.setState({
-                        inputUrl: inputUrl,
-                        clearInput: false
-                    })}
-                    value={this.state.clearInput ? '' : this.state.inputUrl}
-                />
-                <ScrollView>
-                    <View>
-                        {
-                            this.state.items.map((item, index) => (
-                                <TouchableOpacity
-                                    key={item._id}
-                                    onPress={() => this.handleDeleteItem(item)}
-                                    style={{
-                                        padding: 10,
-                                        marginTop: 3,
-                                        backgroundColor: '#d9f9b1',
-                                        alignItems: 'center'
-                                    }}>
-                                    <Text>
-                                        {item.url}
-                                    </Text>
-                                </TouchableOpacity>
-                            ))
-                        }
-                    </View>
-                </ScrollView>
+            <View style={styles.container}>
+
+                <View style={styles.headerBar}>
+                    <MenuButton navigation={this.props.navigation}/>
+                    <Text style={styles.headerTitle}>News Feed</Text>
+                    <Text style={styles.toolbarButton}></Text>
+                </View>
+
+                <View style={styles.content}>
+
+                    <TextInput
+                        style={styles.input}
+                        placeholder='News Feed URL'
+                        autoCapitalize="none"
+                        placeholderTextColor='white'
+                        onSubmitEditing={this.addItem.bind((this))}
+                        autoFocus={true}
+                        clearTextOnFocus={true}
+                        onChangeText={inputUrl => this.setState({
+                            inputUrl: inputUrl,
+                            clearInput: false
+                        })}
+                        value={this.state.clearInput ? '' : this.state.inputUrl}
+                    />
+
+                    <ScrollView>
+                        <View>
+                            {
+                                this.state.items.map((item, index) => (
+                                    <TouchableOpacity
+                                        key={item._id}
+                                        onPress={() => this.handleDeleteItem(item)}
+                                        style={{
+                                            padding: 10,
+                                            marginTop: 3,
+                                            backgroundColor: '#d9f9b1',
+                                            alignItems: 'center'
+                                        }}>
+                                        <Text>
+                                            {item.url}
+                                        </Text>
+                                    </TouchableOpacity>
+                                ))
+                            }
+                        </View>
+                    </ScrollView>
+                </View>
             </View>
         )
     }
