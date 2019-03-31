@@ -27,7 +27,7 @@ export default class Wunderlist extends Component {
         let response = await getCalenderSettings();
         if (response.status === true && response.settings) {
             this.setState({
-                calenderICS: response.calenderICS,
+                calenderICS: response.settings.calenderICS,
             });
         }
     }
