@@ -148,11 +148,11 @@ export const uploadWeatherSettings = async (city, weatherkey) => {
     }
 }
 
-export const uploadCalenderSettings = async (calenderICS) => {
+export const uploadCalendarSettings = async (calendarICS) => {
     try {
         const access_token = await AsyncStorage.getItem("access_token");
         let server_address = await AsyncStorage.getItem("server_address");
-        let response = await fetch(server_address + "/native/uploadCalenderSettings", {
+        let response = await fetch(server_address + "/native/uploadCalendarSettings", {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -160,7 +160,7 @@ export const uploadCalenderSettings = async (calenderICS) => {
                 'Authorization': 'Bearer ' + access_token
             },
             body: JSON.stringify({
-                "calenderICS": calenderICS
+                "calendarICS": calendarICS
             })
         });
         return {

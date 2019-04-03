@@ -3,14 +3,14 @@ import {Button, TextInput, View, Text, AsyncStorage} from "react-native";
 
 import styles from "./styles";
 import deviceStorage from "./deviceStorage";
-import {getCalenderSettings} from "../api/get";
-import {uploadCalenderSettings} from "../api/post";
+import {getCalendarSettings} from "../api/get";
+import {uploadCalendarSettings} from "../api/post";
 import {showAlert} from "../utils";
 import responseMessages from '../responseMessages';
 import {sendSocketMessage} from './socketConnection';
 import MenuButton from './components/MenuButton';
 
-export default class Wunderlist extends Component {
+export default class Calendar extends Component {
 
     static navigationOptions = {
         header: null
@@ -19,31 +19,31 @@ export default class Wunderlist extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            calenderICS: ""
+            calendarICS: ""
         };
     }
 
     async componentDidMount() {
-        let response = await getCalenderSettings();
+        let response = await getCalendarSettings();
         if (response.status === true && response.settings) {
             this.setState({
-                calenderICS: response.settings.calenderICS,
+                calendarICS: response.settings.calendarICS,
             });
         }
     }
 
-    processUploadWCalenderLink = async () => {
-        let response = await uploadCalenderSettings(this.state.calenderICS);
+    processUploadWCalendarLink = async () => {
+        let response = await uploadCalendarSettings(this.state.calendarICS);
         if (response.status === true) {
-            showAlert("Success!", responseMessages.CALENDER_UPLOAD_SUCCESS);
+            showAlert("Success!", responseMessages.CALENDAR_UPLOAD_SUCCESS);
             // Send socket update to web ui
             let token = await AsyncStorage.getItem("access_token");
-            await sendSocketMessage('send_calender_entries', {
+            await sendSocketMessage('send_calendar_entries', {
                 token: token
             });
 
         } else {
-            showAlert("Error!", responseMessages.CALENDER_UPLOAD_ERROR);
+            showAlert("Error!", responseMessages.CALENDAR_UPLOAD_ERROR);
         }
     }
 
@@ -53,16 +53,16 @@ export default class Wunderlist extends Component {
 
                 <View style={styles.headerBar}>
                     <MenuButton navigation={this.props.navigation}/>
-                    <Text style={styles.headerTitle}>Calender</Text>
+                    <Text style={styles.headerTitle}>Calendar</Text>
                     <Text style={styles.toolbarButton}></Text>
                 </View>
 
                 <View style={styles.content}>
-                    <Text style={styles.contentText}>Share your calender and copy the iCal link here</Text>
-                    <TextInput style={styles.input} value={this.state.calenderICS} autoCapitalize="none"
-                           autoCorrect={false} onChangeText={(calenderICS) => this.setState({calenderICS})}/>
+                    <Text style={styles.contentText}>Share your calendar and copy the iCal link here</Text>
+                    <TextInput style={styles.input} value={this.state.calendarICS} autoCapitalize="none"
+                           autoCorrect={false} onChangeText={(calendarICS) => this.setState({calendarICS})}/>
 
-                    <Button title="Setup Calender" color="#C0C0C0" onPress={this.processUploadWCalenderLink}/>
+                    <Button title="Setup Calender" color="#C0C0C0" onPress={this.processUploadWCalendarLink}/>
                 </View>
             </View>
 

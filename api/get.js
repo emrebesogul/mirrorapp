@@ -101,7 +101,7 @@ export const getWeatherSettings = async () => {
     }
 }
 
-export const getCalenderSettings = async () => {
+export const getCalendarSettings = async () => {
     try {
         const access_token = await AsyncStorage.getItem("access_token");
         let server_address = await AsyncStorage.getItem("server_address");

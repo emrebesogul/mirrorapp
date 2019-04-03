@@ -11,6 +11,6 @@
   "IMAGE_UPLOAD_ERROR": "An error occured trying to upload user image",
   "WEATHER_UPLOAD_SUCCESS": "Weather settings were successfully uploaded",
   "WEATHER_UPLOAD_ERROR": "An error occured trying to upload Weather settings",
-  "CALENDER_UPLOAD_SUCCESS": "Calender iCal was successfully uploaded",
-  "CALENDER_UPLOAD_ERROR": "n error occured trying to upload iCal"
+  "CALENDAR_UPLOAD_SUCCESS": "Calender iCal was successfully uploaded",
+  "CALENDAR_UPLOAD_ERROR": "n error occured trying to upload iCal"
 }
