@@ -133,10 +133,9 @@ export default class NewsFeedSettings extends Component {
                                         style={{
                                             padding: 10,
                                             marginTop: 3,
-                                            backgroundColor: '#d9f9b1',
                                             alignItems: 'center'
                                         }}>
-                                        <Text>
+                                        <Text style={{color: 'white'}}>
                                             {item.url}
                                         </Text>
                                     </TouchableOpacity>
