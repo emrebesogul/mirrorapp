@@ -2,8 +2,8 @@ import React, {Component} from "react";
 import {
     View,
     TextInput,
-    Button,
-    Text
+    Text,
+    TouchableOpacity
 } from "react-native";
 
 import styles from './styles';
@@ -66,14 +66,21 @@ class Login extends Component {
                         placeholderTextColor='white'
                         onChangeText={val => this.onChangeText('password', val)}
                     />
-                    <Button
-                        title='Login here!' color="white"
-                        onPress={this.processSignIn}
-                    />
-                    <Button
-                        title='Not registered yet? Register here!' color="white"
-                        onPress={() => this.props.navigation.navigate('Register')}
-                    />
+
+                    <TouchableOpacity style={styles.button} onPress={this.processSignIn}>
+                        <Text style={styles.buttonText}>Login</Text>
+                    </TouchableOpacity>
+
+                    <TouchableOpacity style={styles.button}
+                                      onPress={() => this.props.navigation.navigate('Register')}>
+                        <Text style={styles.buttonText}>Go To Register</Text>
+                    </TouchableOpacity>
+
+                    <TouchableOpacity style={styles.button}
+                                      onPress={() => this.props.navigation.navigate('QRScanner')}>
+                        <Text style={styles.buttonText}>Scan New QR Code</Text>
+                    </TouchableOpacity>
+
                 </View>
             </View>
         );

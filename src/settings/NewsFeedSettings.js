@@ -4,7 +4,6 @@ import {isURL} from "../../utils";
 import {getUserData} from "../../api/get";
 import {sendSocketMessage} from "../socketConnection";
 import styles from "../styles";
-import MenuButton from '../components/MenuButton';
 
 export default class NewsFeedSettings extends Component {
 
@@ -123,18 +122,16 @@ export default class NewsFeedSettings extends Component {
                         value={this.state.clearInput ? '' : this.state.inputUrl}
                     />
 
-                    <ScrollView>
+                    <Text style={styles.contentText}>Current Feed Links:</Text>
+
+                    <ScrollView style={styles.newsLinkContainer}>
                         <View>
                             {
                                 this.state.items.map((item, index) => (
                                     <TouchableOpacity
                                         key={item._id}
                                         onPress={() => this.handleDeleteItem(item)}
-                                        style={{
-                                            padding: 10,
-                                            marginTop: 3,
-                                            alignItems: 'center'
-                                        }}>
+                                        style={styles.newsLinkItem}>
                                         <Text style={{color: 'white'}}>
                                             {item.url}
                                         </Text>
