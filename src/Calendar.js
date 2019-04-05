@@ -56,11 +56,11 @@ export default class Calendar extends Component {
                 </View>
 
                 <View style={styles.content}>
-                    <Text style={styles.contentText}>Share your calendar and copy the iCal link here</Text>
-                    <TextInput style={styles.input} value={this.state.calendarICS} autoCapitalize="none"
+                    <Text style={styles.contentText}>Share your private calendar and copy the iCal link here:</Text>
+                    <TextInput style={styles.input} placeholder='https://calender.ics' placeholderTextColor='white' value={this.state.calendarICS} autoCapitalize="none"
                            autoCorrect={false} onChangeText={(calendarICS) => this.setState({calendarICS})}/>
 
-                    <Button title="Setup Calender" color="white" onPress={this.processUploadWCalendarLink}/>
+                    <Button title="Setup Calender!" color="white" onPress={this.processUploadWCalendarLink}/>
                 </View>
             </View>
 

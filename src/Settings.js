@@ -62,7 +62,7 @@ export default class Settings extends Component {
                             console.log("Triggering face id")
                         }
                         }/></View> :
-                        <Button title="Create new Face ID" color="white" onPress={this.handleCreateFaceId.bind(this)}/>}
+                        <Button title="Create new Face ID!" color="white" onPress={this.handleCreateFaceId.bind(this)}/>}
 
                     <Button title="Unpair this mirror!" color="white" onPress={this.mirrorUnpair} />
                     <Button title="Sign me Out!" color="white" onPress={this.logout} />

@@ -70,7 +70,7 @@ export default class MenuDrawer extends React.Component {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		backgroundColor: 'lightgray',
+		backgroundColor: 'black',
 	},
 	scroller: {
 		flex: 1,
@@ -78,13 +78,13 @@ const styles = StyleSheet.create({
 	},
 	name: {
 		fontSize: 20,
-		color: 'black',
+		color: 'white',
 		textAlign: 'center',
 	},
 	topLinks:{
 		alignItems: 'center',
 		height: 60,
-		backgroundColor: 'lightgray',
+		backgroundColor: 'black',
 		flexDirection: 'column',
 		justifyContent: 'center',
 	},
@@ -107,7 +107,7 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 		backgroundColor: 'white',
 		borderTopWidth: 1,
-		borderTopColor: 'lightgray'
+		borderTopColor: 'black'
 	},
 	description: {
 		flex: 1,

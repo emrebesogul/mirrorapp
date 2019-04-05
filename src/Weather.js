@@ -60,10 +60,11 @@ export default class Weather extends Component {
                 </View>
 
                 <View style={styles.content}>
-                    <Text style={styles.contentText}>Please insert your city for the Weather widget:</Text>
+                    <Text style={styles.contentText}>Please insert your city of choice and a weather key to activate the weather widget. To get a weather key, please visit https://openweathermap.org/appid</Text>
                     <TextInput
                         style={styles.input}
                         value={this.state.currentCity}
+                        placeholder="City"
                         autoCapitalize="none"
                         autoCorrect={false}
                         placeholderTextColor='white'
@@ -74,13 +75,14 @@ export default class Weather extends Component {
                     <TextInput
                         style={styles.input}
                         value={this.state.weatherkey}
+                        placeholder="Weather key"
                         autoCapitalize="none"
                         autoCorrect={false}
                         placeholderTextColor='white'
                         onChangeText={(weatherkey) => this.setState({weatherkey})}
                     />
 
-                    <Button title="Update your Weather information for the city above" color="white" onPress={this.processUploadWeatherSettings} />
+                    <Button title="Setup Weather widget!" color="white" onPress={this.processUploadWeatherSettings} />
                 </View>
             </View>
         );

@@ -64,20 +64,20 @@ export default class Wunderlist extends Component {
                 <View style={styles.content}>
                     <Text style={styles.contentText}>Please register with your Google Account at
                         https://developer.wunderlist.com/ and insert your CLIENT ID and ACCESS TOKEN in the fields
-                        below</Text>
-                    <TextInput style={styles.input} value={this.state.todoList} autoCapitalize="none"
+                        below
+                    </Text>
+
+                    <TextInput style={styles.input} placeholder="To Do List" placeholderTextColor='white' value={this.state.todoList} autoCapitalize="none"
                                autoCorrect={false} onChangeText={(todoList) => this.setState({todoList})}/>
 
-                    <Text style={styles.contentText}>ACCESS TOKEN</Text>
-                    <TextInput style={styles.input} value={this.state.wl_access_token} autoCapitalize="none"
+                    <TextInput style={styles.input} placeholder='ACCESS TOKEN' placeholderTextColor='white' value={this.state.wl_access_token} autoCapitalize="none"
                                autoCorrect={false}
                                onChangeText={(wl_access_token) => this.setState({wl_access_token})}/>
 
-                    <Text style={styles.contentText}>CLIENT ID</Text>
-                    <TextInput style={styles.input} value={this.state.wl_client_id} autoCapitalize="none"
+                    <TextInput style={styles.input} placeholder='CLIENT ID' placeholderTextColor='white' value={this.state.wl_client_id} autoCapitalize="none"
                                autoCorrect={false} onChangeText={(wl_client_id) => this.setState({wl_client_id})}/>
 
-                    <Button title="Setup To Do Widget" color="white" onPress={this.processUploadWunderlistSettings}/>
+                    <Button title="Setup To Do Widget!" color="white" onPress={this.processUploadWunderlistSettings}/>
                 </View>
             </View>
 

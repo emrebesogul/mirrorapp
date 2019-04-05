@@ -105,6 +105,8 @@ export default class NewsFeedSettings extends Component {
 
                 <View style={styles.content}>
 
+                    <Text style={styles.contentText}>Please insert your news feed links below:</Text>
+
                     <TextInput
                         style={styles.input}
                         placeholder='News Feed URL'

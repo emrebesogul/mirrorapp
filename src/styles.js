@@ -101,11 +101,19 @@ export default StyleSheet.create({
         color: 'black',
         textAlign:'center',
         justifyContent: 'center',
-        color: 'white'
+        color: 'white',
+        padding: 5
     },
     content: {
         marginTop: 40,
-        color: 'white'
+        color: 'white',
+        padding: 5
+    },
+    contentQR: {
+        alignItems: 'center',
+        marginTop: 40,
+        color: 'white',
+        padding: 10
     },
     dragDropContent: {
         marginTop: 40,
