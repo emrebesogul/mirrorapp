@@ -16,7 +16,8 @@ import deviceStorage from "./deviceStorage";
 export default class Register extends React.Component {
 
     static navigationOptions = {
-        header: null
+        header: null,
+        gesturesEnabled: false
     }
 
     constructor(props) {

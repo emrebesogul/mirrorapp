@@ -6,7 +6,8 @@ import DrawerNavigator from './navigation/DrawerNavigator'
 export default class Home extends React.Component {
 
     static navigationOptions = {
-        header: null
+        header: null,
+        gesturesEnabled: false
     }
 
     render() {

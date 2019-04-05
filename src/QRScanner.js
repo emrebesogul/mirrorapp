@@ -14,7 +14,8 @@ import {isMirrorURL} from "../utils";
 export default class App extends Component {
 
     static navigationOptions = {
-        header: null
+        header: null,
+        gesturesEnabled: false
     }
 
     state = {

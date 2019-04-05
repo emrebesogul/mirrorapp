@@ -9,7 +9,8 @@ import MenuButton from '../components/MenuButton';
 export default class NewsFeedSettings extends Component {
 
     static navigationOptions = {
-        header: null
+        header: null,
+        gesturesEnabled: false
     }
 
     constructor(props) {

@@ -5,8 +5,7 @@ import {authorizeToken} from "../api/post";
 
 import {
     View,
-    Text,
-    BackHandler
+    Text
 } from 'react-native';
 
 export default class Initializing extends React.Component {
@@ -15,13 +14,7 @@ export default class Initializing extends React.Component {
         header: null
     }
 
-    componentWillUnmount() {
-        BackHandler.removeEventListener('hardwareBackPress', () => {return true});
-    }
-
     async componentDidMount() {
-        BackHandler.addEventListener('hardwareBackPress', () => {return true});
-
         let response = await authorizeToken();
         if (response.authorized === true) {
             this.props.navigation.navigate('Home'); // go to main page

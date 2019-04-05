@@ -82,7 +82,6 @@ export default StyleSheet.create({
         textAlign:'center'
     },
     headerBar: {
-        backgroundColor: 'black',
         marginTop: 40,
         height: 60,
         alignItems: 'center',
@@ -94,7 +93,6 @@ export default StyleSheet.create({
     },
     headerTitle: {
         fontSize: 28,
-        color: 'black',
         textAlign:'center',
         fontWeight:'bold',
         flex: 1,
