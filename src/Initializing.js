@@ -11,7 +11,12 @@ import {
 export default class Initializing extends React.Component {
 
     static navigationOptions = {
-        header: null
+        header: null,
+        gesturesEnabled: false
+    }
+
+    constructor(props) {
+        super(props);
     }
 
     async componentDidMount() {

@@ -10,10 +10,6 @@ import {connectSocket} from "./socketConnection";
 
 export default class InitializingQR extends React.Component {
 
-    static navigationOptions = {
-        header: null
-    }
-
     async componentDidMount() {
         let server_address = await deviceStorage.getItem("server_address");
 
