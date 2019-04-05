@@ -100,12 +100,12 @@ export default class NewsFeedSettings extends Component {
             <View style={styles.container}>
 
                 <View style={styles.headerBar}>
-                    <MenuButton navigation={this.props.navigation}/>
                     <Text style={styles.headerTitle}>News Feed</Text>
-                    <Text style={styles.toolbarButton}></Text>
                 </View>
 
                 <View style={styles.content}>
+
+                    <Text style={styles.contentText}>Please insert your news feed links below:</Text>
 
                     <TextInput
                         style={styles.input}

@@ -56,33 +56,32 @@ export default class Weather extends Component {
             <View style={styles.container}>
 
                 <View style={styles.headerBar}>
-                    <MenuButton navigation={this.props.navigation} />
                     <Text style={styles.headerTitle}>Weather</Text>
-                    <Text style={styles.toolbarButton}></Text>
                 </View>
 
                 <View style={styles.content}>
-                    <Text style={styles.contentText}>Please insert your city for the Weather widget:</Text>
+                    <Text style={styles.contentText}>Please insert your city of choice and a weather key to activate the weather widget. To get a weather key, please visit https://openweathermap.org/appid</Text>
                     <TextInput
                         style={styles.input}
                         value={this.state.currentCity}
+                        placeholder="City"
                         autoCapitalize="none"
                         autoCorrect={false}
                         placeholderTextColor='white'
                         onChangeText={(currentCity) => this.setState({currentCity})}
                     />
 
-                    <Text style={styles.contentText}>Please insert your weather key:</Text>
                     <TextInput
                         style={styles.input}
                         value={this.state.weatherkey}
+                        placeholder="Weather key"
                         autoCapitalize="none"
                         autoCorrect={false}
                         placeholderTextColor='white'
                         onChangeText={(weatherkey) => this.setState({weatherkey})}
                     />
 
-                    <Button title="Update your Weather information for the city above" color="#C0C0C0" onPress={this.processUploadWeatherSettings} />
+                    <Button title="Setup Weather widget!" color="white" onPress={this.processUploadWeatherSettings} />
                 </View>
             </View>
         );

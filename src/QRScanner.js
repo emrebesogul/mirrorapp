@@ -42,26 +42,31 @@ export default class App extends Component {
 
     render() {
         return (
-            <View style={[styles.container, {'alignItems': 'center'}]}>
+            <View style={styles.container}>
 
-                <View>
-                    <Text style={styles.qrCodeText}>Hello and welcome to MirrorApp. Scan the QR Code on your Smart
-                        Mirror to get started.</Text>
+                <View style={styles.headerBar}>
+                    <Text style={styles.headerTitle}>QR Code Scanner</Text>
                 </View>
 
-                {this.state.hasCameraPermission === null
-                    ? <Text>Please allow camera usage to connect to your mirror</Text>
-                    : this.state.hasCameraPermission === false
-                        ? <Text style={{color: '#fff'}}>
-                            Camera permission is not granted
-                        </Text>
-                        : <BarCodeScanner
-                            onBarCodeRead={this._handleBarCodeRead}
-                            style={{
-                                height: Dimensions.get('window').height / 2,
-                                width: Dimensions.get('window').width / 2,
-                            }}
-                        />}
+                <View style={styles.contentQR}>
+                    <Text style={styles.contentText}>Hello and welcome to MirrorApp. Scan the QR Code on your Smart
+                        Mirror to get started
+                    </Text>
+
+                    {this.state.hasCameraPermission === null
+                        ? <Text>Please allow camera usage to connect to your mirror</Text>
+                        : this.state.hasCameraPermission === false
+                            ? <Text style={{color: '#fff'}}>
+                                Camera permission is not granted
+                            </Text>
+                            : <BarCodeScanner
+                                onBarCodeRead={this._handleBarCodeRead}
+                                style={{
+                                    height: Dimensions.get('window').height / 2.25,
+                                    width: Dimensions.get('window').width / 1.25,
+                                }}
+                            />}
+                </View>
             </View>
         );
     }

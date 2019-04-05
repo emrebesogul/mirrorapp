@@ -93,9 +93,7 @@ export default class DragDropApp extends Component {
             <DragContainer style={styles.container}>
 
                 <View style={styles.headerBar}>
-                    <MenuButton navigation={this.props.navigation}/>
                     <Text style={styles.headerTitle}>Home</Text>
-                    <Text style={styles.toolbarButton}></Text>
                 </View>
 
                 <View style={styles.dragDropContent}>

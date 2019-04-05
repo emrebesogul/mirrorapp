@@ -56,6 +56,7 @@ export default StyleSheet.create({
         color: 'white'
     },
     initializing: {
+        backgroundColor: 'black',
         fontSize: 28,
         paddingTop: 200,
         justifyContent: 'center',
@@ -63,6 +64,7 @@ export default StyleSheet.create({
     },
     initializingText: {
         fontSize: 18,
+        color: 'white'
     },
     lrScreen: {
         paddingTop: 50,
@@ -101,11 +103,19 @@ export default StyleSheet.create({
         color: 'black',
         textAlign:'center',
         justifyContent: 'center',
-        color: 'white'
+        color: 'white',
+        padding: 5
     },
     content: {
         marginTop: 40,
-        color: 'white'
+        color: 'white',
+        padding: 10
+    },
+    contentQR: {
+        alignItems: 'center',
+        marginTop: 40,
+        color: 'white',
+        padding: 10
     },
     dragDropContent: {
         marginTop: 40,
@@ -130,8 +140,5 @@ export default StyleSheet.create({
     deleteZone: {
         flex: 1,
         backgroundColor: 'red'
-    },
-    buttonStyle: {
-        color: 'white'
     }
 });

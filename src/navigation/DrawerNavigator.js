@@ -6,13 +6,10 @@ import Settings from '../Settings';
 import Wunderlist from '../Wunderlist';
 import DragDropApp from '../DragDropApp';
 import Weather from '../Weather';
-import Login from '../Login';
-import Register from '../Register';
-import InitializingQR from '../InitializingQR';
-
 import MenuDrawer from '../components/MenuDrawer';
 import NewsFeedSettings from "../settings/NewsFeedSettings";
 import Calendar from '../Calendar';
+
 
 const WIDTH = Dimensions.get('window').width;
 
@@ -29,16 +26,18 @@ const DrawerNavigator = createDrawerNavigator(
 	    Settings: {screen: Settings},
 	    Wunderlist: {screen: Wunderlist},
 		Weather: {screen: Weather},
-		InitializingQR: {screen: InitializingQR},
-		Login: {screen: Login},
-		Register: {screen: Register},
 		NewsFeedSettings: {screen: NewsFeedSettings},
 		Calendar: {screen: Calendar}
 	},
 	DrawerConfig,
 	{
 		initialRouteName: 'DragDropApp'
-    }
+    },
+	{
+		drawerOpenRoute: 'DrawerOpen',
+		drawerCloseRoute: 'DrawerClose',
+		drawerToggleRoute: 'DrawerToggle'
+	}
 );
 
 export default createAppContainer(DrawerNavigator);
