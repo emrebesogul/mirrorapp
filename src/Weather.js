@@ -55,12 +55,12 @@ export default class Weather extends Component {
             <View style={styles.container}>
 
                 <View style={styles.headerBar}>
-                    <Text style={styles.headerTitle}>Weather</Text>
+                    <Text style={styles.headerTitle}>Weather Settings</Text>
                 </View>
 
                 <View style={styles.content}>
                     <Text style={styles.contentText}>Please insert your city of choice and a weather key to activate the
-                        weather widget. To get a weather key, please visit https://openweathermap.org/appid</Text>
+                        weather widget. To get a weather key, follow the instructions on https://openweathermap.org/appid</Text>
                     <TextInput
                         style={styles.input}
                         value={this.state.currentCity}

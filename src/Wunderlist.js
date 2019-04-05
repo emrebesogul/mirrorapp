@@ -57,13 +57,12 @@ export default class Wunderlist extends Component {
             <View style={styles.container}>
 
                 <View style={styles.headerBar}>
-                    <Text style={styles.headerTitle}>To Do List</Text>
+                    <Text style={styles.headerTitle}>To Do List Settings</Text>
                 </View>
 
                 <View style={styles.content}>
-                    <Text style={styles.contentText}>Please register with your Google Account on
-                        https://developer.wunderlist.com/ and insert your CLIENT ID and ACCESS TOKEN in the fields
-                        below
+                    <Text style={styles.contentText}>This feature currently only works with Wunderlist To Do Lists. To use this feature, register a new App with your Google Account on
+                        https://developer.wunderlist.com/ and insert the name of your list to display as well as your CLIENT ID and ACCESS TOKEN in the fields below.
                     </Text>
 
                     <TextInput style={styles.input} placeholder="To Do List" placeholderTextColor='white' value={this.state.todoList} autoCapitalize="none"

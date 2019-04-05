@@ -105,7 +105,7 @@ export default class NewsFeedSettings extends Component {
 
                 <View style={styles.content}>
 
-                    <Text style={styles.contentText}>Please insert your news feed links below:</Text>
+                    <Text style={styles.contentText}>To use the News Feed Widget, add RSS Feed Links to the list below. Type them into the Text Field and press enter to submit them.</Text>
 
                     <TextInput
                         style={styles.input}
@@ -122,7 +122,7 @@ export default class NewsFeedSettings extends Component {
                         value={this.state.clearInput ? '' : this.state.inputUrl}
                     />
 
-                    <Text style={styles.contentText}>Current Feed Links:</Text>
+                    <Text style={styles.contentText}>Current RSS News Feed Links (Press an item to delete it from the list):</Text>
 
                     <ScrollView style={styles.newsLinkContainer}>
                         <View>

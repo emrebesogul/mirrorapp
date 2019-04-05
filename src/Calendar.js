@@ -53,11 +53,11 @@ export default class Calendar extends Component {
             <View style={styles.container}>
 
                 <View style={styles.headerBar}>
-                    <Text style={styles.headerTitle}>Calendar</Text>
+                    <Text style={styles.headerTitle}>Calendar Settings</Text>
                 </View>
 
                 <View style={styles.content}>
-                    <Text style={styles.contentText}>Share your private calendar and copy the iCal link here:</Text>
+                    <Text style={styles.contentText}>By setting up a Calendar, you can display all your daily appointments on your Mirror. To use this Feature, share your private Calendar and paste the iCal link below. </Text>
                     <TextInput style={styles.input} placeholder='https://calender.ics' placeholderTextColor='white' value={this.state.calendarICS} autoCapitalize="none"
                            autoCorrect={false} onChangeText={(calendarICS) => this.setState({calendarICS})}/>
 

@@ -4,7 +4,7 @@ import deviceStorage from './deviceStorage';
 
 import {
     View,
-    Text
+    Text, TouchableOpacity
 } from 'react-native';
 import {connectSocket} from "./socketConnection";
 
@@ -21,6 +21,11 @@ export default class InitializingQR extends React.Component {
         }
     }
 
+    processGoToQRScanner(e) {
+        e.preventDefault();
+        this.props.navigation.navigate('QRScanner');
+    }
+
     render() {
         return (
             <View style={styles.container}>
@@ -29,7 +34,13 @@ export default class InitializingQR extends React.Component {
                 </View>
 
                 <View style={styles.content}>
-                    <Text style={styles.initializingText}>Loading IP Address of Smart Mirror...</Text>
+                    <Text style={styles.initializingText}>Looking for a paired Smart Mirror... To scan a new QR Code, press the Button below.</Text>
+
+
+                    <TouchableOpacity style={styles.button} onPress={this.processGoToQRScanner.bind(this)}>
+                        <Text style={styles.buttonText}>Scan QR Code</Text>
+                    </TouchableOpacity>
+
                 </View>
             </View>
         )

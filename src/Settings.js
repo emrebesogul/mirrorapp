@@ -55,6 +55,7 @@ export default class Settings extends Component {
 
                 <View style={styles.content}>
 
+                    <Text style={styles.contentText}>In order to use Face Recognition to unlock your Smart Mirror, you need to create a Face ID. Stand in front of the Mirror and press the Button below. Look into the Camera of the Mirror.</Text>
                     {this.state.displayMessage ?
                         <Text style={styles.faceIdText} >{this.state.message}</Text> :
                         <TouchableOpacity style={styles.button} onPress={this.handleCreateFaceId.bind(this)}>
@@ -62,9 +63,14 @@ export default class Settings extends Component {
                         </TouchableOpacity>
                     }
 
+                    <Text style={styles.contentText}>You can Unpair this App from the currently paired Smart Mirror by pressing the Button below. This will take you back to the QR Code Scanner.</Text>
+
                     <TouchableOpacity onPress={this.mirrorUnpair} style={styles.button}>
                         <Text style={styles.buttonText}>Unpair</Text>
                     </TouchableOpacity>
+
+                    <Text style={styles.contentText}>Logout of the existing User Profile by clicking the Button below.</Text>
+
                     <TouchableOpacity style={styles.button} onPress={this.logout}>
                         <Text style={styles.buttonText}>Logout</Text>
                     </TouchableOpacity>
