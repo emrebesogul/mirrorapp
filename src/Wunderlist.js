@@ -62,7 +62,7 @@ export default class Wunderlist extends Component {
                 </View>
 
                 <View style={styles.content}>
-                    <Text style={styles.contentText}>Please register with your Google Account at
+                    <Text style={styles.contentText}>Please register with your Google Account on
                         https://developer.wunderlist.com/ and insert your CLIENT ID and ACCESS TOKEN in the fields
                         below
                     </Text>

@@ -71,7 +71,6 @@ export default class Weather extends Component {
                         onChangeText={(currentCity) => this.setState({currentCity})}
                     />
 
-                    <Text style={styles.contentText}>Please insert your weather key:</Text>
                     <TextInput
                         style={styles.input}
                         value={this.state.weatherkey}
