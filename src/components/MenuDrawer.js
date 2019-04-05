@@ -11,6 +11,7 @@ import {
 } from 'react-native';
 
 import {getUserData} from "../../api/get";
+import deviceStorage from '../deviceStorage';
 
 export default class MenuDrawer extends React.Component {
 
@@ -28,6 +29,8 @@ export default class MenuDrawer extends React.Component {
             this.setState({
                 currentUser: response.user_data.username
             });
+			let id = response.user_data._id;
+			deviceStorage.saveItem("userId", id);
         }
     }
 

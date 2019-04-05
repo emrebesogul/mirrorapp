@@ -44,9 +44,9 @@ export default class Wunderlist extends Component {
         if (response.status === true) {
             showAlert("Success!", responseMessages.WUNDERLIST_UPLOAD_SUCCESS);
             // Send socket update to web ui
-            let token = await AsyncStorage.getItem("access_token");
+            let userId = await AsyncStorage.getItem("userId");
             await sendSocketMessage('send_wunderlist_settings', {
-                token: token
+                userId: userId
             });
 
         } else {

@@ -38,9 +38,9 @@ export default class Calendar extends Component {
         if (response.status === true) {
             showAlert("Success!", responseMessages.CALENDAR_UPLOAD_SUCCESS);
             // Send socket update to web ui
-            let token = await AsyncStorage.getItem("access_token");
+            let userId = await AsyncStorage.getItem("userId");
             await sendSocketMessage('send_calendar_entries', {
-                token: token
+                userId: userId
             });
 
         } else {

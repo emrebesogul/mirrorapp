@@ -42,9 +42,9 @@ export default class Weather extends Component {
         if (response.status === true) {
             showAlert("Success!", responseMessages.WEATHER_UPLOAD_SUCCESS);
             // Send socket update to web ui
-            let token = await AsyncStorage.getItem("access_token");
+            let userId = await AsyncStorage.getItem("userId");
             await sendSocketMessage('send_weather_forecast', {
-                token: token
+                userId: userId
             });
 
         } else {
