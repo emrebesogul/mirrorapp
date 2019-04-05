@@ -22,7 +22,8 @@ import MenuButton from './components/MenuButton';
 export default class DragDropApp extends Component {
 
     static navigationOptions = {
-        header: null
+        header: null,
+        gesturesEnabled: false
     }
 
     constructor(props) {

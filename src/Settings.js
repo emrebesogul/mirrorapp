@@ -11,7 +11,8 @@ import {showAlert} from "../utils";
 export default class Settings extends Component {
 
     static navigationOptions = {
-        header: null
+        header: null,
+        gesturesEnabled: false
     }
 
     constructor(props) {

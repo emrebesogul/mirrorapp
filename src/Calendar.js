@@ -13,7 +13,8 @@ import MenuButton from './components/MenuButton';
 export default class Calendar extends Component {
 
     static navigationOptions = {
-        header: null
+        header: null,
+        gesturesEnabled: false
     }
 
     constructor(props) {
