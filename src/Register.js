@@ -1,10 +1,9 @@
 import React from 'react';
 import {
     View,
-    Button,
     TextInput,
-    Alert,
-    Text
+    Text,
+    TouchableOpacity
 } from 'react-native';
 
 import styles from './styles';
@@ -76,14 +75,18 @@ export default class Register extends React.Component {
                         onChangeText={val => this.onChangeText('password', val)}
                     />
 
-                    <Button
-                        title='Register here!' color="white"
-                        onPress={this.processSignUp}
-                    />
+                    <TouchableOpacity style={styles.button} onPress={this.processSignUp}>
+                        <Text style={styles.buttonText} >Register here</Text>
+                    </TouchableOpacity>
 
-                    <Button title={'Already have an account? Log in!'} color="white"
-                        onPress={() => {this.props.navigation.navigate('Login')}}
-                    />
+                    <TouchableOpacity style={styles.button} onPress={() => {this.props.navigation.navigate('Login')}}>
+                        <Text style={styles.buttonText} >Already have an account? Log in!</Text>
+                    </TouchableOpacity>
+
+                    <TouchableOpacity style={styles.button}
+                                      onPress={() => this.props.navigation.navigate('QRScanner')}>
+                        <Text style={styles.buttonText}>Scan New QR Code</Text>
+                    </TouchableOpacity>
                 </View>
             </View>
         )

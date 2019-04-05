@@ -1,14 +1,12 @@
 import React, {Component} from 'react';
-import {Button, Text, TextInput, View, AsyncStorage} from "react-native";
+import {Text, TextInput, View, AsyncStorage, TouchableOpacity} from "react-native";
 
 import styles from "./styles";
-import deviceStorage from "./deviceStorage";
 import {getWeatherSettings} from "../api/get";
 import {uploadWeatherSettings} from "../api/post";
 import {showAlert} from "../utils";
 import responseMessages from '../responseMessages';
 import {sendSocketMessage} from './socketConnection';
-import MenuButton from './components/MenuButton';
 
 export default class Weather extends Component {
 
@@ -26,15 +24,15 @@ export default class Weather extends Component {
     }
 
     async componentDidMount() {
-    let response = await getWeatherSettings();
-    if (response.status === true && response.settings) {
-        this.setState({
-            currentCity: response.settings.city
-        });
-        this.setState({
-            weatherkey: response.settings.weatherkey
-        });
-    }
+        let response = await getWeatherSettings();
+        if (response.status === true && response.settings) {
+            this.setState({
+                currentCity: response.settings.city
+            });
+            this.setState({
+                weatherkey: response.settings.weatherkey
+            });
+        }
     }
 
     processUploadWeatherSettings = async () => {
@@ -61,7 +59,8 @@ export default class Weather extends Component {
                 </View>
 
                 <View style={styles.content}>
-                    <Text style={styles.contentText}>Please insert your city of choice and a weather key to activate the weather widget. To get a weather key, please visit https://openweathermap.org/appid</Text>
+                    <Text style={styles.contentText}>Please insert your city of choice and a weather key to activate the
+                        weather widget. To get a weather key, please visit https://openweathermap.org/appid</Text>
                     <TextInput
                         style={styles.input}
                         value={this.state.currentCity}
@@ -82,7 +81,9 @@ export default class Weather extends Component {
                         onChangeText={(weatherkey) => this.setState({weatherkey})}
                     />
 
-                    <Button title="Setup Weather widget!" color="white" onPress={this.processUploadWeatherSettings} />
+                    <TouchableOpacity style={styles.button} onPress={this.processUploadWeatherSettings}>
+                        <Text style={styles.buttonText}>Setup Weather widget</Text>
+                    </TouchableOpacity>
                 </View>
             </View>
         );

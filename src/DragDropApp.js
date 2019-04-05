@@ -14,10 +14,7 @@ import WidgetDeleteZone from '../lib/WidgetDeleteZone';
 
 import styles from './styles';
 import {getWidgets, getUserData} from "../api/get";
-
 import {sendSocketMessage} from './socketConnection';
-
-import MenuButton from './components/MenuButton';
 
 export default class DragDropApp extends Component {
 
@@ -46,7 +43,7 @@ export default class DragDropApp extends Component {
             handleAllWidgets.push(<AllWidget
                 key={widget.name}
                 data={{widgetName: widget.name, previousSlot: null}}
-                style={styles.box}>
+                style={styles.allWidgetBox}>
                 <WidgetContent widgetName={widget.name}/>
             </AllWidget>)
         });
@@ -75,7 +72,7 @@ export default class DragDropApp extends Component {
                         }
                     });
                 }}
-                style={styles.box}
+                style={styles.userWidgetBox}
                 draggable={widget ? true : false}
                 data={widget ? {widgetName: widget.name, previousSlot: index} : null}
             >
@@ -120,10 +117,15 @@ export default class DragDropApp extends Component {
                                         }
                                     });
                                 }}
-                            />
-                            <ScrollView horizontal={true} style={styles.widgetScrollView}>
-                                {this.state.allWidgets}
-                            </ScrollView>
+                            >
+                                <Text style={styles.deleteZoneText}>Drop Widgets here to delete them</Text>
+                            </WidgetDeleteZone>
+                            <View style={styles.dragDropBottomMidContainer}>
+                                <Text style={styles.dragDropMidContainerText}>Hold and Drag New Widgets:</Text>
+                                <ScrollView horizontal={true} style={styles.widgetScrollView}>
+                                    {this.state.allWidgets}
+                                </ScrollView>
+                            </View>
                         </View>
 
                         <View style={styles.row}>

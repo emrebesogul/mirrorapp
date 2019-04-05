@@ -1,12 +1,9 @@
 import React, {Component} from 'react';
-import {Button, View, Text, TextInput} from "react-native";
-import { StackActions, NavigationActions } from 'react-navigation';
-import MenuButton from './components/MenuButton';
+import {View, Text} from "react-native";
 import styles from "./styles";
 import deviceStorage from "./deviceStorage";
 import {sendSocketMessage, handleSocketMessage} from './socketConnection';
-import {AsyncStorage} from 'react-native';
-import {showAlert} from "../utils";
+import {AsyncStorage, TouchableOpacity} from 'react-native';
 
 export default class Settings extends Component {
 
@@ -59,14 +56,18 @@ export default class Settings extends Component {
                 <View style={styles.content}>
 
                     {this.state.displayMessage ?
-                        <View><Button title={this.state.message} color="white" disabled={true} onPress={(e) => {
-                            console.log("Triggering face id")
-                        }
-                        }/></View> :
-                        <Button title="Create new Face ID!" color="white" onPress={this.handleCreateFaceId.bind(this)}/>}
+                        <Text style={styles.faceIdText} >{this.state.message}</Text> :
+                        <TouchableOpacity style={styles.button} onPress={this.handleCreateFaceId.bind(this)}>
+                            <Text style={styles.buttonText}>Create New Face ID</Text>
+                        </TouchableOpacity>
+                    }
 
-                    <Button title="Unpair this mirror!" color="white" onPress={this.mirrorUnpair} />
-                    <Button title="Sign me Out!" color="white" onPress={this.logout} />
+                    <TouchableOpacity onPress={this.mirrorUnpair} style={styles.button}>
+                        <Text style={styles.buttonText}>Unpair</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.button} onPress={this.logout}>
+                        <Text style={styles.buttonText}>Logout</Text>
+                    </TouchableOpacity>
                 </View>
             </View>
         );

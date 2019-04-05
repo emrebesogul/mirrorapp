@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Button, TextInput, View, Text, AsyncStorage} from "react-native";
+import {TextInput, View, Text, AsyncStorage, TouchableOpacity} from "react-native";
 
 import styles from "./styles";
 import deviceStorage from "./deviceStorage";
@@ -8,7 +8,6 @@ import {uploadCalendarSettings} from "../api/post";
 import {showAlert} from "../utils";
 import responseMessages from '../responseMessages';
 import {sendSocketMessage} from './socketConnection';
-import MenuButton from './components/MenuButton';
 
 export default class Calendar extends Component {
 
@@ -34,6 +33,7 @@ export default class Calendar extends Component {
     }
 
     processUploadWCalendarLink = async () => {
+        console.log("Processing stuff")
         let response = await uploadCalendarSettings(this.state.calendarICS);
         if (response.status === true) {
             showAlert("Success!", responseMessages.CALENDAR_UPLOAD_SUCCESS);
@@ -61,7 +61,9 @@ export default class Calendar extends Component {
                     <TextInput style={styles.input} placeholder='https://calender.ics' placeholderTextColor='white' value={this.state.calendarICS} autoCapitalize="none"
                            autoCorrect={false} onChangeText={(calendarICS) => this.setState({calendarICS})}/>
 
-                    <Button title="Setup Calender!" color="white" onPress={this.processUploadWCalendarLink}/>
+                    <TouchableOpacity style={styles.button} onPress={this.processUploadWCalendarLink}>
+                        <Text style={styles.buttonText}>Setup Calendar</Text>
+                    </TouchableOpacity>
                 </View>
             </View>
 

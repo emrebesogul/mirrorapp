@@ -1,14 +1,12 @@
 import React, {Component} from 'react';
-import {Button, TextInput, View, Text, AsyncStorage} from "react-native";
+import {TextInput, View, Text, AsyncStorage, TouchableOpacity} from "react-native";
 
 import styles from "./styles";
-import deviceStorage from "./deviceStorage";
 import {getWunderlistSettings} from "../api/get";
 import {uploadWunderlistSettings} from "../api/post";
 import {showAlert} from "../utils";
 import responseMessages from '../responseMessages';
 import {sendSocketMessage} from './socketConnection';
-import MenuButton from './components/MenuButton';
 
 export default class Wunderlist extends Component {
 
@@ -78,7 +76,11 @@ export default class Wunderlist extends Component {
                     <TextInput style={styles.input} placeholder='CLIENT ID' placeholderTextColor='white' value={this.state.wl_client_id} autoCapitalize="none"
                                autoCorrect={false} onChangeText={(wl_client_id) => this.setState({wl_client_id})}/>
 
-                    <Button title="Setup To Do Widget!" color="white" onPress={this.processUploadWunderlistSettings}/>
+
+
+                    <TouchableOpacity style={styles.button} onPress={this.processUploadWunderlistSettings}>
+                        <Text style={styles.buttonText} >Setup To Do Widget</Text>
+                    </TouchableOpacity>
                 </View>
             </View>
 
