@@ -11,6 +11,10 @@ import {
 
 export default class Initializing extends React.Component {
 
+    static navigationOptions = {
+        header: null
+    }
+
     componentWillUnmount() {
         BackHandler.removeEventListener('hardwareBackPress', () => {return true});
     }
@@ -29,8 +33,14 @@ export default class Initializing extends React.Component {
 
     render() {
         return (
-            <View style={styles.initializing}>
-                <Text style={styles.initializingText}>Loading user credentials...</Text>
+            <View style={styles.container}>
+
+                <View style={styles.headerBar}>
+                </View>
+
+                <View style={styles.content}>
+                    <Text style={styles.initializingText}>Loading user credentials...</Text>
+                </View>
             </View>
         )
     }

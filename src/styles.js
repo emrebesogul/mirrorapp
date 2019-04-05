@@ -5,7 +5,7 @@ const WIDTH = Dimensions.get('window').width;
 export default StyleSheet.create({
     container: {
         backgroundColor: 'black',
-        marginTop: 40
+        height: '100%'
     },
     boxText: {
         textAlign: "center",
@@ -58,6 +58,7 @@ export default StyleSheet.create({
     initializing: {
         backgroundColor: 'black',
         fontSize: 28,
+        height: '100%',
         paddingTop: 200,
         justifyContent: 'center',
         alignItems: 'center',
@@ -81,6 +82,8 @@ export default StyleSheet.create({
         textAlign:'center'
     },
     headerBar: {
+        backgroundColor: 'black',
+        marginTop: 40,
         height: 60,
         alignItems: 'center',
         flexDirection: 'row'
@@ -109,7 +112,8 @@ export default StyleSheet.create({
     content: {
         marginTop: 40,
         color: 'white',
-        padding: 10
+        padding: 10,
+        alignItems: 'center'
     },
     contentQR: {
         alignItems: 'center',

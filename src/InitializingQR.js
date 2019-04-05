@@ -10,6 +10,10 @@ import {connectSocket} from "./socketConnection";
 
 export default class InitializingQR extends React.Component {
 
+    static navigationOptions = {
+        header: null
+    }
+
     async componentDidMount() {
         let server_address = await deviceStorage.getItem("server_address");
 
@@ -23,8 +27,14 @@ export default class InitializingQR extends React.Component {
 
     render() {
         return (
-            <View style={styles.initializing}>
-                <Text style={styles.initializingText}>Loading IP Address of Smart Mirror...</Text>
+            <View style={styles.container}>
+
+                <View style={styles.headerBar}>
+                </View>
+
+                <View style={styles.content}>
+                    <Text style={styles.initializingText}>Loading IP Address of Smart Mirror...</Text>
+                </View>
             </View>
         )
     }
