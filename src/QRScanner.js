@@ -59,7 +59,7 @@ export default class App extends Component {
                             onBarCodeRead={this._handleBarCodeRead}
                             style={{
                                 height: Dimensions.get('window').height / 2,
-                                width: Dimensions.get('window').width / 2,
+                                width: Dimensions.get('window').width / 1.25,
                             }}
                         />}
             </View>

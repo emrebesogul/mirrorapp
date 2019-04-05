@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import {Button, View, Text, TextInput, NativeModules} from "react-native";
+import {Button, View, Text, TextInput} from "react-native";
+import { StackActions, NavigationActions } from 'react-navigation';
 import MenuButton from './components/MenuButton';
 import styles from "./styles";
 import deviceStorage from "./deviceStorage";
@@ -16,14 +17,9 @@ export default class Settings extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            newPassword: "",
             displayMessage: false,
             message: ""
         }
-    }
-
-    onChangeText = (key, value) => {
-        this.setState({[key]: value})
     }
 
     async handleCreateFaceId() {
@@ -40,19 +36,15 @@ export default class Settings extends Component {
         });
     }
 
-    updatePassword = async () => {
-        showAlert("Feature not implemented...");
-    }
-
     mirrorUnpair = async () => {
         deviceStorage.saveItem("access_token", "");
         AsyncStorage.removeItem("server_address");
-        NativeModules.DevSettings.reload();
+        Expo.Util.reload();
     }
 
     logout = async () => {
         deviceStorage.saveItem("access_token", "");
-        NativeModules.DevSettings.reload();
+        Expo.Util.reload();
     }
 
     render() {
@@ -60,31 +52,20 @@ export default class Settings extends Component {
             <View style={styles.container}>
 
                 <View style={styles.headerBar}>
-                    <MenuButton navigation={this.props.navigation}/>
                     <Text style={styles.headerTitle}>Settings</Text>
-                    <Text style={styles.toolbarButton}></Text>
                 </View>
 
                 <View style={styles.content}>
-                    <TextInput
-                        style={styles.input}
-                        placeholder='New Password'
-                        autoCapitalize="none"
-                        secureTextEntry={true}
-                        placeholderTextColor='white'
-                        onChangeText={val => this.onChangeText('newPassword', val)}
-                    />
-                    <Button title="Update Password!" color="#C0C0C0" onPress={this.updatePassword} />
 
                     {this.state.displayMessage ?
-                        <View><Button title={this.state.message} color="#C0C0C0" disabled={true} onPress={(e) => {
+                        <View><Button title={this.state.message} color="white" disabled={true} onPress={(e) => {
                             console.log("Triggering face id")
                         }
                         }/></View> :
-                        <Button title="Create new Face ID" color="#C0C0C0" onPress={this.handleCreateFaceId.bind(this)}/>}
+                        <Button title="Create new Face ID" color="white" onPress={this.handleCreateFaceId.bind(this)}/>}
 
-                    <Button title="Unpair this mirror!" color="#C0C0C0" onPress={this.mirrorUnpair} />
-                    <Button title="Sign me Out!" color="#C0C0C0" onPress={this.logout} />
+                    <Button title="Unpair this mirror!" color="white" onPress={this.mirrorUnpair} />
+                    <Button title="Sign me Out!" color="white" onPress={this.logout} />
                 </View>
             </View>
         );

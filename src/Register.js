@@ -76,11 +76,11 @@ export default class Register extends React.Component {
                     />
 
                     <Button
-                        title='Register here!'
+                        title='Register here!' color="white"
                         onPress={this.processSignUp}
                     />
 
-                    <Button title={'Already have an account? Log in!'}
+                    <Button title={'Already have an account? Log in!'} color="white"
                         onPress={() => {this.props.navigation.navigate('Login')}}
                     />
                 </View>

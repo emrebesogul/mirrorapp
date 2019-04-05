@@ -11,7 +11,7 @@ export default class MenuButton extends React.Component {
 
     render() {
         return (
-            <Button title="Menu" color="#C0C0C0" onPress={() => this.props.navigation.toggleDrawer()}>  </Button>
+            <Button title="" color="white" onPress={() => this.props.navigation.toggleDrawer()}>  </Button>
         )
     }
 }

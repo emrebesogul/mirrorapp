@@ -17,6 +17,10 @@ const AppStackNavigator = createStackNavigator({
     Login: {screen: Login, navigationOptions: {headerLeft: null}}
 });
 
-const App = createAppContainer(AppStackNavigator);
+const AppContainer = createAppContainer(AppStackNavigator);
 
-export default App;
+export default class App extends React.Component {
+  render() {
+    return <AppContainer />;
+  }
+}

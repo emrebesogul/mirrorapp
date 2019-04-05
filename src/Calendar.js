@@ -52,9 +52,7 @@ export default class Calendar extends Component {
             <View style={styles.container}>
 
                 <View style={styles.headerBar}>
-                    <MenuButton navigation={this.props.navigation}/>
                     <Text style={styles.headerTitle}>Calendar</Text>
-                    <Text style={styles.toolbarButton}></Text>
                 </View>
 
                 <View style={styles.content}>
@@ -62,7 +60,7 @@ export default class Calendar extends Component {
                     <TextInput style={styles.input} value={this.state.calendarICS} autoCapitalize="none"
                            autoCorrect={false} onChangeText={(calendarICS) => this.setState({calendarICS})}/>
 
-                    <Button title="Setup Calender" color="#C0C0C0" onPress={this.processUploadWCalendarLink}/>
+                    <Button title="Setup Calender" color="white" onPress={this.processUploadWCalendarLink}/>
                 </View>
             </View>
 
