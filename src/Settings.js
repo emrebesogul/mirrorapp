@@ -54,10 +54,12 @@ export default class Settings extends Component {
                 </View>
 
                 <View style={styles.content}>
-
                     <Text style={styles.contentText}>In order to use Face Recognition to unlock your Smart Mirror, you need to create a Face ID. Stand in front of the Mirror and press the Button below. Look into the Camera of the Mirror.</Text>
                     {this.state.displayMessage ?
-                        <Text style={styles.faceIdText} >{this.state.message}</Text> :
+                        <TouchableOpacity style={styles.button}>
+                            <Text style={styles.buttonText}>Processing Images. This may take several minutes</Text>
+                        </TouchableOpacity>
+                        :
                         <TouchableOpacity style={styles.button} onPress={this.handleCreateFaceId.bind(this)}>
                             <Text style={styles.buttonText}>Create New Face ID</Text>
                         </TouchableOpacity>
