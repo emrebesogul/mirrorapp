@@ -9,6 +9,7 @@ import Weather from '../Weather';
 import MenuDrawer from '../components/MenuDrawer';
 import NewsFeedSettings from "../settings/NewsFeedSettings";
 import Calendar from '../Calendar';
+import DjangoConfig from '../DjangoConfig';
 
 
 const WIDTH = Dimensions.get('window').width;
@@ -27,7 +28,8 @@ const DrawerNavigator = createDrawerNavigator(
 	    Wunderlist: {screen: Wunderlist},
 		Weather: {screen: Weather},
 		NewsFeedSettings: {screen: NewsFeedSettings},
-		Calendar: {screen: Calendar}
+		Calendar: {screen: Calendar},
+		DjangoConfig: {screen: DjangoConfig}
 	},
 	DrawerConfig,
 	{

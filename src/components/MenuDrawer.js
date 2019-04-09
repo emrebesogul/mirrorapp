@@ -45,6 +45,9 @@ export default class MenuDrawer extends React.Component {
 						<TouchableOpacity style={{height: 50}} onPress={() => this.props.navigation.navigate('Settings')}>
 							<Text style={styles.link}>Settings</Text>
 						</TouchableOpacity>
+						<TouchableOpacity style={{height: 50}} onPress={() => this.props.navigation.navigate('DjangoConfig')}>
+							<Text style={styles.link}>Django</Text>
+						</TouchableOpacity>
 						<TouchableOpacity style={{height: 50}} onPress={() => this.props.navigation.navigate('Calendar')}>
 							<Text style={styles.link}>Calendar</Text>
 						</TouchableOpacity>
