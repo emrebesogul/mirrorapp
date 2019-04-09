@@ -1,6 +1,7 @@
 import React from 'react'
 import styles from './styles';
 import deviceStorage from './deviceStorage';
+import {AsyncStorage} from 'react-native';
 
 import {
     View,
@@ -11,6 +12,8 @@ import {connectSocket} from "./socketConnection";
 export default class InitializingQR extends React.Component {
 
     async componentDidMount() {
+        //deviceStorage.saveItem("access_token", "");
+        //AsyncStorage.removeItem("server_address");
         let server_address = await deviceStorage.getItem("server_address");
 
         if (server_address) {
