@@ -12,5 +12,7 @@
   "WEATHER_UPLOAD_SUCCESS": "Weather settings were successfully uploaded",
   "WEATHER_UPLOAD_ERROR": "An error occured trying to upload Weather settings",
   "CALENDAR_UPLOAD_SUCCESS": "Calender iCal was successfully uploaded",
-  "CALENDAR_UPLOAD_ERROR": "n error occured trying to upload iCal"
+  "CALENDAR_UPLOAD_ERROR": "An error occured trying to upload iCal",
+  "DJANGOIP_UPLOAD_SUCCESS": "Django IP address was successfully setup",
+  "DJANGOIP_UPLOAD_ERROR": "An error occured trying to setup Django IP address"
 }

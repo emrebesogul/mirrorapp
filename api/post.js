@@ -175,3 +175,31 @@ export const uploadCalendarSettings = async (calendarICS) => {
         };
     }
 }
+
+export const uploadDjangoIP = async (djangoIP) => {
+    try {
+        const access_token = await AsyncStorage.getItem("access_token");
+        let server_address = await AsyncStorage.getItem("server_address");
+        let response = await fetch(server_address + "/native/uploadDjangoIP", {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + access_token
+            },
+            body: JSON.stringify({
+                "djangoIP": djangoIP
+            })
+        });
+        return {
+            status: JSON.parse(response._bodyText).status,
+            message: responseMessages.FETCH_SUCCESS + ", " + JSON.parse(response._bodyText).message
+        };
+    } catch (err) {
+        return {
+            status: false,
+            message: responseMessages.FETCH_ERROR,
+            error: err
+        };
+    }
+}
