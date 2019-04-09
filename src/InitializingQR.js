@@ -12,8 +12,8 @@ import {connectSocket} from "./socketConnection";
 export default class InitializingQR extends React.Component {
 
     async componentDidMount() {
-        //deviceStorage.saveItem("access_token", "");
-        //AsyncStorage.removeItem("server_address");
+        deviceStorage.saveItem("access_token", "");
+        AsyncStorage.removeItem("server_address");
         let server_address = await deviceStorage.getItem("server_address");
 
         if (server_address) {
