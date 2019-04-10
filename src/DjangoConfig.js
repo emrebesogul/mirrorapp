@@ -40,8 +40,8 @@ export default class DjangoConfig extends Component {
                 </View>
 
                 <View style={styles.content}>
-                    <Text style={styles.contentText}>By setting the Django IP address, you can setup your Face ID. To use this Feature, insert the IP address of your Django Server. </Text>
-                    <TextInput style={styles.input} placeholder='172.34.10.96' placeholderTextColor='white' value={this.state.djangoIP} autoCapitalize="none"
+                    <Text style={styles.contentText}>By setting the Django IP address, you can setup your Face ID. To use this Feature, insert the IP address of your Django Server int the following format. </Text>
+                    <TextInput style={styles.input} placeholder='http://your-ip-address:8000' placeholderTextColor='white' value={this.state.djangoIP} autoCapitalize="none"
                            autoCorrect={false} onChangeText={(djangoIP) => this.setState({djangoIP})}/>
 
                     <TouchableOpacity style={styles.button} onPress={this.processUploadDjangoIP}>
